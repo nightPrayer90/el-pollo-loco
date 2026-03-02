@@ -57,6 +57,27 @@ class ImageHub {
             "../assets/img/2_character_pepe/5_dead/D-56.png",
             "../assets/img/2_character_pepe/5_dead/D-57.png",
         ]
-    }
+    };
 
+    static CHICKEN_SMALL = {
+        walk: [
+            "../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
+            "../assets/img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
+            "../assets/img/3_enemies_chicken/chicken_small/1_walk/3_w.png",
+        ],
+        dead: [
+            "../assets/img/3_enemies_chicken/chicken_small/2_dead/dead.png"
+        ]
+    };
+
+    static CHICKEN_NORMAL = {
+        walk: [
+            "../assets/img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
+            "../assets/img/3_enemies_chicken/chicken_normal/1_walk/2_w.png",
+            "../assets/img/3_enemies_chicken/chicken_normal/1_walk/3_w.png",
+        ],
+        dead: [
+            "../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
+        ]
+    };
 }
