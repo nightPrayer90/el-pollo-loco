@@ -12,6 +12,17 @@ h1 {
     color: white;
 }
 
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+canvas {
+    background: black;
+}
+
 /* tablet */
 @media (max-width: 1280px) {
     h1 {
