@@ -80,4 +80,19 @@ class ImageHub {
             "../assets/img/3_enemies_chicken/chicken_normal/2_dead/dead.png"
         ]
     };
+
+    static BACKGROUNDSETS = {
+        set1: [
+            "../assets/img/5_background/layers/air.png", 
+            "../assets/img/5_background/layers/3_third_layer/1.png", 
+            "../assets/img/5_background/layers/2_second_layer/1.png", 
+            "../assets/img/5_background/layers/1_first_layer/1.png"
+        ],
+        set2: [
+            "../assets/img/5_background/layers/air.png", 
+            "../assets/img/5_background/layers/3_third_layer/2.png", 
+            "../assets/img/5_background/layers/2_second_layer/2.png", 
+            "../assets/img/5_background/layers/1_first_layer/2.png"
+        ]
+    };
 }
