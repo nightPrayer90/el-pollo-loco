@@ -2,26 +2,16 @@ class Character extends MovableObject {
     x = 120;
     y = 180;
     height = 250;
-    width = 150;
+    width = 120;
     speed = 4;
     otherDirection = false;
 
-    IMAGES_WALKING = ImageHub.CHARACTER.walk;
-
-    IMAGES_WALKING = [
-            "../assets/img/2_character_pepe/2_walk/W-21.png",
-            "../assets/img/2_character_pepe/2_walk/W-22.png",
-            "../assets/img/2_character_pepe/2_walk/W-23.png",
-            "../assets/img/2_character_pepe/2_walk/W-24.png",
-            "../assets/img/2_character_pepe/2_walk/W-25.png",
-            "../assets/img/2_character_pepe/2_walk/W-26.png",
-        ]
-        
+    IMAGES_WALKING = ImageHub.CHARACTER.walk;        
     world;
 
     constructor() {
         super();
-        this.loadImage("../assets/img/2_character_pepe/1_idle/idle/I-1.png");
+        this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         IntervalHub.startInterval(this.animate, 100);
         IntervalHub.startInterval(this.move, 1000/60);
@@ -42,10 +32,7 @@ class Character extends MovableObject {
     animate = () => {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
             // Walk animation
-            let i = this.currentImage % this.IMAGES_WALKING.length;
-            let path = this.IMAGES_WALKING[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
+            this.playAnimation(this.IMAGES_WALKING);
         }
     };
 
