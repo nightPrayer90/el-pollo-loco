@@ -7,6 +7,16 @@ class Character extends MovableObject {
     otherDirection = false;
 
     IMAGES_WALKING = ImageHub.CHARACTER.walk;
+
+    IMAGES_WALKING = [
+            "../assets/img/2_character_pepe/2_walk/W-21.png",
+            "../assets/img/2_character_pepe/2_walk/W-22.png",
+            "../assets/img/2_character_pepe/2_walk/W-23.png",
+            "../assets/img/2_character_pepe/2_walk/W-24.png",
+            "../assets/img/2_character_pepe/2_walk/W-25.png",
+            "../assets/img/2_character_pepe/2_walk/W-26.png",
+        ]
+        
     world;
 
     constructor() {
@@ -18,15 +28,15 @@ class Character extends MovableObject {
     }
 
     move = () => {
-        if (this.world.keyboard.RIGHT) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.x += this.speed;
             this.otherDirection = false;
         }
-        else if (this.world.keyboard.LEFT) { 
+        else if (this.world.keyboard.LEFT && this.x > 0) { 
             this.x -= this.speed;
             this.otherDirection = true;
         }
-        this.world.camera_x = -this.x
+        this.world.camera_x = -this.x +100;
     };
 
     animate = () => {

@@ -1,8 +1,6 @@
 class World {
     character = new Character();
-    enemies = [new Chicken(), new Chicken(), new Chicken()];
-    clouds = [new Cloud()];
-    backgroundObjects = [];
+    level = level1;
 
     ctx;
     canvas;
@@ -13,7 +11,6 @@ class World {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.buildBackgrounds();
         this.draw();
         this.setWorld();
     }
@@ -22,24 +19,15 @@ class World {
         this.character.world = this;
     }
 
-    buildBackgrounds() {
-        for (let i = -1; i < 4; i++) {
-            let currentImageSet = i % 2 == 0 ? ImageHub.BACKGROUNDSETS.set1 : ImageHub.BACKGROUNDSETS.set2;
-
-            for (let j = 0; j < currentImageSet.length; j++) {
-                this.backgroundObjects.push(new BackgroundOject(currentImageSet[j], i * 719));
-            }
-        }
-    }
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addObjectsToMap(this.clouds);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.enemies);
         this.addToMap(this.character);
 
         this.ctx.translate(-this.camera_x, 0);
