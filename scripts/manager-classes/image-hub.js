@@ -59,6 +59,17 @@ class ImageHub {
         ]
     };
 
+    static STATUSBAR = {
+        health: [
+            "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
+            "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
+            "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png",
+            "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png",
+            "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
+            "../assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png"
+        ]
+    }
+
     static CHICKEN_SMALL = {
         walk: [
             "../assets/img/3_enemies_chicken/chicken_small/1_walk/1_w.png",

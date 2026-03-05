@@ -61,7 +61,8 @@ class Character extends MovableObject {
             this.canTakeDamage = false;
             this.health -= damage;
             console.log("PEPE-HEALTH " + this.health);
-            
+            this.world.statusBar.setPercentage(this.health);
+
             this.speedY = 10;
             setTimeout(() => {
                 this.isHurt();

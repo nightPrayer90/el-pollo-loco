@@ -1,12 +1,4 @@
-class MovableObject {
-    x = 120;
-    y = 200;
-
-    img;
-    height = 150;
-    width = 100;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject {    
     speed = 0.15;
     speedY = 0;
     acceleration = 1;
@@ -29,19 +21,6 @@ class MovableObject {
         bottom: 0,
         left: 0
     };
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
 
     moveRight() {
         this.x += this.speed;
@@ -95,23 +74,6 @@ class MovableObject {
     jump() {
         this.speedY = 18;
         this.lastImages = [];
-    }
-
-
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-     //collision Rectangle
-    drawFrame(ctx) {
-        if (!(this instanceof Character || this instanceof Chicken)) return;
-        this.setCollisionRect();
-
-        ctx.beginPath();
-        ctx.lineWidth = "5";
-        ctx.strokeStyle = "blue";
-        ctx.rect(this.cX, this.cY, this.cW, this.cH);
-        ctx.stroke();
     }
 
     // constructor
