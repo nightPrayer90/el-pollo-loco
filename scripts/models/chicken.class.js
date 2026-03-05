@@ -4,6 +4,7 @@ class Chicken extends MovableObject {
     height = 100;
     width = 70;
     speed = 1 + Math.random() * 1;
+    damage = 20;
 
     IMAGES_WALKING = ImageHub.CHICKEN_NORMAL.walk;
 

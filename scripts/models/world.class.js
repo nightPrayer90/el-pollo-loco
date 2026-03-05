@@ -68,12 +68,10 @@ class World {
     }
 
     checkCollisions = () => {
-        console.log("checkCollision");
+    
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                 console.log("checkCollision");
-                this.character.health -= enemy.damage;
-                console.log("pepe health " + this.character.health);
+                this.character.hit(enemy.damage)
             }
         });
     };
