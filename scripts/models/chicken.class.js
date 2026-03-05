@@ -7,11 +7,19 @@ class Chicken extends MovableObject {
 
     IMAGES_WALKING = ImageHub.CHICKEN_NORMAL.walk;
 
+    collisionOffset = {
+        top: 20,
+        right: 10,
+        bottom: 0,
+        left: 10
+    };
+
     constructor() {
         super();
         this.loadImage(this.IMAGES_WALKING[0]);
         this.x = Math.random() * 500 + 200;
 
+        this.setCollisionRect();
         this.loadImages(this.IMAGES_WALKING);
         IntervalHub.startInterval(this.animate, 100); // wir sagen hier das die Hüher animation zusammen mit der geschwindigkeit animiert werden! das fühlt sich falsch an!!!
         IntervalHub.startInterval(this.moveLeft, 60); 
@@ -19,6 +27,6 @@ class Chicken extends MovableObject {
 
 
     animate = () => {
-        this.playAnimation(this.IMAGES_WALKING);
+        this.playAnimationLoop(this.IMAGES_WALKING);
     };
 }

@@ -1,6 +1,6 @@
 class World {
     character = new Character();
-    level = level1;
+    level;
 
     ctx;
     canvas;
@@ -14,12 +14,12 @@ class World {
         this.level = level;
         this.draw();
         this.setWorld();
+        IntervalHub.startInterval(this.checkCollisions, 50);
     }
 
     setWorld() {
         this.character.world = this;
     }
-
 
     draw() {
         this.ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -48,8 +48,8 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx); 
-        
+        mo.drawFrame(this.ctx);
+
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -66,4 +66,15 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
+    checkCollisions = () => {
+        console.log("checkCollision");
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy)) {
+                 console.log("checkCollision");
+                this.character.health -= enemy.damage;
+                console.log("pepe health " + this.character.health);
+            }
+        });
+    };
 }

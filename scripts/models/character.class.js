@@ -8,13 +8,25 @@ class Character extends MovableObject {
 
     IMAGES_WALKING = ImageHub.CHARACTER.walk;
     IMAGES_JUMPING = ImageHub.CHARACTER.jump;
+    IMAGES_IDLE = ImageHub.CHARACTER.idle;
+
     world;
+
+    collisionOffset = {
+        top: 110,
+        right: 35,
+        bottom: 10,
+        left: 35
+    };
 
     constructor() {
         super();
         this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_IDLE);
+
+        this.setCollisionRect();
         IntervalHub.startInterval(this.animate, 100);
         IntervalHub.startInterval(this.move, 1000 / 60);
         IntervalHub.startInterval(this.applyGravity, 1000 / 60);
@@ -28,21 +40,23 @@ class Character extends MovableObject {
             this.moveLeft();
             this.otherDirection = true;
         } 
-        if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-            this.jump();   
+        if (this.world.keyboard.SPACE) {
+            if (!this.isAboveGround()) {
+                this.jump();
+            }
         }
-
-
         this.world.camera_x = -this.x + 100;
     };
 
     animate = () => {
         if (this.isAboveGround()) {
-            this.playAnimation(this.IMAGES_JUMPING);
-        } else {
+            this.playAnimationSingle(this.IMAGES_JUMPING);
+        } else {    
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                // Walk animation
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playAnimationLoop(this.IMAGES_WALKING);
+            }
+            else {
+                this.playAnimationLoop(this.IMAGES_IDLE);
             }
         }
     };

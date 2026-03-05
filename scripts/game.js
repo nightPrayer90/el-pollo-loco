@@ -6,9 +6,6 @@ let level = level1;
 function init() {
     canvas = document.getElementById("canvas");
     world = new World(canvas, keyboard, level);
-    // ctx = canvas.getContext("2d");
-
-    console.log("my character is", world.character);
 }
 
 window.addEventListener("keydown", (e) => {

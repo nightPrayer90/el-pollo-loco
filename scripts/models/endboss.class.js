@@ -10,11 +10,11 @@ class Endboss extends MovableObject {
 
         this.x = 2300;
 
-        IntervalHub.startInterval(this.animate, 100); // wir sagen hier das die Hüher animation zusammen mit der geschwindigkeit animiert werden! das fühlt sich falsch an!!!
+        IntervalHub.startInterval(this.animate, 100);
     }
 
 
     animate = () => {
-        this.playAnimation(this.IMAGES_WALKING);
+        this.playAnimationLoop(this.IMAGES_WALKING);
     };
 }
