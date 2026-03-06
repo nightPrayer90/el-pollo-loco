@@ -25,7 +25,8 @@ class ThrowableObject extends MovableObject {
     }
 
     throw() {
-        this.speedY = 10;
+        let jumpHight = (180-this.world.character.y)/25;
+        this.speedY = 10 + jumpHight;
         if (this.world.keyboard.RIGHT == true) this.speed += 3;
 
         if(this.world.character.otherDirection)
@@ -45,7 +46,7 @@ class ThrowableObject extends MovableObject {
     };
 
     splash() {
-        this.remove();
+        this.removeBottleFromCollision();
     }
 
     animate = () => {
@@ -56,7 +57,7 @@ class ThrowableObject extends MovableObject {
         }
     };
 
-    remove() {
+    removeBottleFromCollision() {
         // MAYBE TODO: -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
         if (this.isHit == false) {
             // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
