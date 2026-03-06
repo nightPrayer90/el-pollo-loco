@@ -71,7 +71,7 @@ class Character extends MovableObject {
             this.health -= damage;
             this.world.statusBar.setPercentage(this.health);
 
-            this.speedY = 10;
+            this.speedY = 6;
             setTimeout(() => {
                 this.isHurt();
             }, 1000);
@@ -87,7 +87,6 @@ class Character extends MovableObject {
     }
 
     animate = () => {
-
         if (this.isDead()) {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
                 IntervalHub.stopInterval(this.animate_id);

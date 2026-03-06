@@ -1,9 +1,9 @@
-class MovableObject extends DrawableObject {    
+class MovableObject extends DrawableObject {
     speed = 0.15;
     speedY = 0;
     acceleration = 1;
-    
-    lastImages =[];
+
+    lastImages = [];
     animationFlag = false;
 
     health = 100;
@@ -19,7 +19,7 @@ class MovableObject extends DrawableObject {
         top: 0,
         right: 0,
         bottom: 0,
-        left: 0
+        left: 0,
     };
 
     moveRight() {
@@ -34,7 +34,6 @@ class MovableObject extends DrawableObject {
         this.speedY = 18;
         this.lastImages = [];
     }
-
 
     playAnimationLoop(images) {
         if (images != this.lastImages) {
@@ -58,10 +57,10 @@ class MovableObject extends DrawableObject {
 
         let i = this.currentImage % images.length;
         let path = images[i];
-        this.img = this.imageCache[path];  
+        this.img = this.imageCache[path];
         this.currentImage++;
 
-        if(i == images.length -1) {
+        if (i == images.length - 1) {
             this.animationFlag = true;
             return true;
         }
@@ -95,11 +94,14 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         this.updateCollisionRect();
-        mo.updateCollisionRect(); // das geht doch sicher effizienter!!!
+        mo.updateCollisionRect();
 
-        return this.cX + this.cW > mo.cX &&
-        this.cY + this.cH > mo.cY &&
-        this.cX < mo.cX  + mo.cW &&
-        this.cY < mo.cY + mo.cH;
+        return this.cX + this.cW > mo.cX && this.cY + this.cH > mo.cY && this.cX < mo.cX + mo.cW && this.cY < mo.cY + mo.cH;
+    }
+
+    isCollidingFromTop(mo) {
+        const playerBottomPrev = this.cY + this.cH + this.speedY;
+        const enemyTop = mo.cY;
+        return playerBottomPrev < enemyTop;
     }
 }

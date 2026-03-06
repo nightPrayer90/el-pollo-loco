@@ -24,7 +24,7 @@ class World {
         this.draw();
         this.setWorld();
         this.cloudsGenerator(5);
-        IntervalHub.startInterval(this.update, 33);
+        IntervalHub.startInterval(this.update, 16);
     }
 
     setWorld() {
@@ -106,14 +106,21 @@ class World {
         this.level.enemies.forEach((enemy) => {
             // collision Character -> enemy
             if (this.character.isColliding(enemy)) {
-                this.character.hit(enemy.damage);
+                if(this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
+                    enemy.hit(this);
+                    this.character.speedY = 8;
+                }
+                else 
+                {
+                    if (enemy.isDead == false)
+                        this.character.hit(enemy.damage);
+                }
             }
 
             // collision bottle -> enemy
             if (this.throwableObjects.length > 0) {
                 this.throwableObjects.forEach((bottle) => {
                     if (bottle.isColliding(enemy)) {
-                        // ich muss hier unbedingt die referenz von bottle aus dem array nehmen!
                         bottle.splash();
                         console.log("enemy hit!");
                         enemy.hit(this);
