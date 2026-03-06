@@ -57,9 +57,8 @@ class ThrowableObject extends MovableObject {
     };
 
     remove() {
-        // MAYBE TODO -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
+        // MAYBE TODO: -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
         if (this.isHit == false) {
-            
             // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
             const index = this.world.throwableObjects.indexOf(this);
             if (index != -1) {

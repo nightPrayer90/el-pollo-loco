@@ -26,6 +26,10 @@ class Chicken extends MovableObject {
         IntervalHub.startInterval(this.moveLeft, 60); 
     }
 
+    hit() {
+        console.log("ich bin getroffen");
+    }
+
 
     animate = () => {
         this.playAnimationLoop(this.IMAGES_WALKING);

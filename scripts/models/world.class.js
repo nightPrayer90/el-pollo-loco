@@ -109,17 +109,23 @@ class World {
                         // ich muss hier unbedingt die referenz von bottle aus dem array nehmen!
                         bottle.splash();
                         console.log("enemy hit!");
+                        enemy.hit();
                     }
                 });
             }
         });
     }
 
-    // wirklich hier?
+    // wirklich hier? -> eigentlich gehört das werfen in den charakter
     checkThrowObjects() {
-        if (this.keyboard.D) {
+        if (this.keyboard.D && this.character.canThrow == true) {
             let bottle = new ThrowableObject(this.character.x, this.character.y, world);
             this.throwableObjects.push(bottle);
+            this.character.canThrow = false;
+            
+            setTimeout(() => {
+                this.character.canThrow = true;
+            }, 1000);
         }
     }
 }

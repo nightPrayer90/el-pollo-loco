@@ -30,6 +30,12 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
+    jump() {
+        this.speedY = 18;
+        this.lastImages = [];
+    }
+
+
     playAnimationLoop(images) {
         if (images != this.lastImages) {
             this.currentImage = 0;
@@ -69,11 +75,6 @@ class MovableObject extends DrawableObject {
 
     isAboveGround() {
         return this.y < 180;
-    }
-
-    jump() {
-        this.speedY = 18;
-        this.lastImages = [];
     }
 
     // constructor

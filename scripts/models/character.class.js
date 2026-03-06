@@ -22,6 +22,7 @@ class Character extends MovableObject {
     };
 
     canTakeDamage = true;
+    canThrow = true;
 
     constructor() {
         super();
