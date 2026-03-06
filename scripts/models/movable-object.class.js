@@ -63,7 +63,9 @@ class MovableObject extends DrawableObject {
 
         if(i == images.length -1) {
             this.animationFlag = true;
+            return true;
         }
+        return false;
     }
 
     applyGravity = () => {

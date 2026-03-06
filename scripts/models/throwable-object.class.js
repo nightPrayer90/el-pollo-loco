@@ -7,7 +7,9 @@ class ThrowableObject extends MovableObject {
     SPLASH_BOTTLE = ImageHub.BOTTLE.splash;
 
     isHit = false;
-
+    
+    animate_id;
+    fly_id;
     world;
 
     constructor(x, y, world) {
@@ -21,7 +23,6 @@ class ThrowableObject extends MovableObject {
 
         this.setCollisionRect();
         this.throw();
-        IntervalHub.startInterval(this.animate, 60);
     }
 
     throw() {
@@ -32,7 +33,8 @@ class ThrowableObject extends MovableObject {
         if(this.world.character.otherDirection)
             this.speed *= -1;
 
-        IntervalHub.startInterval(this.flyWithGravity, 16);
+        this.animate_id = IntervalHub.startInterval(this.animate, 60);
+        this.fly_id = IntervalHub.startInterval(this.flyWithGravity, 16);
     }
 
     flyWithGravity = () => {
@@ -45,10 +47,6 @@ class ThrowableObject extends MovableObject {
         }
     };
 
-    splash() {
-        this.removeBottleFromCollision();
-    }
-
     animate = () => {
         if (this.isHit == false) {
             this.playAnimationLoop(this.ROTATE_BOTTLE);
@@ -56,6 +54,10 @@ class ThrowableObject extends MovableObject {
             this.playAnimationSingle(this.SPLASH_BOTTLE);
         }
     };
+
+    splash() {
+        this.removeBottleFromCollision();
+    }
 
     removeBottleFromCollision() {
         // MAYBE TODO: -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
@@ -68,5 +70,11 @@ class ThrowableObject extends MovableObject {
             }
             this.isHit = true;
         }
+    }
+
+    // flasche wird aus dem Intervalhub genommen
+    removeBottleFormInverval() {
+        IntervalHub.stopInterval(this.animate_id);
+        IntervalHub.stopInterval(this.fly_id);
     }
 }

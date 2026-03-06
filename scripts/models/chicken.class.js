@@ -11,11 +11,14 @@ class Chicken extends MovableObject {
 
     isDead = false;
 
+    animate_id;
+    move_id;
+
     collisionOffset = {
         top: 20,
         right: 10,
         bottom: 0,
-        left: 10
+        left: 10,
     };
 
     constructor() {
@@ -26,24 +29,33 @@ class Chicken extends MovableObject {
         this.setCollisionRect();
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        IntervalHub.startInterval(this.animate, 100); // wir sagen hier das die Hüher animation zusammen mit der geschwindigkeit animiert werden! das fühlt sich falsch an!!!
-        IntervalHub.startInterval(this.move, 60); 
+        this.animate_id = IntervalHub.startInterval(this.animate, 100); 
+        this.move_id = IntervalHub.startInterval(this.move, 60);
     }
 
     move = () => {
         if (this.isDead == true) return;
 
         this.moveLeft();
-    }
+    };
 
     hit(world) {
         console.log("ich bin getroffen");
-        this.removeEnemyFromCollision(world)
+        this.removeEnemyFromCollision(world);
     }
 
-     // Überlegen ob das nicht vielleicht auch besser in den enemy gehört
+    animate = () => {
+        if (this.isDead == false) {
+            this.playAnimationLoop(this.IMAGES_WALKING);
+        } else {
+            if (this.playAnimationSingle(this.IMAGES_DEAD)) {
+                this.removeEnemyFormInverval();
+            }
+        }
+    };
+
     removeEnemyFromCollision(world) {
-        // MAYBE TODO: -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
+        // INTERVAL Läuft noch aber sonst tut sich nichts mehr
         if (this.isDead == false) {
             // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
             const index = world.level.enemies.indexOf(this);
@@ -55,13 +67,9 @@ class Chicken extends MovableObject {
         }
     }
 
-
-    animate = () => {
-        if (this.isDead == false) { 
-            this.playAnimationLoop(this.IMAGES_WALKING);
-        }
-        else {
-            this.playAnimationSingle(this.IMAGES_DEAD);
-        }
-    };
+    // enemy wird aus dem intervalhub genommen
+    removeEnemyFormInverval() {
+        IntervalHub.stopInterval(this.animate_id);
+        IntervalHub.stopInterval(this.move_id);
+    }
 }
