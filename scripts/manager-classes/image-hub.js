@@ -137,6 +137,13 @@ class ImageHub {
         ]
     }
 
+    static CLOUDS = {
+        cloud: [
+            "../assets/img/5_background/layers/4_clouds/1.png",
+             "../assets/img/5_background/layers/4_clouds/2.png"
+        ]
+    }
+
     static ENDBOSS = {
         walk: [
             "../assets/img/4_enemie_boss_chicken/1_walk/G1.png",

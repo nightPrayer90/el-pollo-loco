@@ -14,6 +14,5 @@ class IntervalHub {
 
     static stopInterval(id) {
     clearInterval(id);
-    console.log("aus!");
     }
 }

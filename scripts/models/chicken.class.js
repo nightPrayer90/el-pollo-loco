@@ -29,7 +29,7 @@ class Chicken extends MovableObject {
         this.setCollisionRect();
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        this.animate_id = IntervalHub.startInterval(this.animate, 100); 
+        this.animate_id = IntervalHub.startInterval(this.animate, 100); // wir sagen hier das die Hüher animation zusammen mit der geschwindigkeit animiert werden! das fühlt sich falsch an!!!
         this.move_id = IntervalHub.startInterval(this.move, 60);
     }
 

@@ -12,6 +12,10 @@ class Character extends MovableObject {
     IMAGES_DEAD = ImageHub.CHARACTER.dead;
     IMAGES_HURT = ImageHub.CHARACTER.hurt;
 
+    animate_id;
+    move_id;
+    applyGravity_id;
+
     world;
 
     collisionOffset = {
@@ -24,6 +28,8 @@ class Character extends MovableObject {
     canTakeDamage = true;
     canThrow = true;
 
+    animate_id
+
     constructor() {
         super();
         this.loadImage(this.IMAGES_WALKING[0]);
@@ -34,9 +40,9 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
 
         this.setCollisionRect();
-        IntervalHub.startInterval(this.animate, 100);
-        IntervalHub.startInterval(this.move, 16);
-        IntervalHub.startInterval(this.applyGravity, 16);
+        this.animate_id = IntervalHub.startInterval(this.animate, 100);
+        this.move_id = IntervalHub.startInterval(this.move, 16);
+        this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);
     }
 
     move = () => {
@@ -81,7 +87,11 @@ class Character extends MovableObject {
     animate = () => {
 
         if (this.isDead()) {
-            this.playAnimationSingle(this.IMAGES_DEAD);
+            if (this.playAnimationSingle(this.IMAGES_DEAD)) {
+                IntervalHub.stopInterval(this.animate_id);
+                IntervalHub.stopInterval(this.move_id);
+                IntervalHub.stopInterval(this.applyGravity_id);
+            };
         }
         else if (!this.canTakeDamage) {
             this.playAnimationLoop(this.IMAGES_HURT);
