@@ -7,8 +7,11 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+
     throwableObjects = [];
     thrownBottles =[];
+
+    diedEnemies = [];
 
 
     constructor(canvas, keyboard, level) {
@@ -49,6 +52,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.thrownBottles);
+        this.addObjectsToMap(this.diedEnemies);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -91,7 +95,7 @@ class World {
 
     run = () => {
         this.checkCollisions();
-        this.checkThrowObjects();
+        this.throwBottle();
     };
 
     checkCollisions() {
@@ -109,7 +113,7 @@ class World {
                         // ich muss hier unbedingt die referenz von bottle aus dem array nehmen!
                         bottle.splash();
                         console.log("enemy hit!");
-                        enemy.hit();
+                        enemy.hit(this);
                     }
                 });
             }
@@ -117,7 +121,7 @@ class World {
     }
 
     // wirklich hier? -> eigentlich gehört das werfen in den charakter
-    checkThrowObjects() {
+    throwBottle() {
         if (this.keyboard.D && this.character.canThrow == true) {
             let bottle = new ThrowableObject(this.character.x, this.character.y, world);
             this.throwableObjects.push(bottle);

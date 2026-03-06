@@ -7,6 +7,9 @@ class Chicken extends MovableObject {
     damage = 20;
 
     IMAGES_WALKING = ImageHub.CHICKEN_NORMAL.walk;
+    IMAGES_DEAD = ImageHub.CHICKEN_NORMAL.dead;
+
+    isDead = false;
 
     collisionOffset = {
         top: 20,
@@ -22,16 +25,43 @@ class Chicken extends MovableObject {
 
         this.setCollisionRect();
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
         IntervalHub.startInterval(this.animate, 100); // wir sagen hier das die Hüher animation zusammen mit der geschwindigkeit animiert werden! das fühlt sich falsch an!!!
-        IntervalHub.startInterval(this.moveLeft, 60); 
+        IntervalHub.startInterval(this.move, 60); 
     }
 
-    hit() {
+    move = () => {
+        if (this.isDead == true) return;
+
+        this.moveLeft();
+    }
+
+    hit(world) {
         console.log("ich bin getroffen");
+        this.removeEnemyFromCollision(world)
+    }
+
+     // Überlegen ob das nicht vielleicht auch besser in den enemy gehört
+    removeEnemyFromCollision(world) {
+        // MAYBE TODO: -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
+        if (this.isDead == false) {
+            // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
+            const index = world.level.enemies.indexOf(this);
+            if (index != -1) {
+                world.level.enemies.splice(index, 1);
+                world.diedEnemies.push(this);
+            }
+            this.isDead = true;
+        }
     }
 
 
     animate = () => {
-        this.playAnimationLoop(this.IMAGES_WALKING);
+        if (this.isDead == false) { 
+            this.playAnimationLoop(this.IMAGES_WALKING);
+        }
+        else {
+            this.playAnimationSingle(this.IMAGES_DEAD);
+        }
     };
 }
