@@ -34,8 +34,8 @@ class Character extends MovableObject {
 
         this.setCollisionRect();
         IntervalHub.startInterval(this.animate, 100);
-        IntervalHub.startInterval(this.move, 1000 / 60);
-        IntervalHub.startInterval(this.applyGravity, 1000 / 60);
+        IntervalHub.startInterval(this.move, 16);
+        IntervalHub.startInterval(this.applyGravity, 16);
     }
 
     move = () => {
@@ -60,7 +60,6 @@ class Character extends MovableObject {
         if (this.canTakeDamage == true) {
             this.canTakeDamage = false;
             this.health -= damage;
-            console.log("PEPE-HEALTH " + this.health);
             this.world.statusBar.setPercentage(this.health);
 
             this.speedY = 10;

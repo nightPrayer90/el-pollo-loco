@@ -27,11 +27,11 @@ class DrawableObject {
 
      //collision Rectangle
     drawFrame(ctx) {
-        if (!(this instanceof Character || this instanceof Chicken)) return;
+        if (!(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject)) return;
         this.setCollisionRect();
 
         ctx.beginPath();
-        ctx.lineWidth = "5";
+        ctx.lineWidth = "2";
         ctx.strokeStyle = "blue";
         ctx.rect(this.cX, this.cY, this.cW, this.cH);
         ctx.stroke();

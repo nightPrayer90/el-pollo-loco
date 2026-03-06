@@ -28,7 +28,7 @@ class MovableObject extends DrawableObject {
 
     moveLeft = () => {
         this.x -= this.speed;
-    };
+    }
 
     playAnimationLoop(images) {
         if (images != this.lastImages) {

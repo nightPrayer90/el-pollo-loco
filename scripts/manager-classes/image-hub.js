@@ -33,9 +33,9 @@ class ImageHub {
             "../assets/img/2_character_pepe/2_walk/W-26.png",
         ],
         jump: [
-            "../assets/img/2_character_pepe/3_jump/J-31.png",
-            "../assets/img/2_character_pepe/3_jump/J-32.png",
-            "../assets/img/2_character_pepe/3_jump/J-33.png",
+            //"../assets/img/2_character_pepe/3_jump/J-31.png",
+            //"../assets/img/2_character_pepe/3_jump/J-32.png",
+            //"../assets/img/2_character_pepe/3_jump/J-33.png",
             "../assets/img/2_character_pepe/3_jump/J-34.png",
             "../assets/img/2_character_pepe/3_jump/J-35.png",
             "../assets/img/2_character_pepe/3_jump/J-36.png",
@@ -58,6 +58,24 @@ class ImageHub {
             "../assets/img/2_character_pepe/5_dead/D-57.png",
         ]
     };
+
+    static BOTTLE = {
+        rotate: [
+            "../assets/img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png"
+        ],
+        splash: [
+            "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
+            "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+        ]
+
+    }
 
     static STATUSBAR = {
         health: [
@@ -92,20 +110,32 @@ class ImageHub {
         ]
     };
 
-    static BACKGROUNDSETS = {
+    static BACKGROUNDSETS_L1 = {
         set1: [
-            "../assets/img/5_background/layers/air.png", 
-            "../assets/img/5_background/layers/3_third_layer/1.png", 
-            "../assets/img/5_background/layers/2_second_layer/1.png", 
             "../assets/img/5_background/layers/1_first_layer/1.png"
         ],
         set2: [
-            "../assets/img/5_background/layers/air.png", 
-            "../assets/img/5_background/layers/3_third_layer/2.png", 
-            "../assets/img/5_background/layers/2_second_layer/2.png", 
             "../assets/img/5_background/layers/1_first_layer/2.png"
         ]
     };
+
+    static BACKGROUNDSETS_L2 = {
+        set1: [
+            "../assets/img/5_background/layers/2_second_layer/1.png", 
+        ],
+        set2: [
+            "../assets/img/5_background/layers/2_second_layer/2.png", 
+        ]
+    };
+
+    static BACKGROUNDSETS_L3 = {
+        set1: [
+            "../assets/img/5_background/layers/3_third_layer/1.png", 
+        ],
+        set2: [
+            "../assets/img/5_background/layers/3_third_layer/2.png", 
+        ]
+    }
 
     static ENDBOSS = {
         walk: [
