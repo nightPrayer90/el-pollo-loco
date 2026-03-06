@@ -36,12 +36,14 @@ class ImageHub {
             //"../assets/img/2_character_pepe/3_jump/J-31.png",
             //"../assets/img/2_character_pepe/3_jump/J-32.png",
             //"../assets/img/2_character_pepe/3_jump/J-33.png",
-            "../assets/img/2_character_pepe/3_jump/J-34.png",
+            "../assets/img/2_character_pepe/3_jump/J-34.png"
+        ],
+        fall: [
             "../assets/img/2_character_pepe/3_jump/J-35.png",
             "../assets/img/2_character_pepe/3_jump/J-36.png",
             "../assets/img/2_character_pepe/3_jump/J-37.png",
-            "../assets/img/2_character_pepe/3_jump/J-38.png",
-            "../assets/img/2_character_pepe/3_jump/J-39.png"
+            "../assets/img/2_character_pepe/3_jump/J-38.png"
+            //"../assets/img/2_character_pepe/3_jump/J-39.png"
         ],
         hurt: [
             "../assets/img/2_character_pepe/4_hurt/H-41.png",
@@ -140,7 +142,7 @@ class ImageHub {
     static CLOUDS = {
         cloud: [
             "../assets/img/5_background/layers/4_clouds/1.png",
-             "../assets/img/5_background/layers/4_clouds/2.png"
+            "../assets/img/5_background/layers/4_clouds/2.png"
         ]
     }
 

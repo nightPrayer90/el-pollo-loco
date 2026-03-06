@@ -8,6 +8,7 @@ class Character extends MovableObject {
 
     IMAGES_WALKING = ImageHub.CHARACTER.walk;
     IMAGES_JUMPING = ImageHub.CHARACTER.jump;
+    IMAGES_FALLING = ImageHub.CHARACTER.fall;
     IMAGES_IDLE = ImageHub.CHARACTER.idle;
     IMAGES_DEAD = ImageHub.CHARACTER.dead;
     IMAGES_HURT = ImageHub.CHARACTER.hurt;
@@ -21,7 +22,7 @@ class Character extends MovableObject {
     collisionOffset = {
         top: 110,
         right: 35,
-        bottom: 10,
+        bottom: 20,
         left: 35,
     };
 
@@ -35,6 +36,7 @@ class Character extends MovableObject {
         this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
+        this.loadImages(this.IMAGES_FALLING);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
@@ -97,7 +99,10 @@ class Character extends MovableObject {
             this.playAnimationLoop(this.IMAGES_HURT);
         }
         else if (this.isAboveGround()) {
-            this.playAnimationSingle(this.IMAGES_JUMPING);
+            if (this.speedY > 0)
+                this.playAnimationSingle(this.IMAGES_JUMPING);
+            else
+                this.playAnimationSingle(this.IMAGES_FALLING);
         } else {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimationLoop(this.IMAGES_WALKING);

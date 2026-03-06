@@ -15,10 +15,10 @@ class Chicken extends MovableObject {
     move_id;
 
     collisionOffset = {
-        top: 20,
-        right: 10,
+        top: 30,
+        right: 15,
         bottom: 0,
-        left: 10,
+        left: 15,
     };
 
     constructor() {
