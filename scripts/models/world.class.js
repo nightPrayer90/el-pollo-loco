@@ -12,6 +12,7 @@ class World {
     thrownBottles = [];
 
     diedEnemies = [];
+    particleSystems = [];
 
     clouds_L2 = [];
     clouds_L3 = [];
@@ -57,6 +58,7 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.thrownBottles);
         this.addObjectsToMap(this.diedEnemies);
+        this.addObjectsToMap(this.particleSystems);
 
         this.ctx.translate(-this.camera_x, 0);
 
@@ -109,6 +111,7 @@ class World {
                 if(this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
                     enemy.hit(this);
                     this.character.speedY = 8;
+                    this.particleSystems.push(new ParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW/2 , enemy.cY+ enemy.cH/2 , 126, 126, this));
                 }
                 else 
                 {

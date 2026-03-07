@@ -184,4 +184,23 @@ class ImageHub {
             "../assets/img/4_enemie_boss_chicken/5_dead/G26.png"
         ]
     };
+
+    static VFX = {
+        hit: [
+            "../assets/img/10_animation/hit/Fx07_00.png",
+            "../assets/img/10_animation/hit/Fx07_01.png",
+            "../assets/img/10_animation/hit/Fx07_02.png",
+            "../assets/img/10_animation/hit/Fx07_03.png",
+            "../assets/img/10_animation/hit/Fx07_04.png",
+            "../assets/img/10_animation/hit/Fx07_05.png",
+            "../assets/img/10_animation/hit/Fx07_06.png",
+            "../assets/img/10_animation/hit/Fx07_07.png",
+            "../assets/img/10_animation/hit/Fx07_08.png",
+            "../assets/img/10_animation/hit/Fx07_09.png",
+            "../assets/img/10_animation/hit/Fx07_10.png",
+            "../assets/img/10_animation/hit/Fx07_11.png",
+            "../assets/img/10_animation/hit/Fx07_12.png"
+
+        ]
+    }
 }
