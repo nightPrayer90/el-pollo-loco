@@ -24,7 +24,7 @@ class World {
         this.level = level;
         this.draw();
         this.setWorld();
-        this.cloudsGenerator(5);
+        this.cloudsGenerator(6);
         IntervalHub.startInterval(this.update, 16);
     }
 
@@ -111,7 +111,7 @@ class World {
                 if(this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
                     enemy.hit(this);
                     this.character.speedY = 8;
-                    this.particleSystems.push(new ParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW/2 , enemy.cY+ enemy.cH/2 , 126, 126, this));
+                    this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW/2 , enemy.cY+ enemy.cH/2 , 126, 126);
                 }
                 else 
                 {
@@ -160,5 +160,9 @@ class World {
                 let cloud = new Cloud(this.level.level_size, 1, generateRandomX);
                 this.clouds_L3.push(cloud);
             }
+    }
+    
+    createParticleSystem(images, x, y, width, height,) {
+        this.particleSystems.push(new ParticleSystem(images, x , y , width, height, this));
     }
 }

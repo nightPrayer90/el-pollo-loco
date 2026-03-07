@@ -200,7 +200,17 @@ class ImageHub {
             "../assets/img/10_animation/hit/Fx07_10.png",
             "../assets/img/10_animation/hit/Fx07_11.png",
             "../assets/img/10_animation/hit/Fx07_12.png"
-
+        ],
+        jump: [
+            //"../assets/img/10_animation/landing/1.png",
+            //"../assets/img/10_animation/landing/2.png",
+            //"../assets/img/10_animation/landing/3.png",
+            "../assets/img/10_animation/landing/4.png",
+            "../assets/img/10_animation/landing/5.png",
+            "../assets/img/10_animation/landing/6.png",
+            "../assets/img/10_animation/landing/7.png",
+            "../assets/img/10_animation/landing/8.png",
+            "../assets/img/10_animation/landing/9.png"
         ]
     }
 }

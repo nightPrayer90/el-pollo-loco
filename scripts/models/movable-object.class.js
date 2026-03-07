@@ -9,6 +9,8 @@ class MovableObject extends DrawableObject {
     health = 100;
     damage = 2;
 
+    isLanding = false;
+
     // collision
     cX;
     cY;
@@ -71,11 +73,21 @@ class MovableObject extends DrawableObject {
         if (this.isAboveGround() || this.speedY > 0) {
             this.y -= this.speedY;
             this.speedY -= this.acceleration;
+            this.isLanding = false;
+        }
+
+        if (!this.isAboveGround() && this.isLanding == false) {
+            this.jumpEndFrame();
         }
     };
 
     isAboveGround() {
         return this.y < 180;
+    }
+
+    jumpEndFrame(){
+        console.log("isLanding");
+        this.isLanding = true;
     }
 
     // constructor

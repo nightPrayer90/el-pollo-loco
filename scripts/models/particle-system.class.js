@@ -17,7 +17,7 @@ class ParticleSystem extends MovableObject {
         this.world = world;
         this.loadImage(this.IMAGES[0]);
         this.loadImages(this.IMAGES);
-        this.animate_id = IntervalHub.startInterval(this.animate, 33);
+        this.animate_id = IntervalHub.startInterval(this.animate, 25);
     }
 
     animate = () => {

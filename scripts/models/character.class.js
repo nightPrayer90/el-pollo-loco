@@ -65,6 +65,11 @@ class Character extends MovableObject {
         this.world.camera_x = -this.x + 100;
     };
 
+    jumpEndFrame(){
+        super.jumpEndFrame();
+        this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width/2, this.y + this.height-10, 126, 126) 
+    }
+
     hit(damage) {
         if (this.canTakeDamage == true) {
             this.canTakeDamage = false;
