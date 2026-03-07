@@ -53,11 +53,11 @@ class World {
         // - last bk -> 100/ movement
         this.ctx.translate(this.camera_x * 0.5, 0);
         this.addObjectsToMap(this.level.backgroundObjects_L1);
+        this.addObjectsToMap(this.diedEnemies);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.thrownBottles);
-        this.addObjectsToMap(this.diedEnemies);
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
 

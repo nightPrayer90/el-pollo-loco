@@ -2,7 +2,7 @@ let levelBkLength = 4;
 let imageWidth = 720;
 
 const level1 = new Level(
-    [new Chicken(), new Chicken(), new Chicken(), new Endboss()], 
+    [new Chicken(450, 0), new Chicken(550, 1), new Chicken(700, 0), new Endboss()], 
     [new BackgroundObject("../assets/img/5_background/layers/air.png", 0)],
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L1),
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L2),

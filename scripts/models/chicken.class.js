@@ -1,36 +1,32 @@
 class Chicken extends MovableObject {
     x;
-    y = 330;
-    height = 100;
-    width = 70;
-    speed = 1 + Math.random() * 1;
+    y;
+    height;
+    width;
+    speed;
     damage = 20;
 
-    IMAGES_WALKING = ImageHub.CHICKEN_NORMAL.walk;
-    IMAGES_DEAD = ImageHub.CHICKEN_NORMAL.dead;
+    IMAGES_WALKING;
+    IMAGES_DEAD;
 
     isDead = false;
 
     animate_id;
     move_id;
 
-    collisionOffset = {
-        top: 15,
-        right: 15,
-        bottom: 0,
-        left: 15,
-    };
+    collisionOffset = {};
+    ;
 
-    constructor() {
+    constructor(x, chickenType) {
         super();
-        this.loadImage(this.IMAGES_WALKING[0]);
-        this.x = Math.random() * 1500 + 200;
-
+        this.x = x;
+        this.chickenType(chickenType);
         this.setCollisionRect();
+        this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        this.animate_id = IntervalHub.startInterval(this.animate, 100); 
-        this.move_id = IntervalHub.startInterval(this.move, 60);
+        this.animate_id = IntervalHub.startInterval(this.animate, 100);
+        this.move_id = IntervalHub.startInterval(this.move, 32);
     }
 
     move = () => {
@@ -49,6 +45,7 @@ class Chicken extends MovableObject {
             this.playAnimationLoop(this.IMAGES_WALKING);
         } else {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
+                this.y +=10;
                 this.removeEnemyFormInverval();
             }
         }
@@ -72,4 +69,45 @@ class Chicken extends MovableObject {
         IntervalHub.stopInterval(this.animate_id);
         IntervalHub.stopInterval(this.move_id);
     }
+
+    chickenType(type) {
+        switch (type) {
+            case 0:
+                this.loadNormalChicken();
+                break;
+            case 1:
+                this.loadSmallChicken();
+                break;
+        }
+    }
+
+    loadNormalChicken() {
+        this.IMAGES_WALKING = ImageHub.CHICKEN_NORMAL.walk;
+        this.IMAGES_DEAD = ImageHub.CHICKEN_NORMAL.dead;
+        this.collisionOffset = {
+            top: 15,
+            right: 15,
+            bottom: 0,
+            left: 15,
+        };
+        this.height = 100;
+        this.width = 95;
+        this.y = 335;
+        this.speed = 1 + Math.random() * 1;
+    }
+
+    loadSmallChicken() {
+        this.IMAGES_WALKING = ImageHub.CHICKEN_SMALL.walk;
+        this.IMAGES_DEAD = ImageHub.CHICKEN_SMALL.dead;
+        this.collisionOffset = {
+            top: 5,
+            right: 5,
+            bottom: 0,
+            left: 5,
+        };
+        this.height = 60;
+        this.width = 55;
+        this.y = 370;
+        this.speed = 3 + Math.random() * 2;
+    } 
 }
