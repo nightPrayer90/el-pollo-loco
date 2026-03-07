@@ -213,4 +213,10 @@ class ImageHub {
             "../assets/img/10_animation/landing/9.png"
         ]
     }
+
+    static OBSTACLES = {
+        mast: [
+            "../assets/img/11_obstacles/mast.png"
+        ]
+    }
 }

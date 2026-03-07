@@ -59,8 +59,10 @@ class World {
         this.addObjectsToMap(this.thrownBottles);
         this.addObjectsToMap(this.diedEnemies);
         this.addObjectsToMap(this.particleSystems);
+        this.addObjectsToMap(this.level.obstacles);
 
         this.ctx.translate(-this.camera_x, 0);
+       
 
         // --- space for ui ---
         this.addToMap(this.statusBar);
