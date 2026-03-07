@@ -21,7 +21,6 @@ class ParticleSystem extends MovableObject {
     }
 
     animate = () => {
-        console.log("HALLO PARTICLE? " + this.x + " " + this.y);
         if (this.playAnimationSingle(this.IMAGES)) {
             IntervalHub.stopInterval(this.animate_id);
             this.removeParticle();

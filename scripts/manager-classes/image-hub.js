@@ -75,6 +75,11 @@ class ImageHub {
             "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png",
             "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png",
             "../assets/img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png",
+        ],
+        broken: [
+            "../assets/img/6_salsa_bottle/bottle_broken/bottle_broken1.png",
+            "../assets/img/6_salsa_bottle/bottle_broken/bottle_broken2.png",
+            "../assets/img/6_salsa_bottle/bottle_broken/bottle_broken3.png"
         ]
 
     }

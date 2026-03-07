@@ -54,10 +54,10 @@ class World {
         this.ctx.translate(this.camera_x * 0.5, 0);
         this.addObjectsToMap(this.level.backgroundObjects_L1);
         this.addObjectsToMap(this.diedEnemies);
+        this.addObjectsToMap(this.thrownBottles);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
-        this.addObjectsToMap(this.thrownBottles);
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
 
@@ -127,7 +127,6 @@ class World {
                 this.throwableObjects.forEach((bottle) => {
                     if (bottle.isColliding(enemy)) {
                         bottle.splash();
-                        console.log("enemy hit!");
                         enemy.hit(this);
                     }
                 });
