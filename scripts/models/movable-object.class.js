@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
     damage = 2;
 
     isLanding = false;
+    showCollisionFrame = false;
 
     // collision
     cX;
@@ -86,7 +87,6 @@ class MovableObject extends DrawableObject {
     }
 
     jumpEndFrame(){
-        console.log("isLanding");
         this.isLanding = true;
     }
 

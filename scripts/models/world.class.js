@@ -61,8 +61,7 @@ class World {
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
 
-        this.ctx.translate(-this.camera_x, 0);
-       
+        this.ctx.translate(-this.camera_x, 0);       
 
         // --- space for ui ---
         this.addToMap(this.statusBar);
@@ -82,6 +81,8 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
+        
+        if(mo.showCollisionFrame)
         mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
