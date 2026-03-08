@@ -14,8 +14,9 @@ class Chicken extends MovableObject {
     animate_id;
     move_id;
 
+    moveDirection = true;
+
     collisionOffset = {};
-    ;
 
     constructor(x, chickenType) {
         super();
@@ -32,7 +33,11 @@ class Chicken extends MovableObject {
     move = () => {
         if (this.isDead == true) return;
 
-        this.moveLeft();
+        if (this.x <= 10) this.moveDirection = false;
+        if (this.x >= 2000) this.moveDirection = true;
+
+        if (this.moveDirection == true) this.moveLeft();
+        else this.moveRight();
     };
 
     hit(world) {
@@ -45,7 +50,7 @@ class Chicken extends MovableObject {
             this.playAnimationLoop(this.IMAGES_WALKING);
         } else {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
-                this.y +=10;
+                this.y += 10;
                 this.removeEnemyFormInverval();
             }
         }
@@ -109,5 +114,5 @@ class Chicken extends MovableObject {
         this.width = 55;
         this.y = 370;
         this.speed = 3 + Math.random() * 2;
-    } 
+    }
 }

@@ -27,10 +27,12 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
+        this.otherDirection = (this instanceof Chicken)  ? true :  false;
     }
 
     moveLeft() {
         this.x -= this.speed;
+        this.otherDirection = (this instanceof Chicken)  ? false :  true;
     }
 
     jump() {
