@@ -57,6 +57,8 @@ class ThrowableObject extends MovableObject {
             if (this.isHitOnGround == true) {
 
                 this.loadImage(this.BROKEN_BOTTLE[Math.floor(Math.random() * this.BROKEN_BOTTLE.length)]);
+                
+                //TODO: könnte man hier auch in die Superclass verschieben!
                 IntervalHub.stopInterval(this.animate_id);
             }
         }
@@ -72,7 +74,6 @@ class ThrowableObject extends MovableObject {
     }
 
     removeBottleFromCollision() {
-        // MAYBE TODO: -> INTERVAL Läuft noch aber sonst tut sich nichts mehr
         if (this.isHit == false) {
             // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
             const index = this.world.throwableObjects.indexOf(this);

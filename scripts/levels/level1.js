@@ -7,6 +7,7 @@ const level1 = new Level(
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L1),
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L2),
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L3),
+    [new Collectable(800,150)],
     [new Obstacle(ImageHub.OBSTACLES.mast, -140, 200, 250, 250)],
     imageWidth*levelBkLength
 );

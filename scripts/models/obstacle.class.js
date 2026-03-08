@@ -1,8 +1,8 @@
 class Obstacle extends DrawableObject {
     x;
     y;
-    width = 720;
-    height = 480;
+    width;
+    height;
     
     constructor(imagePath, x, y, width, height) {
         super();

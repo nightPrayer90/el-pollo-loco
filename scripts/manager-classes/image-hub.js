@@ -207,21 +207,42 @@ class ImageHub {
             "../assets/img/10_animation/hit/Fx07_12.png"
         ],
         jump: [
-            //"../assets/img/10_animation/landing/1.png",
-            //"../assets/img/10_animation/landing/2.png",
-            //"../assets/img/10_animation/landing/3.png",
+            "../assets/img/10_animation/landing/1.png",
+            "../assets/img/10_animation/landing/2.png",
+            "../assets/img/10_animation/landing/3.png",
             "../assets/img/10_animation/landing/4.png",
             "../assets/img/10_animation/landing/5.png",
             "../assets/img/10_animation/landing/6.png",
-            "../assets/img/10_animation/landing/7.png",
-            "../assets/img/10_animation/landing/8.png",
-            "../assets/img/10_animation/landing/9.png"
+            "../assets/img/10_animation/landing/7.png"
+        ],
+        coin: [
+            "../assets/img/10_animation/collectCoin/1.png",
+            "../assets/img/10_animation/collectCoin/2.png",
+            "../assets/img/10_animation/collectCoin/3.png",
+            "../assets/img/10_animation/collectCoin/4.png",
+            "../assets/img/10_animation/collectCoin/5.png",
+            "../assets/img/10_animation/collectCoin/6.png",
+            "../assets/img/10_animation/collectCoin/7.png",
+            "../assets/img/10_animation/collectCoin/8.png"
         ]
     }
 
     static OBSTACLES = {
         mast: [
             "../assets/img/11_obstacles/mast.png"
+        ]
+    }
+
+    static COLLECTABLES = {
+        coin: [
+            "../assets/img/8_coin/coin_1.png",
+            "../assets/img/8_coin/coin_2.png"
+        ],
+        bottle_v1: [
+            "../assets/img/6_salsa_bottle/1_salsa_bottle_on_ground.png"
+        ],
+        bottle_v2: [
+            "../assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"
         ]
     }
 }

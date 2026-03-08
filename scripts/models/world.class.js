@@ -55,13 +55,14 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects_L1);
         this.addObjectsToMap(this.diedEnemies);
         this.addObjectsToMap(this.thrownBottles);
+        this.addObjectsToMap(this.level.collectables);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
 
-        this.ctx.translate(-this.camera_x, 0);       
+        this.ctx.translate(-this.camera_x, 0);
 
         // --- space for ui ---
         this.addToMap(this.statusBar);
@@ -81,9 +82,8 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        
-        if(mo.showCollisionFrame)
-        mo.drawFrame(this.ctx);
+
+        if (mo.showCollisionFrame) mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -111,15 +111,12 @@ class World {
         this.level.enemies.forEach((enemy) => {
             // collision Character -> enemy
             if (this.character.isColliding(enemy)) {
-                if(this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
+                if (this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
                     enemy.hit(this);
                     this.character.speedY = 8;
-                    this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW/2 , enemy.cY+ enemy.cH/2 , 126, 126);
-                }
-                else 
-                {
-                    if (enemy.isDead == false)
-                        this.character.hit(enemy.damage);
+                    this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW / 2, enemy.cY + enemy.cH / 2, 126, 126);
+                } else {
+                    if (enemy.isDead == false) this.character.hit(enemy.damage);
                 }
             }
 
@@ -131,6 +128,14 @@ class World {
                         enemy.hit(this);
                     }
                 });
+            }
+        });
+
+        this.level.collectables.forEach((collectable) => {
+            // collision Character -> enemy
+            if (this.character.isColliding(collectable) && collectable.isCollect == false) {
+                collectable.collect(this);
+                this.createParticleSystem(collectable.IMAGES_VFX, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
             }
         });
     }
@@ -156,15 +161,15 @@ class World {
 
     generateCloud(generateRandomX) {
         if (Math.random() > 0.35) {
-                let cloud = new Cloud(this.level.level_size, 0, generateRandomX);
-                this.clouds_L2.push(cloud);
-            } else {
-                let cloud = new Cloud(this.level.level_size, 1, generateRandomX);
-                this.clouds_L3.push(cloud);
-            }
+            let cloud = new Cloud(this.level.level_size, 0, generateRandomX);
+            this.clouds_L2.push(cloud);
+        } else {
+            let cloud = new Cloud(this.level.level_size, 1, generateRandomX);
+            this.clouds_L3.push(cloud);
+        }
     }
-    
-    createParticleSystem(images, x, y, width, height,) {
-        this.particleSystems.push(new ParticleSystem(images, x , y , width, height, this));
+
+    createParticleSystem(images, x, y, width, height) {
+        this.particleSystems.push(new ParticleSystem(images, x, y, width, height, this));
     }
 }

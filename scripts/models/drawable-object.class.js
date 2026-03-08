@@ -25,9 +25,8 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-     //collision Rectangle
     drawFrame(ctx) {
-        if (!(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject)) return;
+        if (!(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject|| this instanceof Collectable)) return;
         this.setCollisionRect();
 
         ctx.beginPath();
