@@ -104,7 +104,6 @@ class World {
 
     update = () => {
         this.checkCollisions();
-        this.throwBottle();
     };
 
     checkCollisions() {
@@ -140,19 +139,7 @@ class World {
         });
     }
 
-    // wirklich hier? -> eigentlich gehört das werfen in den charakter
-    throwBottle() {
-        if (this.keyboard.D && this.character.canThrow == true) {
-            let bottle = new ThrowableObject(this.character.x, this.character.y, world);
-            this.throwableObjects.push(bottle);
-            this.character.canThrow = false;
-
-            setTimeout(() => {
-                this.character.canThrow = true;
-            }, 1000);
-        }
-    }
-
+    
     cloudsGenerator(cloundQuantity) {
         for (let i = 0; i <= cloundQuantity; i++) {
             this.generateCloud(true);

@@ -38,7 +38,6 @@ class Collectable extends MovableObject  {
     collect(world) {
         this.removeCollectableFormInverval();
         this.removeCollectableFromCollision(world);
-        console.log("collect");
     }
 
     // TODO: könnte man in die superclass verschieben

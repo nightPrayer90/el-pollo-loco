@@ -29,7 +29,7 @@ class Character extends MovableObject {
     canTakeDamage = true;
     canThrow = true;
 
-    animate_id
+    animate_id;
 
     constructor() {
         super();
@@ -48,7 +48,7 @@ class Character extends MovableObject {
     }
 
     move = () => {
-        if(this.isDead() == true) return;
+        if (this.isDead() == true) return;
 
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.moveRight();
@@ -62,12 +62,26 @@ class Character extends MovableObject {
                 this.jump();
             }
         }
+        if (this.world.keyboard.D && this.canThrow == true) {
+            this.throwBottle();
+        }
+
         this.world.camera_x = -this.x + 100;
     };
 
-    jumpEndFrame(){
+    throwBottle() {
+        let bottle = new ThrowableObject(this.x, this.y, this.world);
+        this.world.throwableObjects.push(bottle);
+        this.canThrow = false;
+
+        setTimeout(() => {
+            this.canThrow = true;
+        }, 1000);
+    }
+
+    jumpEndFrame() {
         super.jumpEndFrame();
-        this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width/2, this.y + this.height-10, 126, 126) 
+        this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 10, 126, 126);
     }
 
     hit(damage) {
@@ -87,8 +101,8 @@ class Character extends MovableObject {
         this.canTakeDamage = true;
     }
 
-    isDead(){
-        return this.health <= 0 ;
+    isDead() {
+        return this.health <= 0;
     }
 
     animate = () => {
@@ -97,16 +111,12 @@ class Character extends MovableObject {
                 IntervalHub.stopInterval(this.animate_id);
                 IntervalHub.stopInterval(this.move_id);
                 IntervalHub.stopInterval(this.applyGravity_id);
-            };
-        }
-        else if (!this.canTakeDamage) {
+            }
+        } else if (!this.canTakeDamage) {
             this.playAnimationLoop(this.IMAGES_HURT);
-        }
-        else if (this.isAboveGround()) {
-            if (this.speedY > 0)
-                this.playAnimationSingle(this.IMAGES_JUMPING);
-            else
-                this.playAnimationSingle(this.IMAGES_FALLING);
+        } else if (this.isAboveGround()) {
+            if (this.speedY > 0) this.playAnimationSingle(this.IMAGES_JUMPING);
+            else this.playAnimationSingle(this.IMAGES_FALLING);
         } else {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimationLoop(this.IMAGES_WALKING);
