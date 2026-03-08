@@ -230,6 +230,12 @@ class ImageHub {
     static OBSTACLES = {
         mast: [
             "../assets/img/11_obstacles/mast.png"
+        ],
+        barrel1: [
+            "../assets/img/11_obstacles/barrel-1.png"
+        ],
+        barrel2: [
+            "../assets/img/11_obstacles/barrel-2.png"
         ]
     }
 

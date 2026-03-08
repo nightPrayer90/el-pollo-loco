@@ -5,6 +5,7 @@ class World {
     ctx;
     canvas;
     keyboard;
+    spawn_id;
     camera_x = 0;
     statusBar = new StatusBar();
 
@@ -26,6 +27,8 @@ class World {
         this.setWorld();
         this.cloudsGenerator(6);
         IntervalHub.startInterval(this.update, 16);
+        this.spawn_id = IntervalHub.startInterval(this.chickenSpawner,3000);
+        
     }
 
     setWorld() {
@@ -139,7 +142,6 @@ class World {
         });
     }
 
-    
     cloudsGenerator(cloundQuantity) {
         for (let i = 0; i <= cloundQuantity; i++) {
             this.generateCloud(true);
@@ -159,4 +161,19 @@ class World {
     createParticleSystem(images, x, y, width, height) {
         this.particleSystems.push(new ParticleSystem(images, x, y, width, height, this));
     }
+
+    chickenSpawner = () => {
+        if (this.level.maxEnemies <= 0) {
+            IntervalHub.stopInterval(this.spawn_id);
+            console.log("[chickenSpawner] stop spawning!" )
+        }
+        if (this.level.enemies.length >= this.level.maxEnemies) return;
+
+        let xSpawnPos = (this.level.level_size - 1000)/2;
+        let turnXPosition = this.level.level_size - 1000;
+        let type = Math.random() < 0.35 ? 1 : 0;
+        this.level.enemies.push(new Chicken(xSpawnPos, type, turnXPosition)); 
+
+        console.log("[enemies ] " + this.level.enemies.length);
+    };
 }

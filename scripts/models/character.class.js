@@ -54,9 +54,10 @@ class Character extends MovableObject {
     move = () => {
         if (this.isDead() == true) return;
 
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        if (this.world.keyboard.RIGHT && this.x < (this.world.level.level_size - 650)) {
             this.moveRight();
-        } else if (this.world.keyboard.LEFT && this.x > 0) {
+
+        } else if (this.world.keyboard.LEFT && this.x > -500) {
             this.moveLeft();
             
         }
@@ -78,7 +79,7 @@ class Character extends MovableObject {
         this.canThrow = false;
 
         this.bottles--;
-        console.log("bottles: " + this.bottles);
+        console.log("[bottles: ]" + this.bottles);
 
         setTimeout(() => {
             this.canThrow = true;
@@ -91,7 +92,7 @@ class Character extends MovableObject {
     }
 
     hit(damage) {
-        if (this.canTakeDamage == true) {
+        if (this.canTakeDamage == true && !this.isDead()) {
             this.canTakeDamage = false;
             this.health -= damage;
             this.world.statusBar.setPercentage(this.health);
@@ -116,7 +117,6 @@ class Character extends MovableObject {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
                 IntervalHub.stopInterval(this.animate_id);
                 IntervalHub.stopInterval(this.move_id);
-                IntervalHub.stopInterval(this.applyGravity_id);
             }
         } else if (!this.canTakeDamage) {
             this.playAnimationLoop(this.IMAGES_HURT);

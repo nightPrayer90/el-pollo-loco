@@ -18,7 +18,7 @@ class ThrowableObject extends MovableObject {
         super();
         this.loadImage(this.ROTATE_BOTTLE[0]);
         this.loadImages(this.ROTATE_BOTTLE);
-        //this.loadImages(this.BROKEN_BOTTLE);
+       
         this.x = x + 50;
         this.y = y + 100;
         this.world = world;
@@ -70,7 +70,7 @@ class ThrowableObject extends MovableObject {
 
         this.removeBottleFromCollision();
         this.world.createParticleSystem(ImageHub.BOTTLE.splash, this.x+this.width/2, this.y + this.height-2, 150, 150);
-        IntervalHub.stopInterval(this.fly_id);
+        IntervalHub.stopInterval(this.fly_id); 
     }
 
     removeBottleFromCollision() {

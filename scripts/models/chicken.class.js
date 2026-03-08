@@ -14,11 +14,12 @@ class Chicken extends MovableObject {
     animate_id;
     move_id;
 
-    moveDirection = true;
+    moveDirection;
+    turnXPosition;
 
     collisionOffset = {};
 
-    constructor(x, chickenType) {
+    constructor(x, chickenType, turnXPosition) {
         super();
         this.x = x;
         this.chickenType(chickenType);
@@ -26,22 +27,24 @@ class Chicken extends MovableObject {
         this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
+        this.turnXPosition = turnXPosition;
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
         this.move_id = IntervalHub.startInterval(this.move, 32);
+        this.moveDirection = (Math.random() < 0.6) ? true : false;
     }
 
     move = () => {
         if (this.isDead == true) return;
 
-        if (this.x <= 10) this.moveDirection = false;
-        if (this.x >= 2000) this.moveDirection = true;
+        if (this.x <= -300) this.moveDirection = false;
+        if (this.x >= this.turnXPosition) this.moveDirection = true;
 
         if (this.moveDirection == true) this.moveLeft();
         else this.moveRight();
     };
 
     hit(world) {
-        console.log("ich bin getroffen");
+        console.log("[CHICKEN] arg!");
         this.removeEnemyFromCollision(world);
     }
 
