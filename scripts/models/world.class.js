@@ -18,6 +18,10 @@ class World {
     clouds_L2 = [];
     clouds_L3 = [];
 
+    yShake = 0;
+    yShake_id;
+    isScreenShake = false;
+
     constructor(canvas, keyboard, level) {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
@@ -27,8 +31,7 @@ class World {
         this.setWorld();
         this.cloudsGenerator(6);
         IntervalHub.startInterval(this.update, 16);
-        this.spawn_id = IntervalHub.startInterval(this.chickenSpawner,3000);
-        
+        this.spawn_id = IntervalHub.startInterval(this.chickenSpawner, 3000);
     }
 
     setWorld() {
@@ -43,18 +46,19 @@ class World {
         this.addObjectsToMap(this.level.staticBackground);
 
         //level2
-        this.ctx.translate(this.camera_x * 0.25, 0);
+        this.ctx.translate(this.camera_x * 0.25, this.yShake);
         this.addObjectsToMap(this.level.backgroundObjects_L3);
         this.addObjectsToMap(this.clouds_L2);
 
         // level 3
-        this.ctx.translate(this.camera_x * 0.25, 0);
+        this.ctx.translate(this.camera_x * 0.25, -this.yShake);
         this.addObjectsToMap(this.level.backgroundObjects_L2);
         this.addObjectsToMap(this.clouds_L3);
         // bk layer
 
         // - last bk -> 100/ movement
-        this.ctx.translate(this.camera_x * 0.5, 0);
+        this.ctx.translate(this.camera_x * 0.5, this.yShake);
+
         this.addObjectsToMap(this.level.backgroundObjects_L1);
         this.addObjectsToMap(this.diedEnemies);
         this.addObjectsToMap(this.thrownBottles);
@@ -65,7 +69,7 @@ class World {
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
 
-        this.ctx.translate(-this.camera_x, 0);
+        this.ctx.translate(-this.camera_x,-this.yShake);
 
         // --- space for ui ---
         this.addToMap(this.statusBar);
@@ -118,7 +122,10 @@ class World {
                     this.character.speedY = 8;
                     this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW / 2, enemy.cY + enemy.cH / 2, 126, 126);
                 } else {
-                    if (enemy.isDead == false) this.character.hit(enemy.damage);
+                    if (enemy.isDead == false) {
+                        this.character.hit(enemy.damage);
+                        this.triggerScreenShake(250);
+                    }
                 }
             }
 
@@ -128,6 +135,7 @@ class World {
                     if (bottle.isColliding(enemy)) {
                         bottle.splash();
                         enemy.hit(this);
+                        this.triggerScreenShake(150);
                     }
                 });
             }
@@ -137,6 +145,7 @@ class World {
             // collision Character -> enemy
             if (this.character.isColliding(collectable) && collectable.isCollect == false) {
                 collectable.collect(this);
+                this.triggerScreenShake(66);
                 this.createParticleSystem(collectable.IMAGES_VFX, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
             }
         });
@@ -165,15 +174,36 @@ class World {
     chickenSpawner = () => {
         if (this.level.maxEnemies <= 0) {
             IntervalHub.stopInterval(this.spawn_id);
-            console.log("[chickenSpawner] stop spawning!" )
+            console.log("[chickenSpawner] stop spawning!");
         }
         if (this.level.enemies.length >= this.level.maxEnemies) return;
 
-        let xSpawnPos = (this.level.level_size - 1000)/2;
+        let xSpawnPos = (this.level.level_size - 1000) / 2;
         let turnXPosition = this.level.level_size - 1000;
         let type = Math.random() < 0.35 ? 1 : 0;
-        this.level.enemies.push(new Chicken(xSpawnPos, type, turnXPosition)); 
+        this.level.enemies.push(new Chicken(xSpawnPos, type, turnXPosition));
 
         console.log("[enemies ] " + this.level.enemies.length);
+    };
+
+    triggerScreenShake(shakeTime) {
+        console.log("triggerShake");
+
+        if (this.isScreenShake == true) return;
+        this.isScreenShake = true;
+
+        this.yShake_id = IntervalHub.startInterval(this.sceenShake, 33);
+        this.yShake = 2;
+
+        setTimeout(() => {
+            this.yShake = 0;
+            IntervalHub.stopInterval(this.spawn_id);
+            this.isScreenShake = false;
+        }, shakeTime);
+    }
+
+    sceenShake = () => {
+        if (this.yShake > 0) this.yShake = -2;
+        else this.yShake = -this.yShake;
     };
 }
