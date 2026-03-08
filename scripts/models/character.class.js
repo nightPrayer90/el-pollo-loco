@@ -6,6 +6,10 @@ class Character extends MovableObject {
     speed = 4;
     otherDirection = false;
 
+    health = 100;
+    coins = 0;
+    bottles = 5;
+
     IMAGES_WALKING = ImageHub.CHARACTER.walk;
     IMAGES_JUMPING = ImageHub.CHARACTER.jump;
     IMAGES_FALLING = ImageHub.CHARACTER.fall;
@@ -62,7 +66,7 @@ class Character extends MovableObject {
                 this.jump();
             }
         }
-        if (this.world.keyboard.D && this.canThrow == true) {
+        if (this.world.keyboard.D && this.canThrow == true && this.bottles > 0) {
             this.throwBottle();
         }
 
@@ -73,6 +77,9 @@ class Character extends MovableObject {
         let bottle = new ThrowableObject(this.x, this.y, this.world);
         this.world.throwableObjects.push(bottle);
         this.canThrow = false;
+
+        this.bottles--;
+        console.log("bottles: " + this.bottles);
 
         setTimeout(() => {
             this.canThrow = true;

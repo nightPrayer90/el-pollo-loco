@@ -1,32 +1,22 @@
-class Collectable extends MovableObject  {
+class Collectable extends MovableObject {
     x;
     y;
-    width = 120;
-    height = 120;
+    width;
+    height;
 
-    IMAGES_SET = ImageHub.COLLECTABLES.coin;
+    IMAGES_SET = [];
     IMAGES_VFX = ImageHub.VFX.coin;
-    
+
     animate_id;
     isCollect = false;
 
-    collisionOffset = {
-        top: 40,
-        right: 40,
-        bottom: 40,
-        left: 40,
-    };
-
-
-    constructor(x, y) {
+    constructor(x, y, type) {
         super();
-        this.loadImage(this.IMAGES_SET[0]);
-        this.loadImages(this.IMAGES_SET);
+        this.type = type;
         this.x = x;
         this.y = y;
-
+        this.init(type);
         this.setCollisionRect();
-        this.animate_id = IntervalHub.startInterval(this.animate, 250);
     }
 
     animate = () => {
@@ -35,8 +25,57 @@ class Collectable extends MovableObject  {
         }
     };
 
+    init(type) {
+        switch (type) {
+            case 0:
+                this.initCoin();
+                break;
+            case 1:
+                this.initBottle();
+                break;
+        }
+        this.loadImage(this.IMAGES_SET[0]);
+        this.loadImages(this.IMAGES_SET);
+        if (this.IMAGES_SET.length > 1) this.animate_id = IntervalHub.startInterval(this.animate, 250);
+    }
+
+    initCoin() {
+        this.width = 120;
+        this.height = 120;
+        this.collisionOffset = {
+            top: 40,
+            right: 40,
+            bottom: 40,
+            left: 40,
+        };
+        this.IMAGES_SET = ImageHub.COLLECTABLES.coin;
+    }
+
+    initBottle() {
+        this.width = 60;
+        this.height = 60;
+        this.collisionOffset = {
+            top: 5,
+            right: 5,
+            bottom: 5,
+            left: 5,
+        };
+        this.IMAGES_SET = Math.random() < 0.5 ? ImageHub.COLLECTABLES.bottle_v1 : ImageHub.COLLECTABLES.bottle_v2;
+    }
+
     collect(world) {
-        this.removeCollectableFormInverval();
+        switch (this.type) {
+            case 0:
+                world.character.coins++;
+                console.log("COINS: " + world.character.coins);
+                break;
+            case 1:
+                world.character.bottles++;
+                console.log("BOTTLES: " + world.character.bottles);
+                break;
+        }
+
+        if (this.IMAGES_SET.length > 1) this.removeCollectableFormInverval();
         this.removeCollectableFromCollision(world);
     }
 

@@ -6,8 +6,8 @@ class MovableObject extends DrawableObject {
     lastImages = [];
     animationFlag = false;
 
-    health = 100;
-    damage = 2;
+    health;
+    damage;
 
     isLanding = false;
     showCollisionFrame = true;
