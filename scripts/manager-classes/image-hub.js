@@ -92,6 +92,12 @@ class ImageHub {
             "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png",
             "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
             "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png"
+        ],
+        bottle: [
+            "./assets/img/7_statusbars/3_icons/icon_salsa_bottle.png",
+        ],
+        coin: [
+            "./assets/img/7_statusbars/3_icons/icon_coin.png",
         ]
     }
 

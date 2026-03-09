@@ -10,7 +10,7 @@ class MovableObject extends DrawableObject {
     damage;
 
     isLanding = false;
-    showCollisionFrame = true;
+    drawCollisionFrame = true;
 
     // collision
     cX;
@@ -110,7 +110,10 @@ class MovableObject extends DrawableObject {
         this.updateCollisionRect();
         mo.updateCollisionRect();
 
-        return this.cX + this.cW > mo.cX && this.cY + this.cH > mo.cY && this.cX < mo.cX + mo.cW && this.cY < mo.cY + mo.cH;
+        return this.cX + this.cW > mo.cX && 
+        this.cY + this.cH > mo.cY && 
+        this.cX < mo.cX + mo.cW && 
+        this.cY < mo.cY + mo.cH;
     }
 
     isCollidingFromTop(mo) {

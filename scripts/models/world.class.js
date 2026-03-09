@@ -8,6 +8,8 @@ class World {
     spawn_id;
     camera_x = 0;
     statusBar = new StatusBar();
+    bottleUI = new StatusObject(0);
+    coinUI = new StatusObject(1);
 
     throwableObjects = [];
     thrownBottles = [];
@@ -73,6 +75,8 @@ class World {
 
         // --- space for ui ---
         this.addToMap(this.statusBar);
+        this.addToMap(this.bottleUI);
+        this.addToMap(this.coinUI);
 
         // Draw() wird immer wieder aufgerufen
         requestAnimationFrame(() => this.draw());
@@ -90,7 +94,8 @@ class World {
         }
         mo.draw(this.ctx);
 
-        if (mo.showCollisionFrame) mo.drawFrame(this.ctx);
+        if (mo.drawCollisionFrame) mo.drawFrame(this.ctx);
+        if (mo.isDrawText) mo.drawText(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

@@ -1,0 +1,10 @@
+@font-face {
+    font-family: "Boogaloo";
+    src: url("../assets/fonts/Boogaloo/Boogaloo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Figtree";
+    src: url("../assets/fonts/Figtree/Figtree-VariableFont_wght.ttf") format("truetype");
+    font-style: normal;
+}

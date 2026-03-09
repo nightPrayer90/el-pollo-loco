@@ -32,6 +32,7 @@ class Character extends MovableObject {
 
     canTakeDamage = true;
     canThrow = true;
+    isDrawText = true;
     playHurtAnimation = true;
 
     animate_id;

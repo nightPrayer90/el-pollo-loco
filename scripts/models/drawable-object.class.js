@@ -7,6 +7,13 @@ class DrawableObject {
     y = 200;
     height = 150;
     width = 100;
+ 
+    isDrawText = false;
+    showTextString = "Möhrenkult";
+    textOffset = {
+        x: 0,
+        y: 0
+    }
 
     loadImage(path) {
         this.img = new Image();
@@ -33,6 +40,12 @@ class DrawableObject {
         ctx.lineWidth = "2";
         ctx.strokeStyle = "blue";
         ctx.rect(this.cX, this.cY, this.cW, this.cH);
-        ctx.stroke();
+        ctx.stroke();   
+    }
+
+    drawText(ctx) {
+        ctx.font = "30px Boogaloo";
+        ctx.fillStyle = "orange";
+        ctx.fillText(this.showTextString,this.x + this.textOffset.x, this.y+this.textOffset.y);
     }
 }

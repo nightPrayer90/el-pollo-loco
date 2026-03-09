@@ -27,6 +27,7 @@ main {
     section {
         padding: 0 123px;
         h1 {
+            font-family: "Boogaloo";
             margin-top: 64px;
             margin-bottom: 80px;
         }
