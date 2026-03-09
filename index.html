@@ -32,8 +32,6 @@
     <script src="./scripts/levels/level1.js" defer></script>
 
     <script src="./scripts/models/world.class.js" defer></script>
-
-
     <script src="./scripts/game.js" defer></script>
 </head>
 
@@ -48,8 +46,15 @@
     <main>
         <section class="content">
             <h1>EL POLLO LOCO</h1>
-            <canvas id="canvas" width="720" height="480">
-                </div>
+            <canvas id="canvas" width="720" height="480"></canvas>
+
+            <div class="audio_slider">
+                <input type="range" oninput="AudioHub.objSetVolume(AudioHub.allSounds)" id='volume' min=0 max=1
+                    step=0.01 value='0.2'>
+                <a href="https://stackoverflow.com/questions/60355315/improving-volume-slider-with-html-and-js">Volume
+                    Slider</a>
+            </div>
+
         </section>
     </main>
 

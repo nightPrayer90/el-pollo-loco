@@ -23,6 +23,9 @@ class AudioHub {
     static THROW_HITCHICKEN = new MyAudio("./assets/sounds/chicken/chickenDead.mp3"); 
     static JUMP_HITCHICKEN = new MyAudio("./assets/sounds/chicken/chickenDead2.mp3"); 
 
+    static sliderVolume = 0.2;
+
+
     // Array, das alle definierten Audio-Dateien enthält
     static allSounds = [AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW,
                         AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, 
@@ -34,7 +37,8 @@ class AudioHub {
 
         if (track.sound.readyState == 4 || track.isLoaded) {
             track.isLoaded = true;
-            track.sound.volume = 0.2;  // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
+            console.log(this.sliderVolume);
+            track.sound.volume = this.sliderVolume;  // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
             track.sound.currentTime = 0;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
             track.sound.play();  // Spielt das übergebene Sound-Objekt ab
         }
@@ -60,6 +64,8 @@ class AudioHub {
     // Setzt die Lautstärke für alle Audiodateien
     static objSetVolume(volumeSlider) {
         let volumeValue = document.getElementById('volume').value;  // Holt den aktuellen Lautstärkewert aus dem Inputfeld
+        this.sliderVolume = volumeValue;
+
         volumeSlider.forEach(sound => {
             sound.volume = volumeValue;  // Setzt die Lautstärke für jedes Audio wie im Slider angegeben
         });
@@ -74,7 +80,7 @@ class AudioHub {
 
     static unmute() {
         AudioHub.allSounds.forEach(sound => {
-            sound.volume = 0.2;
+            sound.volume = this.sliderVolume;
         });
     }
 }
