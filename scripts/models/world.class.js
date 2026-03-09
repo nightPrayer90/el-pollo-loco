@@ -117,11 +117,15 @@ class World {
         this.level.enemies.forEach((enemy) => {
             // collision Character -> enemy
             if (this.character.isColliding(enemy)) {
+                // character from top
                 if (this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
                     enemy.hit(this);
                     this.character.speedY = 8;
+                    this.character.collisionTimeout();
                     this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW / 2, enemy.cY + enemy.cH / 2, 126, 126);
+                    return;
                 } else {
+                    // character get damge
                     if (enemy.isDead == false) {
                         this.character.hit(enemy.damage);
                         this.triggerScreenShake(250);
@@ -142,7 +146,7 @@ class World {
         });
 
         this.level.collectables.forEach((collectable) => {
-            // collision Character -> enemy
+            // collision chracter -> collectable
             if (this.character.isColliding(collectable) && collectable.isCollect == false) {
                 collectable.collect(this);
                 this.triggerScreenShake(66);

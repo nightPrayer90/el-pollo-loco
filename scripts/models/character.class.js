@@ -32,6 +32,7 @@ class Character extends MovableObject {
 
     canTakeDamage = true;
     canThrow = true;
+    playHurtAnimation = true;
 
     animate_id;
 
@@ -54,12 +55,10 @@ class Character extends MovableObject {
     move = () => {
         if (this.isDead() == true) return;
 
-        if (this.world.keyboard.RIGHT && this.x < (this.world.level.level_size - 650)) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_size - 650) {
             this.moveRight();
-
         } else if (this.world.keyboard.LEFT && this.x > -500) {
             this.moveLeft();
-            
         }
         if (this.world.keyboard.SPACE) {
             if (!this.isAboveGround()) {
@@ -93,19 +92,29 @@ class Character extends MovableObject {
 
     hit(damage) {
         if (this.canTakeDamage == true && !this.isDead()) {
-            this.canTakeDamage = false;
+            this.collisionTimeout();
+
+            this.playHurtAnimation = false;
             this.health -= damage;
             this.world.statusBar.setPercentage(this.health);
 
             this.speedY = 6;
-            setTimeout(() => {
-                this.isHurt();
-            }, 1000);
+            this.isHurt();
         }
     }
 
+    collisionTimeout() {
+        this.canTakeDamage = false;
+
+        setTimeout(() => {
+            this.canTakeDamage = true;
+        }, 1000);
+    }
+
     isHurt() {
-        this.canTakeDamage = true;
+        setTimeout(() => {
+            this.playHurtAnimation = true;
+        }, 1000);
     }
 
     isDead() {
@@ -118,7 +127,7 @@ class Character extends MovableObject {
                 IntervalHub.stopInterval(this.animate_id);
                 IntervalHub.stopInterval(this.move_id);
             }
-        } else if (!this.canTakeDamage) {
+        } else if (!this.playHurtAnimation) {
             this.playAnimationLoop(this.IMAGES_HURT);
         } else if (this.isAboveGround()) {
             if (this.speedY > 0) this.playAnimationSingle(this.IMAGES_JUMPING);
