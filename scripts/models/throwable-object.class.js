@@ -18,7 +18,7 @@ class ThrowableObject extends MovableObject {
         super();
         this.loadImage(this.ROTATE_BOTTLE[0]);
         this.loadImages(this.ROTATE_BOTTLE);
-       
+
         this.x = x + 50;
         this.y = y + 100;
         this.world = world;

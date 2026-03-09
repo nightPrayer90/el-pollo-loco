@@ -8,8 +8,8 @@ class World {
     spawn_id;
     camera_x = 0;
     statusBar = new StatusBar();
-    bottleUI = new StatusObject(0);
-    coinUI = new StatusObject(1);
+    bottleUI = new StatusObject(0, this.character);
+    coinUI = new StatusObject(1, this.character);
 
     throwableObjects = [];
     thrownBottles = [];
@@ -154,7 +154,7 @@ class World {
             // collision chracter -> collectable
             if (this.character.isColliding(collectable) && collectable.isCollect == false) {
                 collectable.collect(this);
-                this.triggerScreenShake(66);
+                
                 this.createParticleSystem(collectable.IMAGES_VFX, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
             }
         });

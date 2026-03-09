@@ -10,7 +10,7 @@ class MovableObject extends DrawableObject {
     damage;
 
     isLanding = false;
-    drawCollisionFrame = true;
+    drawCollisionFrame = false;
 
     // collision
     cX;

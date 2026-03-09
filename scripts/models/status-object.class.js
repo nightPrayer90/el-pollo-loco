@@ -9,11 +9,14 @@ class StatusObject extends DrawableObject {
 
     isDrawText = true;
     type;
+    character;
 
-    constructor(type) {
+    constructor(type, character) {
         super();
         this.type = type;
+        this.character = character;
         this.init();
+        
     }
 
     init() {
@@ -37,7 +40,7 @@ class StatusObject extends DrawableObject {
             x: 43,
             y: 30,
         };
-        this.updateText(0);
+        this.updateText(this.character.bottles);
     }
 
     initCoin() {
@@ -50,7 +53,7 @@ class StatusObject extends DrawableObject {
             x: 45,
             y: 35,
         };
-        this.updateText(0);
+        this.updateText(this.character.coins);
     } 
 
     updateText(value) {

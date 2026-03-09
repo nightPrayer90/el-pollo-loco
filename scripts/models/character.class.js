@@ -32,7 +32,6 @@ class Character extends MovableObject {
 
     canTakeDamage = true;
     canThrow = true;
-    isDrawText = true;
     playHurtAnimation = true;
 
     animate_id;
@@ -76,11 +75,13 @@ class Character extends MovableObject {
     throwBottle() {
         let bottle = new ThrowableObject(this.x, this.y, this.world);
         this.world.throwableObjects.push(bottle);
-        this.canThrow = false;
-
         this.bottles--;
-        console.log("[bottles: ]" + this.bottles);
+        this.world.bottleUI.updateText(this.bottles);
+        this.throwCooldown();
+    }
 
+    throwCooldown() {
+        this.canThrow = false;
         setTimeout(() => {
             this.canThrow = true;
         }, 1000);

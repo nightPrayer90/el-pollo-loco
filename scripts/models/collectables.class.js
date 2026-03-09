@@ -67,13 +67,13 @@ class Collectable extends MovableObject {
         switch (this.type) {
             case 0:
                 world.character.coins++;
-                console.log("[COINS:] " + world.character.coins);
                 world.level.maxEnemies = Math.max(world.level.maxEnemies - 5, 0);
-                console.log("[maxEnemies:] " + world.level.maxEnemies);
+                world.coinUI.updateText(world.character.coins);
+                world.triggerScreenShake(66);
                 break;
             case 1:
                 world.character.bottles++;
-                console.log("[BOTTLES:] " + world.character.bottles);
+                world.bottleUI.updateText(world.character.bottles);
                 break;
         }
 
