@@ -43,7 +43,13 @@ class Chicken extends MovableObject {
         else this.moveRight();
     };
 
-    hit(world) {
+    // hitFrom 0-> PlayerJump 1->Bottle
+    hit(world, hitFrom) {
+        if (hitFrom == 0) 
+            AudioHub.playOne(AudioHub.JUMP_HITCHICKEN);
+        else
+            AudioHub.playOne(AudioHub.THROW_HITCHICKEN);
+
         console.log("[CHICKEN] arg!");
         this.removeEnemyFromCollision(world);
     }

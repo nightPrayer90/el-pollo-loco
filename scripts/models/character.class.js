@@ -34,6 +34,8 @@ class Character extends MovableObject {
     canThrow = true;
     playHurtAnimation = true;
 
+    isPlayWalksound = false;
+
     animate_id;
 
     constructor() {
@@ -55,16 +57,33 @@ class Character extends MovableObject {
     move = () => {
         if (this.isDead() == true) return;
 
+        // walking
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_size - 650) {
             this.moveRight();
         } else if (this.world.keyboard.LEFT && this.x > -500) {
             this.moveLeft();
         }
+
+        // Movesound
+        if (!this.isAboveGround() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
+            if (this.isPlayWalksound == false) {
+                this.isPlayWalksound = true;
+                AudioHub.playOne(AudioHub.CHAR_WALK);
+            }
+        } else {
+            this.isPlayWalksound = false;
+            AudioHub.stopOne(AudioHub.CHAR_WALK.sound);
+        }
+
+        // jump
         if (this.world.keyboard.SPACE) {
             if (!this.isAboveGround()) {
                 this.jump();
+                AudioHub.playOne(AudioHub.CHAR_JUMP);
             }
         }
+
+        // throw
         if (this.world.keyboard.D && this.canThrow == true && this.bottles > 0) {
             this.throwBottle();
         }
@@ -73,6 +92,7 @@ class Character extends MovableObject {
     };
 
     throwBottle() {
+        AudioHub.playOne(AudioHub.CHAR_THROW);
         let bottle = new ThrowableObject(this.x, this.y, this.world);
         this.world.throwableObjects.push(bottle);
         this.bottles--;
@@ -89,11 +109,13 @@ class Character extends MovableObject {
 
     jumpEndFrame() {
         super.jumpEndFrame();
+        AudioHub.playOne(AudioHub.CHAR_LANDING);
         this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 10, 126, 126);
     }
 
     hit(damage) {
         if (this.canTakeDamage == true && !this.isDead()) {
+            AudioHub.playOne(AudioHub.CHAR_HURT);
             this.collisionTimeout();
 
             this.playHurtAnimation = false;
@@ -126,6 +148,7 @@ class Character extends MovableObject {
     animate = () => {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
+                AudioHub.playOne(AudioHub.CHAR_DEAD);
                 IntervalHub.stopInterval(this.animate_id);
                 IntervalHub.stopInterval(this.move_id);
             }

@@ -124,7 +124,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 // character from top
                 if (this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
-                    enemy.hit(this);
+                    enemy.hit(this,0);
                     this.character.speedY = 8;
                     this.character.collisionTimeout();
                     this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW / 2, enemy.cY + enemy.cH / 2, 126, 126);
@@ -143,7 +143,7 @@ class World {
                 this.throwableObjects.forEach((bottle) => {
                     if (bottle.isColliding(enemy)) {
                         bottle.splash();
-                        enemy.hit(this);
+                        enemy.hit(this, 1);
                         this.triggerScreenShake(150);
                     }
                 });

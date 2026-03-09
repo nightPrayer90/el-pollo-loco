@@ -70,10 +70,12 @@ class Collectable extends MovableObject {
                 world.level.maxEnemies = Math.max(world.level.maxEnemies - 5, 0);
                 world.coinUI.updateText(world.character.coins);
                 world.triggerScreenShake(66);
+                AudioHub.playOne(AudioHub.COLL_COIN);
                 break;
             case 1:
                 world.character.bottles++;
                 world.bottleUI.updateText(world.character.bottles);
+                AudioHub.playOne(AudioHub.COLL_BOTTLE);
                 break;
         }
 

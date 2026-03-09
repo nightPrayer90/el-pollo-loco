@@ -55,7 +55,7 @@ class ThrowableObject extends MovableObject {
         }
         else {
             if (this.isHitOnGround == true) {
-
+                AudioHub.playOne(AudioHub.THROW_HITGORUND);
                 this.loadImage(this.BROKEN_BOTTLE[Math.floor(Math.random() * this.BROKEN_BOTTLE.length)]);
                 
                 //TODO: könnte man hier auch in die Superclass verschieben!
