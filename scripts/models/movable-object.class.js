@@ -53,31 +53,23 @@ class MovableObject extends DrawableObject {
     }
 
     playAnimationSingle(images) {
-        // animationsreset
-        // du speicherst immer das letzte imageset und vergleichst, kommen neue images rein, wird die animation resettet
-        
         if (images != this.lastImages) { 
-            this.currentImage = 0;// durch den reset beginnst du immer beim ersten bild der animation
-            this.animationFlag = false; // das flag ist dazu da die animation zu beenden
-            this.lastImages = images; // für den nächsten durchlauf um das reset zu triggern
+            this.currentImage = 0;
+            this.animationFlag = false; 
+            this.lastImages = images;
         }
-        // Sorgt dafür, das die animation nur einmal abgespielt wird
+
         if (this.animationFlag == true) return;
 
-
-        // das hier kennst du
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
 
-        // Beim letzten bild setzt du das flag-> damit weiß die funktion ich bin fertig und das return oben greift
         if (i == images.length - 1) {
             this.animationFlag = true;
             return true;
         }
-
-        // zusatz-> damit kannst du das ding in einen ifblock packen (if (playAnimationSingle(images) {beende das spiel}))
         return false;
     }
 

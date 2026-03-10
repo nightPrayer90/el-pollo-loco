@@ -182,10 +182,8 @@ class World {
     }
 
     chickenSpawner = () => {
-        // console.log("[chickenSpawner] loop?! " + this.level.maxEnemies);
         if (this.level.maxEnemies <= 0) {
             IntervalHub.stopInterval(this.spawn_id);
-            // console.log("[chickenSpawner] stop spawning!");
         }
 
         if (this.level.enemies.length >= this.level.maxEnemies) return;
@@ -194,13 +192,9 @@ class World {
         let turnXPosition = this.level.level_size - 1000;
         let type = Math.random() < 0.35 ? 1 : 0;
         this.level.enemies.push(new Chicken(xSpawnPos, type, turnXPosition));
-
-        // console.log("[chickenSpawner] " + this.level.enemies.length);
     };
 
     triggerScreenShake(shakeTime) {
-        // console.log("triggerShake");
-
         if (this.isScreenShake == true) return;
         this.isScreenShake = true;
 
