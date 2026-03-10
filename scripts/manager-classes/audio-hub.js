@@ -33,9 +33,6 @@ class AudioHub {
     static allSounds = [AudioHub.GAME_MUSIC, AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP, AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, AudioHub.THROW_HITGORUND, AudioHub.THROW_HITCHICKEN, AudioHub.JUMP_HITCHICKEN];
 
     static initAudioHub() {
-        let localVolume = localStorage.getItem("[EPL] volume");
-        let muteStatus = localStorage.getItem("[EPL] mute");
-
         if (localVolume == null) {
             localStorage.setItem("[EPL] volume", AudioHub.DEFAULT_VOLUME);
             AudioHub.AUDIO_VOLUME = AudioHub.DEFAULT_VOLUME;
@@ -43,9 +40,6 @@ class AudioHub {
             AudioHub.AUDIO_VOLUME = Number(localVolume);
         }
         AudioHub.setAudioSlider();
-
-        console.log("[AudioHub.AUDIO_VOLUME ] " + AudioHub.AUDIO_VOLUME );
-        console.log("[AudioHub.muteStatus ] " +  muteStatus );
 
         if (muteStatus == null) {
             AudioHub.saveMuteStatus(false);
@@ -55,16 +49,12 @@ class AudioHub {
                 AudioHub.ISSOUND_MUTE  = true;
             }
         }
-
-        console.log("[AudioHub.playOne muteStatus] " +  AudioHub.ISSOUND_MUTE );
-        console.log("[AudioHub.playOne AUDIO_VOLUME] " + AudioHub.AUDIO_VOLUME );
     }
+
+    static initAudio
 
     // Spielt eine einzelne Audiodatei ab
     static playOne(track) {
-        console.log("[AudioHub.playOne muteStatus] " +  AudioHub.ISSOUND_MUTE );
-        console.log("[AudioHub.playOne AUDIO_VOLUME] " + AudioHub.AUDIO_VOLUME );
-
         if (track.myAudio.readyState == 4 || track.isLoaded) {
             track.isLoaded = true;
             track.myAudio.volume = AudioHub.AUDIO_VOLUME; // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
@@ -110,9 +100,6 @@ class AudioHub {
         } else {
             AudioHub.unmute();
         }
-
-        console.log("[AudioHub.toggleSound AUDIO_VOLUME ] " + AudioHub.AUDIO_VOLUME );
-        console.log("[AudioHub.toggleSound muteStatus ] " +  AudioHub.ISSOUND_MUTE );
     }
 
     static mute() {
