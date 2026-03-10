@@ -6,7 +6,8 @@ let maxEnemies = 20;
 // Chicken 0 -> Normal Chicken   1 -> small chicken
 // Collectables -> 0 for 1 for bottle
 
-const level1 = new Level(
+function levelInit() {
+    const level1 = new Level(
     chickenGenerator(15), 
     [new BackgroundObject("./assets/img/5_background/layers/air.png", 0)],
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L1),
@@ -16,7 +17,10 @@ const level1 = new Level(
     getObstacles(),
     getWorldWitdh(),
     maxEnemies
-);
+    );
+
+    return level1;
+}
 
 function buildBackgrounds(imageSet) {
     let backgroundObjects = [];
