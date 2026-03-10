@@ -33,6 +33,12 @@ class AudioHub {
     static allSounds = [AudioHub.GAME_MUSIC, AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP, AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, AudioHub.THROW_HITGORUND, AudioHub.THROW_HITCHICKEN, AudioHub.JUMP_HITCHICKEN];
 
     static initAudioHub() {
+        AudioHub.initAudioVolume();
+        AudioHub.initAudioMute();
+    }
+
+    static initAudioVolume() {
+        let localVolume = localStorage.getItem("[EPL] volume");
         if (localVolume == null) {
             localStorage.setItem("[EPL] volume", AudioHub.DEFAULT_VOLUME);
             AudioHub.AUDIO_VOLUME = AudioHub.DEFAULT_VOLUME;
@@ -40,18 +46,19 @@ class AudioHub {
             AudioHub.AUDIO_VOLUME = Number(localVolume);
         }
         AudioHub.setAudioSlider();
+    }
 
+    static initAudioMute() {
+        let muteStatus = localStorage.getItem("[EPL] mute");
         if (muteStatus == null) {
             AudioHub.saveMuteStatus(false);
         } else {
             if (muteStatus == "true") {
-                AudioHub.mute();
-                AudioHub.ISSOUND_MUTE  = true;
+                AudioHub.mute(); 
+                AudioHub.ISSOUND_MUTE = true;
             }
         }
     }
-
-    static initAudio
 
     // Spielt eine einzelne Audiodatei ab
     static playOne(track) {

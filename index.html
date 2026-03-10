@@ -47,27 +47,23 @@
     <main>
         <section>
             <h1>EL POLLO LOCO</h1>
-            <div id ="fullscreen">
-            <canvas id="canvas" width="720" height="480"></canvas>
-                </div>
-                
+            <div id="fullscreen">
+                <canvas id="canvas" width="720" height="480"></canvas>
+            </div>
+
             <div class="audio_slider">
-                <input type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0 max=1
-                    step=0.01 value='0.2'>
-                <a href="https://stackoverflow.com/questions/60355315/improving-volume-slider-with-html-and-js">Volume
-                    Slider</a>
-                    <button onclick="fullscreen()"> fullscreen! </button>
-                    <button onclick="startGame()"> startGame! </button>
-                    <button onclick="AudioHub.toggleSound()"> mute! </button>
-                </div>
-
-
+                <input type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0 max=1 step=0.01 value='0.2'>
+                Volume Slider
+                <button onclick="fullscreen()"> fullscreen! </button>
+                <button onclick="startGame()"> startGame! </button>
+                <button onclick="AudioHub.toggleSound()"> mute! </button>
+            </div>
         </section>
     </main>
 
 
     <footer>
-        <div">
+        <div>
 
         </div>
     </footer>
