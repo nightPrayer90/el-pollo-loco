@@ -58,14 +58,14 @@ class Character extends MovableObject {
         if (this.isDead() == true) return;
 
         // walking
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_size - 650) {
+        if (Keyboard.RIGHT && this.x < this.world.level.level_size - 650) {
             this.moveRight();
-        } else if (this.world.keyboard.LEFT && this.x > -500) {
+        } else if (Keyboard.LEFT && this.x > -500) {
             this.moveLeft();
         }
 
         // Movesound
-        if (!this.isAboveGround() && (this.world.keyboard.RIGHT || this.world.keyboard.LEFT)) {
+        if (!this.isAboveGround() && (Keyboard.RIGHT || Keyboard.LEFT)) {
             if (this.isPlayWalksound == false) {
                 this.isPlayWalksound = true;
                 AudioHub.playOne(AudioHub.CHAR_WALK);
@@ -76,7 +76,7 @@ class Character extends MovableObject {
         }
 
         // jump
-        if (this.world.keyboard.SPACE) {
+        if (Keyboard.SPACE) {
             if (!this.isAboveGround()) {
                 this.jump();
                 AudioHub.playOne(AudioHub.CHAR_JUMP);
@@ -84,7 +84,7 @@ class Character extends MovableObject {
         }
 
         // throw
-        if (this.world.keyboard.D && this.canThrow == true && this.bottles > 0) {
+        if (Keyboard.D && this.canThrow == true && this.bottles > 0) {
             this.throwBottle();
         }
 
@@ -158,7 +158,7 @@ class Character extends MovableObject {
             if (this.speedY > 0) this.playAnimationSingle(this.IMAGES_JUMPING);
             else this.playAnimationSingle(this.IMAGES_FALLING);
         } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            if (Keyboard.RIGHT || Keyboard.LEFT) {
                 this.playAnimationLoop(this.IMAGES_WALKING);
             } else {
                 this.playAnimationLoop(this.IMAGES_IDLE);

@@ -24,10 +24,11 @@ class World {
     yShake_id;
     isScreenShake = false;
 
-    constructor(canvas, keyboard, level) {
+    constructor(canvas, level) {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
-        this.keyboard = keyboard;
+        //this.keyboard = keyboard;
+        Keyboard.addEvents();
         this.level = level;
         this.draw();
         this.setWorld();
