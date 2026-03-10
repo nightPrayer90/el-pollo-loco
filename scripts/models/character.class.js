@@ -72,7 +72,7 @@ class Character extends MovableObject {
             }
         } else {
             this.isPlayWalksound = false;
-            AudioHub.stopOne(AudioHub.CHAR_WALK.sound);
+            AudioHub.stopOne(AudioHub.CHAR_WALK);
         }
 
         // jump

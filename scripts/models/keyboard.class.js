@@ -4,6 +4,7 @@ class Keyboard {
     static UP = false;
     static SPACE = false;
 
+
     static addEvents() {
         window.addEventListener("keydown", (e) => {
             if (e.key == "ArrowRight") {
@@ -27,9 +28,8 @@ class Keyboard {
             }
         });
 
-        // TODO: SWITCH!!! _> keycode? lagacy
         window.addEventListener("keyup", (e) => {
-            console.log(e);
+            //console.log(e);
             if (e.key == "ArrowRight") {
                 Keyboard.RIGHT = false;
             }

@@ -59,9 +59,9 @@ function getCollectables() {
     return [
         // coins
         new Collectable(-470,75,0),
-        new Collectable((getWorldWitdh() - 1000)/2,80,0),
-        new Collectable((getWorldWitdh() - 1000),80,0),
-        new Collectable(3000,50,0),
+        new Collectable((getWorldWitdh() - 1000)/2,75,0),
+        new Collectable(3000,75,0),
+        new Collectable((getWorldWitdh() - 1000),150,0),
 
         // bottles
         new Collectable(-500,381,1),
