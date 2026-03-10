@@ -1,6 +1,6 @@
 class Character extends MovableObject {
     x = 120;
-    y = 180;
+    y = 0;
     height = 250;
     width = 120;
     speed = 4;
@@ -57,14 +57,40 @@ class Character extends MovableObject {
     move = () => {
         if (this.isDead() == true) return;
 
-        // walking
-        if (Keyboard.RIGHT && this.x < this.world.level.level_size - 650) {
+        if (this.canMoveRight()) {
             this.moveRight();
-        } else if (Keyboard.LEFT && this.x > -500) {
+        } else if (this.canMoveLeft()) {
             this.moveLeft();
         }
 
-        // Movesound
+        if (this.canJump()) 
+            this.jump();
+    
+        if (this.canThrowBottle()) 
+            this.throwBottle();
+        
+
+        this.playMoveSound();
+        this.world.camera_x = -this.x + 100;
+    };
+
+    canMoveRight() {
+        return Keyboard.RIGHT && this.x < this.world.level.level_size - 650;
+    }
+
+    canMoveLeft() {
+        return Keyboard.LEFT && this.x > -500;
+    }
+
+    canThrowBottle() {
+        return Keyboard.D && this.canThrow == true && this.bottles > 0;
+    }
+
+    canJump() {
+        return Keyboard.SPACE;
+    }
+
+    playMoveSound() {
         if (!this.isAboveGround() && (Keyboard.RIGHT || Keyboard.LEFT)) {
             if (this.isPlayWalksound == false) {
                 this.isPlayWalksound = true;
@@ -74,22 +100,7 @@ class Character extends MovableObject {
             this.isPlayWalksound = false;
             AudioHub.stopOne(AudioHub.CHAR_WALK);
         }
-
-        // jump
-        if (Keyboard.SPACE) {
-            if (!this.isAboveGround()) {
-                this.jump();
-                AudioHub.playOne(AudioHub.CHAR_JUMP);
-            }
-        }
-
-        // throw
-        if (Keyboard.D && this.canThrow == true && this.bottles > 0) {
-            this.throwBottle();
-        }
-
-        this.world.camera_x = -this.x + 100;
-    };
+    }
 
     throwBottle() {
         AudioHub.playOne(AudioHub.CHAR_THROW);
@@ -105,6 +116,13 @@ class Character extends MovableObject {
         setTimeout(() => {
             this.canThrow = true;
         }, 1000);
+    }
+
+    jump() {
+        if (!this.isAboveGround()) {
+            super.jump();
+            AudioHub.playOne(AudioHub.CHAR_JUMP);
+        }
     }
 
     jumpEndFrame() {
