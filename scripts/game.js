@@ -4,7 +4,7 @@ const canvas = document.getElementById("canvas");
 
 function init() {
     // hierüber lässt sich das spiel starten! -> können wir auf einen overlay button legen
-    
+    AudioHub.initAudioHub();
 }
 
 function startGame() {

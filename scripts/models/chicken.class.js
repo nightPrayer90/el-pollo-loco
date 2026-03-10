@@ -50,7 +50,6 @@ class Chicken extends MovableObject {
         else
             AudioHub.playOne(AudioHub.THROW_HITCHICKEN);
 
-        console.log("[CHICKEN] arg!");
         this.removeEnemyFromCollision(world);
     }
 

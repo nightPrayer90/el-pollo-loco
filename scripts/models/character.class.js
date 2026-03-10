@@ -75,7 +75,6 @@ class Character extends MovableObject {
             if (this.sleepTimer % 2)
             AudioHub.playOne(AudioHub.CHAR_SLEEP);
         }
-        console.log(this.sleepTimer);
     };
 
     move = () => {
@@ -169,7 +168,8 @@ class Character extends MovableObject {
             this.playHurtAnimation = false;
             this.health -= damage;
             this.world.statusBar.setPercentage(this.health);
-
+            
+            this.sleepTimer = 0;
             this.speedY = 6;
             this.isHurt();
         }
