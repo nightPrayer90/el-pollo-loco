@@ -2,32 +2,27 @@ class Keyboard {
     static LEFT = false;
     static RIGHT = false;
     static UP = false;
-    static DOWN = false;
     static SPACE = false;
 
     static addEvents() {
         window.addEventListener("keydown", (e) => {
-            if (e.keyCode == 39) {
+            if (e.key == "ArrowRight") {
                 Keyboard.RIGHT = true;
             }
 
-            if (e.keyCode == 37) {
+            if (e.key == "ArrowLeft") {
                 Keyboard.LEFT = true;
             }
 
-            if (e.keyCode == 38) {
+            if (e.key == "ArrowUp") {
                 Keyboard.UP = true;
             }
 
-            if (e.keyCode == 40) {
-                Keyboard.DOWN = true;
-            }
-
-            if (e.keyCode == 32) {
+            if (e.key == " ") {
                 Keyboard.SPACE = true;
             }
 
-            if (e.keyCode == 68) {
+            if (e.key == "d") {
                 Keyboard.D = true;
             }
         });
@@ -35,27 +30,23 @@ class Keyboard {
         // TODO: SWITCH!!! _> keycode? lagacy
         window.addEventListener("keyup", (e) => {
             console.log(e);
-            if (e.keyCode == 39) {
+            if (e.key == "ArrowRight") {
                 Keyboard.RIGHT = false;
             }
 
-            if (e.keyCode == 37) {
+            if (e.key == "ArrowLeft") {
                 Keyboard.LEFT = false;
             }
 
-            if (e.keyCode == 38) {
+            if (e.key == "ArrowUp") {
                 Keyboard.UP = false;
             }
 
-            if (e.keyCode == 40) {
-                Keyboard.DOWN = false;
-            }
-
-            if (e.keyCode == 32) {
+            if (e.key == " ") {
                 Keyboard.SPACE = false;
             }
 
-            if (e.keyCode == 68) {
+            if (e.key == "d") {
                 Keyboard.D = false;
             }
         });

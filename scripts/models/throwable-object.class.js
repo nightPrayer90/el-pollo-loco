@@ -30,7 +30,7 @@ class ThrowableObject extends MovableObject {
     throw() {
         let jumpHight = (180 - this.world.character.y) / 25;
         this.speedY = 10 + jumpHight;
-        if (this.world.keyboard.RIGHT == true) this.speed += 3;
+        if (Keyboard.RIGHT == true) this.speed += 3;
 
         if (this.world.character.otherDirection) this.speed *= -1;
 
