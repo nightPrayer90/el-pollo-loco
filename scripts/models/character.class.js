@@ -5,6 +5,7 @@ class Character extends MovableObject {
     width = 120;
     speed = 4;
     otherDirection = false;
+    sleepTimer = 0;
 
     health = 100;
     coins = 0;
@@ -16,10 +17,12 @@ class Character extends MovableObject {
     IMAGES_IDLE = ImageHub.CHARACTER.idle;
     IMAGES_DEAD = ImageHub.CHARACTER.dead;
     IMAGES_HURT = ImageHub.CHARACTER.hurt;
+    IMAGES_SLEEP = ImageHub.CHARACTER.sleep;
 
     animate_id;
     move_id;
     applyGravity_id;
+    sleepInverval_id;
 
     world;
 
@@ -33,13 +36,16 @@ class Character extends MovableObject {
     canTakeDamage = true;
     canThrow = true;
     playHurtAnimation = true;
-
     isPlayWalksound = false;
-
-    animate_id;
 
     constructor() {
         super();
+        this.initImages();
+        this.setCollisionRect();
+        this.startPlayerIntervals();
+    }
+
+    initImages() {
         this.loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
@@ -47,28 +53,40 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_SLEEP);
+    }
 
-        this.setCollisionRect();
+    startPlayerIntervals() {
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
         this.move_id = IntervalHub.startInterval(this.move, 16);
         this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);
+        this.sleepInverval_id = IntervalHub.startInterval(this.sleepInterval, 1000);
     }
+
+    stopPlayerIntervals() {
+        IntervalHub.stopInterval(this.animate_id);
+        IntervalHub.stopInterval(this.move_id);
+        IntervalHub.stopInterval(this.sleepInverval_id);
+    }
+
+    sleepInterval = () => {
+        this.sleepTimer++;
+        if (this.sleepTimer >= 15) {
+            if (this.sleepTimer % 2)
+            AudioHub.playOne(AudioHub.CHAR_SLEEP);
+        }
+        console.log(this.sleepTimer);
+    };
 
     move = () => {
         if (this.isDead() == true) return;
 
-        if (this.canMoveRight()) {
-            this.moveRight();
-        } else if (this.canMoveLeft()) {
-            this.moveLeft();
-        }
+        if (this.canMoveRight()) this.moveRight();
+        else if (this.canMoveLeft()) this.moveLeft();
 
-        if (this.canJump()) 
-            this.jump();
-    
-        if (this.canThrowBottle()) 
-            this.throwBottle();
-        
+        if (this.canJump()) this.jump();
+
+        if (this.canThrowBottle()) this.throwBottle();
 
         this.playMoveSound();
         this.world.camera_x = -this.x + 100;
@@ -109,6 +127,17 @@ class Character extends MovableObject {
         this.bottles--;
         this.world.bottleUI.updateText(this.bottles);
         this.throwCooldown();
+        this.sleepTimer = 0;
+    }
+
+    moveLeft() {
+        super.moveLeft();
+        this.sleepTimer = 0;
+    }
+
+    moveRight() {
+        super.moveRight();
+        this.sleepTimer = 0;
     }
 
     throwCooldown() {
@@ -123,6 +152,7 @@ class Character extends MovableObject {
             super.jump();
             AudioHub.playOne(AudioHub.CHAR_JUMP);
         }
+        this.sleepTimer = 0;
     }
 
     jumpEndFrame() {
@@ -167,8 +197,7 @@ class Character extends MovableObject {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
                 AudioHub.playOne(AudioHub.CHAR_DEAD);
-                IntervalHub.stopInterval(this.animate_id);
-                IntervalHub.stopInterval(this.move_id);
+                this.stopPlayerIntervals();
             }
         } else if (!this.playHurtAnimation) {
             this.playAnimationLoop(this.IMAGES_HURT);
@@ -179,7 +208,8 @@ class Character extends MovableObject {
             if (Keyboard.RIGHT || Keyboard.LEFT) {
                 this.playAnimationLoop(this.IMAGES_WALKING);
             } else {
-                this.playAnimationLoop(this.IMAGES_IDLE);
+                if (this.sleepTimer >= 15) this.playAnimationLoop(this.IMAGES_SLEEP);
+                else this.playAnimationLoop(this.IMAGES_IDLE);
             }
         }
     };

@@ -17,6 +17,7 @@ class AudioHub {
     static CHAR_LANDING = new MyAudio("./assets/sounds/character/characterLanding.mp3");
     static CHAR_WALK = new MyAudio("./assets/sounds/character/characterRun.mp3"); 
     static CHAR_THROW = new MyAudio("./assets/sounds/character/characterThrow.mp3"); 
+    static CHAR_SLEEP = new MyAudio("./assets/sounds/character/characterSnoring.mp3"); 
     static COLL_COIN = new MyAudio("./assets/sounds/collectables/coinCollectSound.mp3"); 
     static COLL_BOTTLE = new MyAudio("./assets/sounds/collectables/bottleCollectSound.mp3"); 
     static THROW_HITGORUND = new MyAudio("./assets/sounds/throwable/bottleBreak.mp3"); 
@@ -32,7 +33,7 @@ class AudioHub {
 
     // Array, das alle definierten Audio-Dateien enthält
     static allSounds = [AudioHub.GAME_MUSIC,
-                        AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW,
+                        AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP,
                         AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, 
                         AudioHub.THROW_HITGORUND, AudioHub.THROW_HITCHICKEN, AudioHub.JUMP_HITCHICKEN,
     ];
