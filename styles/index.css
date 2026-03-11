@@ -91,26 +91,54 @@ canvas {
     width: 100%;
 }
 
+button {
+    background-color: rgb(238, 161, 7);
+    border: 2px solid;
+    border-color: rgb(219, 100, 9);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+
+    img {
+        background: none;
+        border: none;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+button:hover {
+    background-color: rgb(238, 183, 74);
+    border-color: rgb(222, 128, 56);
+}
+
 .button-UI {
     border-radius: 50%;
-    background-color: rgb(238, 161, 7);
     height: 50px;
     width: 50px;
-    margin: 20px;
+    margin: 15px;
 }
 
 .button-rect {
     border-radius: 5px;
-    background-color: rgb(238, 161, 7);
     height: 50px;
     width: 150px;
-    margin: 20px;
+
+    font-family: "Boogaloo";
+    font-size: 25px;
+    color: rgb(95, 50, 2);
+}
+
+
+.button-image-offset {
+    top: 2px;
+}
+
+.button-mirror-image {
+    transform: scaleX(-1);
 }
 
 .audio_slider {
-    flex-direction: column;
-    background-color: teal;
-    gap: 0px;
+    width: 100px;
+    height:25px;
 }
 
 footer {

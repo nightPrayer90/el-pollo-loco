@@ -27,14 +27,18 @@ class World {
     constructor(canvas, level) {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
-        //this.keyboard = keyboard;
-        Keyboard.addEvents();
+        this.initKeyboard();
         this.level = level;
         this.draw();
         this.setWorld();
         this.cloudsGenerator(6);
         IntervalHub.startInterval(this.update, 16);
         this.spawn_id = IntervalHub.startInterval(this.chickenSpawner, 3000);
+    }
+
+    initKeyboard(){
+        Keyboard.addEvents();
+        Keyboard.addButtonEvents();
     }
 
     setWorld() {

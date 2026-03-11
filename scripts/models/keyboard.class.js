@@ -1,9 +1,8 @@
 class Keyboard {
     static LEFT = false;
     static RIGHT = false;
-    static UP = false;
+    static D = false;
     static SPACE = false;
-
 
     static addEvents() {
         window.addEventListener("keydown", (e) => {
@@ -13,10 +12,6 @@ class Keyboard {
 
             if (e.key == "ArrowLeft") {
                 Keyboard.LEFT = true;
-            }
-
-            if (e.key == "ArrowUp") {
-                Keyboard.UP = true;
             }
 
             if (e.key == " ") {
@@ -29,17 +24,12 @@ class Keyboard {
         });
 
         window.addEventListener("keyup", (e) => {
-            //console.log(e);
             if (e.key == "ArrowRight") {
                 Keyboard.RIGHT = false;
             }
 
             if (e.key == "ArrowLeft") {
                 Keyboard.LEFT = false;
-            }
-
-            if (e.key == "ArrowUp") {
-                Keyboard.UP = false;
             }
 
             if (e.key == " ") {
@@ -50,5 +40,40 @@ class Keyboard {
                 Keyboard.D = false;
             }
         });
+    }
+
+    static addButtonEvents() {
+        const btnLeft = document.getElementById("btn-left");
+        const btnRight = document.getElementById("btn-right");
+        const btnUp = document.getElementById("btn-d");
+        const btnSpace = document.getElementById("btn-space");
+
+        // LEFT
+        btnLeft.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            Keyboard.LEFT = true;
+        });
+        btnLeft.addEventListener("touchend", (e) => (Keyboard.LEFT = false));
+
+        // RIGHT
+        btnRight.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            Keyboard.RIGHT = true;
+        });
+        btnRight.addEventListener("touchend", () => (Keyboard.RIGHT = false));
+
+        // D
+        btnUp.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            Keyboard.D = true;
+        });
+        btnUp.addEventListener("touchend", () => (Keyboard.D = false));
+
+        // SPACE
+        btnSpace.addEventListener("touchstart", (e) => {
+            e.preventDefault();
+            Keyboard.SPACE = true;
+        });
+        btnSpace.addEventListener("touchend", () => (Keyboard.SPACE = false));
     }
 }

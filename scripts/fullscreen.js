@@ -22,6 +22,8 @@ function exitFullscreen() {
 
 function toggleFullscreen() {
     isFullscreenMode = !isFullscreenMode;
+
+    toggleFullscreenBtnSprite(isFullscreenMode);
     if (isFullscreenMode) {
         enterFullscreen();
     } else {

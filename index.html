@@ -52,33 +52,40 @@
                 <canvas id="canvas" width="720" height="480"></canvas>
 
                 <div id="overlay-main-menu">
-                    <button class="button-rect" onclick="startGame()"> startGame! </button>
+                    <button class="button-rect" onclick="startGame()"> Start Hunt! </button>
                 </div>
 
                 <div id="overlay-UI" class="hide-object">
                     <div class="button-top">
-                        <button class="button-UI" onclick="AudioHub.toggleSound()"> mute! </button>
-                        <button class="button-UI" onclick="toggleFullscreen()"> fullscreen! </button>
+
+
+                        <input class="audio_slider" type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0
+                            max=1 step=0.01 value='0.2'>
+
+
+                        <button class="button-UI" onclick="AudioHub.toggleSound(); toggleMuteBtnSprite()"> <img
+                                id="mute-btn-image" class="button-image-offset"
+                                src="./assets/img/13_icons/mute-icon.png" alt=""></button>
+                        <button class="button-UI" onclick="toggleFullscreen()"> <img id="fullscreen-btn-image"
+                                class="button-image-offset" src="assets/img/13_icons/fullscreen-open.png"
+                                alt=""></button>
                     </div>
                     <div id="mobile-controls" class="button-bottom hide-object">
                         <div>
-                            <button class="button-UI"> Left! </button>
-                            <button class="button-UI"> Right! </button>
+                            <button id="btn-left" class="button-UI"> <img class="button-mirror-image"
+                                    src="./assets/img/13_icons/arrow-icon.png" alt=""></button>
+                            <button id="btn-right" class="button-UI"> <img src="./assets/img/13_icons/arrow-icon.png" alt=""> </button>
                         </div>
                         <div>
-                            <button class="button-UI"> Jump! </button>
-                            <button class="button-UI"> Throw! </button>
+                            <button id="btn-space" class="button-UI"> <img src="./assets/img/13_icons/jump-icon.png" alt=""> </button>
+                            <button id="btn-d" class="button-UI"> <img src="./assets/img/13_icons/bottle-icon.png" alt=""> </button>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            <div class="audio_slider">
-                <input type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0 max=1 step=0.01 value='0.2'>
-                Volume Slider
 
-            </div>
         </section>
     </main>
 
