@@ -36,6 +36,7 @@ class World {
         this.draw();
         this.setWorldToCharacter();
         this.cloudsGenerator(6);
+        this.initWorldInvervals();
     }
 
     initKeyboard() {

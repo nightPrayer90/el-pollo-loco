@@ -55,7 +55,8 @@
                 <div id="overlay-main-menu">
                     
                     <div class="start-button-container">
-                    <button class="button-rect orientation-display-hide" onclick="startGame()"> Start Hunt! </button>
+                        <button class="button-rect orientation-display-hide" onclick="startGame()"> Start Hunt! </button>
+                        <p class="start-story-text">Find and collect all the coins to stop the chicken invasion. Then battle the boss rooster to rid the world of the chicken plague.</p>
                     </div>
                     <p class="orientation-display-show orientation-text">Turn ur display oriantation to play!</p>
                 </div>
@@ -67,10 +68,10 @@
                             max=1 step=0.01 value='0.2'>
 
 
-                        <button class="button-UI" onclick="AudioHub.toggleSound(); toggleMuteBtnSprite()"> <img
+                        <button class="button-UI" onclick="AudioHub.toggleSound(); toggleMuteBtnSprite(); blur()"> <img
                                 id="mute-btn-image" class="button-image-offset"
                                 src="./assets/img/13_icons/mute-icon.png" alt=""></button>
-                        <button class="button-UI" onclick="toggleFullscreen()"> <img id="fullscreen-btn-image"
+                        <button class="button-UI" onclick="toggleFullscreen(); blur()"> <img id="fullscreen-btn-image"
                                 class="button-image-offset" src="assets/img/13_icons/fullscreen-open.png"
                                 alt=""></button>
                     </div>
@@ -88,7 +89,11 @@
                     </div>
                 </div>
             </div>
-
+            <div class="controls">
+                <p><span>[Left]</span> and <span>[Right]</span> to run</p>
+                <p><span>[Space]</span> to jump</p>
+                <p><span>[d]</span> to throw a bottle</p>
+            </div>
         </section>
     </main>
 

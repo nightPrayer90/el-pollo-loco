@@ -88,10 +88,21 @@ canvas {
     align-items: center;
 
     .start-button-container {
-    background-color: #09212ad8;
-    border-radius: 5px;
-    border: 2px solid rgba(245, 222, 179, 0.831);
-    padding: 20px;
+        background-color: #09212ad8;
+        border-radius: 5px;
+        border: 2px solid rgba(245, 222, 179, 0.831);
+        padding: 20px;
+        width: 600px;;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .start-story-text {
+        margin-top: 26px;
+        border: none;
+        background: none;
     }
 }
 
@@ -167,6 +178,19 @@ button:hover,
     margin: 10px;
 }
 
+.controls{
+    p {
+        margin: 8px;
+        border: none;
+        font-size: 24px;
+        span{
+            color: rgb(207, 254, 221);
+            font-size: 28px;
+        }
+    };
+}
+
+
 footer {
     display: flex;
     align-items: center;
@@ -175,7 +199,6 @@ footer {
     background: #09212a;
     height: 128px;
 }
-
 
 /* Smartphones */
 @media only screen and (max-width: 720px) {
