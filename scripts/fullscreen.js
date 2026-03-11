@@ -1,25 +1,30 @@
-function fullscreen() {
-    let fullscreen = document.getElementById("fullscreen");
-    enterFullscreen(fullscreen);
-}
+let isFullscreenMode = false;
+const fullscreenRef = document.getElementById("fullscreen");
 
-function enterFullscreen(element) {
-    if(element.requestFullscreen) {
-        element.requestFullscreen();
-    }
-    else if (element.msRequestFullscreen) {
-        element.requestFullscreen();
-    }
-    else if (element.webkitRequestFullscreen) {
-        element.webkitRequestFullscreen();
+
+function enterFullscreen() {
+    if (fullscreenRef.requestFullscreen) {
+        fullscreenRef.requestFullscreen();
+    } else if (fullscreenRef.msRequestFullscreen) {
+        fullscreenRef.requestFullscreen();
+    } else if (fullscreenRef.webkitRequestFullscreen) {
+        fullscreenRef.webkitRequestFullscreen();
     }
 }
 
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
-    }
-    else if (document.webkitRequestFullscreen) {
+    } else if (document.webkitRequestFullscreen) {
         document.webkitRequestFullscreen();
+    }
+}
+
+function toggleFullscreen() {
+    isFullscreenMode = !isFullscreenMode;
+    if (isFullscreenMode) {
+        enterFullscreen();
+    } else {
+        exitFullscreen();
     }
 }

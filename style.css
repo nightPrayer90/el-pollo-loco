@@ -7,21 +7,6 @@ h1 {
     color: white;
 }
 
-.content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-canvas {
-    background-image: url("./assets/img/9_intro_outro_screens/start/startscreen_2.png");
-    background-size: 100% 100%;
-
-    width: 100%;
-    height: 100%;
-}
-
 /* tablet */
 @media (max-width: 1280px) {
     h1 {

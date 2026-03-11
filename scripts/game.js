@@ -14,5 +14,6 @@ function startGame() {
     const level = levelInit();
     world = new World(canvas, level);
     AudioHub.playOne(AudioHub.GAME_MUSIC);
+    uiStartGame();
 }
 

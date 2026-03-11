@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotogram</title>
+    <title>El Pollo Loco</title>
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/8_coin/coin_1.png">
     <link rel="stylesheet" href="./styles/font.css">
     <link rel="stylesheet" href="style.css">
@@ -33,6 +33,7 @@
 
     <script src="./scripts/models/world.class.js" defer></script>
     <script src="./scripts/fullscreen.js" defer></script>
+    <script src="./scripts/overlayUI.js" defer></script>
     <script src="./scripts/game.js" defer></script>
 </head>
 
@@ -49,14 +50,34 @@
             <h1>EL POLLO LOCO</h1>
             <div id="fullscreen">
                 <canvas id="canvas" width="720" height="480"></canvas>
+
+                <div id="overlay-main-menu">
+                    <button class="button-rect" onclick="startGame()"> startGame! </button>
+                </div>
+
+                <div id="overlay-UI" class="hide-object">
+                    <div class="button-top">
+                        <button class="button-UI" onclick="AudioHub.toggleSound()"> mute! </button>
+                        <button class="button-UI" onclick="toggleFullscreen()"> fullscreen! </button>
+                    </div>
+                    <div id="mobile-controls" class="button-bottom hide-object">
+                        <div>
+                            <button class="button-UI"> Left! </button>
+                            <button class="button-UI"> Right! </button>
+                        </div>
+                        <div>
+                            <button class="button-UI"> Jump! </button>
+                            <button class="button-UI"> Throw! </button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
 
             <div class="audio_slider">
                 <input type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0 max=1 step=0.01 value='0.2'>
                 Volume Slider
-                <button onclick="fullscreen()"> fullscreen! </button>
-                <button onclick="startGame()"> startGame! </button>
-                <button onclick="AudioHub.toggleSound()"> mute! </button>
+
             </div>
         </section>
     </main>

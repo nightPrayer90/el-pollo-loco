@@ -5,7 +5,7 @@ body {
     background-image: url("../assets/img/12_website/index-bk.jpg");
     background-position: center;
     background-size: cover;
-     background-repeat: no-repeat;
+    background-repeat: no-repeat;
 }
 
 header {
@@ -34,15 +34,77 @@ main {
             font-family: "Boogaloo";
             margin-top: 64px;
             margin-bottom: 80px;
-            text-shadow:  2px 2px 8px rgba(0, 0, 0, 0.5) ;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
     }
 }
 
 canvas {
-    background-color: black;
     display: block;
     border-radius: 5px 5px 5px 5px;
+
+    background-image: url("../assets/img/9_intro_outro_screens/start/startscreen_2.png");
+    background-size: 100% 100%;
+
+    width: 100%;
+    height: 100%;
+}
+
+#fullscreen{
+    .hide-object {
+        display: none;
+    }
+}
+
+#overlay-UI {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    gap: 50px;
+}
+
+#overlay-main-menu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#mobile-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    
+    width: 100%;
+}
+
+.button-UI {
+    border-radius: 50%;
+    background-color: rgb(238, 161, 7);
+    height: 50px;
+    width: 50px;
+    margin: 20px;
+}
+
+.button-rect {
+    border-radius: 5px;
+    background-color: rgb(238, 161, 7);
+    height: 50px;
+    width: 150px;
+    margin: 20px;
 }
 
 .audio_slider {
@@ -63,7 +125,7 @@ footer {
 /* Smartphones */
 @media only screen and (max-width: 720px) {
     canvas {
-        width: 100%
+        width: 100%;
     }
 }
 
