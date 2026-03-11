@@ -1,10 +1,19 @@
-
 h1 {
-    font-family: "Figtree";
-    font-size: 56px;
-    font-weight: 800;
+    font-family: "Boogaloo";
+    margin-top: 32px;
+    margin-bottom: 32px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: whitesmoke;
+    font-size: 64px;
+}
+
+p {
+    font-family: "Boogaloo";
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     text-align: center;
     color: white;
+    font-size: 32px;
 }
 
 /* tablet */
@@ -17,6 +26,8 @@ h1 {
 /* mobile */
 @media (max-width: 767px) {
     h1 {
-        font-size: 48px;
+        font-size: 32px;
+        margin-top: 24px;
+        margin-bottom: 24px;
     }
 }

@@ -29,19 +29,15 @@ main {
     background: none;
 
     section {
-        padding: 0 123px;
-        h1 {
-            font-family: "Boogaloo";
-            margin-top: 64px;
-            margin-bottom: 80px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
+        padding: 0 24px;
     }
 }
 
 canvas {
     display: block;
     border-radius: 5px 5px 5px 5px;
+    border: wheat 2px solid;
+    margin-bottom: 64px;
 
     background-image: url("../assets/img/9_intro_outro_screens/start/startscreen_2.png");
     background-size: 100% 100%;
@@ -52,6 +48,15 @@ canvas {
 
 #fullscreen {
     .hide-object {
+        display: none;
+    }
+    .orientation-display-hide {
+        display: block;
+    }
+    .orientation-display-show {
+        display: none;
+    }
+    .show-only-on-Mobile {
         display: none;
     }
 }
@@ -144,6 +149,7 @@ button:hover,
 .audio_slider {
     width: 100px;
     height: 25px;
+    margin-right: 15px;
 }
 
 footer {
@@ -155,10 +161,27 @@ footer {
     height: 128px;
 }
 
+.orientation-text {
+    background-color: #09212ad8;
+    border-radius: 5px;
+    border: 2px solid rgba(245, 222, 179, 0.831);
+    padding: 8px;
+    margin: 10px;
+}
+
 /* Smartphones */
 @media only screen and (max-width: 720px) {
     canvas {
         width: 100%;
+    }
+
+    #fullscreen {
+        .orientation-display-hide {
+            display: none;
+        }
+        .orientation-display-show {
+            display: flex;
+        }
     }
 }
 
@@ -166,5 +189,15 @@ footer {
 @media only screen and (max-height: 480px) {
     canvas {
         height: 100vh;
+    }
+}
+
+/* is mobile -> TODO: Nico fragen */
+/* https://stackoverflow.com/questions/12469875/how-to-code-css-media-queries-targeting-all-mobile-devices-and-tablets/42835826#42835826 */
+@media (hover: none) and (pointer: coarse) {
+    #fullscreen {
+        .show-only-on-Mobile {
+            display: flex;
+        }
     }
 }

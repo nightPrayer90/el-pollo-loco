@@ -52,13 +52,14 @@
                 <canvas id="canvas" width="720" height="480"></canvas>
 
                 <div id="overlay-main-menu">
-                    <button class="button-rect" onclick="startGame()"> Start Hunt! </button>
+                    <button class="button-rect orientation-display-hide" onclick="startGame()"> Start Hunt! </button>
+
+                    <p class="orientation-display-show orientation-text">Turn ur display oriantation to play!</p>
                 </div>
 
                 <div id="overlay-UI" class="hide-object">
-                    <div class="button-top">
-
-
+                    <!-- button-bar-top -->
+                    <div>
                         <input class="audio_slider" type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0
                             max=1 step=0.01 value='0.2'>
 
@@ -70,7 +71,8 @@
                                 class="button-image-offset" src="assets/img/13_icons/fullscreen-open.png"
                                 alt=""></button>
                     </div>
-                    <div id="mobile-controls" class="button-bottom hide-object">
+                    <!-- button-bar-bottom -->
+                    <div id="mobile-controls" class="show-only-on-Mobile hide-object">
                         <div>
                             <button id="btn-left" class="button-UI"> <img class="button-mirror-image"
                                     src="./assets/img/13_icons/arrow-icon.png" alt=""></button>
@@ -83,8 +85,6 @@
                     </div>
                 </div>
             </div>
-
-
 
         </section>
     </main>

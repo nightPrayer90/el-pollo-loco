@@ -45,7 +45,7 @@ class Keyboard {
     static addButtonEvents() {
         const btnLeft = document.getElementById("btn-left");
         const btnRight = document.getElementById("btn-right");
-        const btnUp = document.getElementById("btn-d");
+        const btnD = document.getElementById("btn-d");
         const btnSpace = document.getElementById("btn-space");
 
         // LEFT
@@ -72,15 +72,15 @@ class Keyboard {
         });
 
         // D
-        btnRight.addEventListener("touchstart", (e) => {
+        btnD.addEventListener("touchstart", (e) => {
             e.preventDefault();
-            Keyboard.RIGHT = true;
-            btnRight.classList.add("touchPressed");
+            Keyboard.D = true;
+            btnD.classList.add("touchPressed");
         });
 
-        btnRight.addEventListener("touchend", () => {
-            Keyboard.RIGHT = false;
-            btnRight.classList.remove("touchPressed");
+        btnD.addEventListener("touchend", () => {
+            Keyboard.D = false;
+            btnD.classList.remove("touchPressed");
         });
 
         // SPACE
