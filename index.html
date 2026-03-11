@@ -27,6 +27,7 @@
     <script src="./scripts/models/collectables.class.js" defer></script>
     <script src="./scripts/models/status-object.class.js" defer></script>
     <script src="./scripts/models/status-bar.class.js" defer></script>
+    <script src="./scripts/models/status-overlay.class.js" defer></script>
     <script src="./scripts/models/background-objects.class.js" defer></script>
     <script src="./scripts/models/level.class.js" defer></script>
     <script src="./scripts/levels/level1.js" defer></script>
@@ -52,8 +53,10 @@
                 <canvas id="canvas" width="720" height="480"></canvas>
 
                 <div id="overlay-main-menu">
+                    
+                    <div class="start-button-container">
                     <button class="button-rect orientation-display-hide" onclick="startGame()"> Start Hunt! </button>
-
+                    </div>
                     <p class="orientation-display-show orientation-text">Turn ur display oriantation to play!</p>
                 </div>
 

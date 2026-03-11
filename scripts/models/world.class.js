@@ -11,6 +11,9 @@ class World {
     bottleUI = new StatusObject(0, this.character);
     coinUI = new StatusObject(1, this.character);
 
+    startOverlay = new StatusOverlay(2);
+    startOverlayFlag = false;
+
     throwableObjects = [];
     thrownBottles = [];
 
@@ -27,21 +30,32 @@ class World {
     constructor(canvas, level) {
         this.ctx = canvas.getContext("2d");
         this.canvas = canvas;
-        this.initKeyboard();
         this.level = level;
+        this.initKeyboard();
+        this.initLoadOverlay();
         this.draw();
-        this.setWorld();
+        this.setWorldToCharacter();
         this.cloudsGenerator(6);
-        IntervalHub.startInterval(this.update, 16);
-        this.spawn_id = IntervalHub.startInterval(this.chickenSpawner, 3000);
     }
 
-    initKeyboard(){
+    initKeyboard() {
         Keyboard.addEvents();
         Keyboard.addButtonEvents();
     }
 
-    setWorld() {
+    initLoadOverlay() {
+        setTimeout(() => {
+            this.startOverlayFlag = true;
+            this.startOverlay.stopInterval();
+        }, 700);
+    }
+
+    initWorldInvervals() {
+        IntervalHub.startInterval(this.update, 16);
+        this.spawn_id = IntervalHub.startInterval(this.chickenSpawner, 3000);
+    }
+
+    setWorldToCharacter() {
         this.character.world = this;
     }
 
@@ -76,12 +90,14 @@ class World {
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
 
-        this.ctx.translate(-this.camera_x,-this.yShake);
+        this.ctx.translate(-this.camera_x, -this.yShake);
 
         // --- space for ui ---
         this.addToMap(this.statusBar);
         this.addToMap(this.bottleUI);
         this.addToMap(this.coinUI);
+        if(!this.startOverlayFlag)
+        this.addToMap(this.startOverlay);
 
         // Draw() wird immer wieder aufgerufen
         requestAnimationFrame(() => this.draw());
@@ -94,6 +110,7 @@ class World {
     }
 
     addToMap(mo) {
+        if (mo == null) return;
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
@@ -129,7 +146,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 // character from top
                 if (this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
-                    enemy.hit(this,0);
+                    enemy.hit(this, 0);
                     this.character.speedY = 8;
                     this.character.collisionTimeout();
                     this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW / 2, enemy.cY + enemy.cH / 2, 126, 126);
@@ -159,7 +176,7 @@ class World {
             // collision chracter -> collectable
             if (this.character.isColliding(collectable) && collectable.isCollect == false) {
                 collectable.collect(this);
-                
+
                 this.createParticleSystem(collectable.IMAGES_VFX, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
             }
         });
@@ -216,4 +233,27 @@ class World {
         if (this.yShake > 0) this.yShake = -2;
         else this.yShake = -this.yShake;
     };
+
+    gameIsOver(isPlayerDead) {
+        this.bottleUI = null;
+        this.coinUI = null;
+        this.statusBar = null;
+
+        setTimeout(() => {
+            IntervalHub.stopIntervals();
+            if (isPlayerDead) {
+                this.gameOver();
+            } else {
+                this.victroy();
+            }
+        }, 1000);
+    }
+
+    gameOver() {
+        console.log("show game over");
+    }
+
+    victroy() {
+        console.log("show victroy");
+    }
 }

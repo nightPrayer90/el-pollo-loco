@@ -1,0 +1,75 @@
+class StatusOverlay extends DrawableObject {
+    IMAGE_VICTORY = ImageHub.OVERLAY.victory;
+    IMAGE_GAMEOVER = ImageHub.OVERLAY.gameOver;
+    IMAGE_STARTSCREEN = ImageHub.OVERLAY.startScreen;
+    type;
+    animate_id;
+
+    constructor(type) {
+        super();
+        this.type = type;
+        this.init();
+        this.animate_id = IntervalHub.startInterval(this.aninmate, 16);
+    }
+
+    init() {
+        switch (this.type) {
+            case 0:
+                this.initVictory();
+                break;
+            case 1:
+                this.initGameOver();
+                break;
+            case 2:
+                this.initStartGame();
+                break;
+        }
+    }
+
+    initVictory() {
+        this.loadImage(this.IMAGE_VICTORY[0]);
+        this.x = (720 - 500) / 2;
+        this.y = 5;
+        this.width = 500;
+        this.height = 480;
+        this.textOffset = {
+            x: 0,
+            y: 0,
+        };
+    }
+
+    initGameOver() {
+        this.loadImage(this.IMAGE_GAMEOVER[0]);
+        this.x = 0;
+        this.y = 0;
+        this.width = 720;
+        this.height = 480;
+        this.textOffset = {
+            x: 0,
+            y: 0,
+        };
+    }
+
+    initStartGame() {
+        this.loadImage(this.IMAGE_STARTSCREEN[0]);
+        this.x = 0;
+        this.y = 0;
+        this.width = 720;
+        this.height = 480;
+        this.textOffset = {
+            x: 0,
+            y: 0,
+        };
+    }
+
+    aninmate = () => {
+        Math.max(0, this.width -= 16);
+        Math.max(0, this.height -= 16);
+        this.x +=8;
+        this.y +=8;
+    }
+
+    stopInterval() {
+        IntervalHub.stopInterval(this.animate_id);
+    }
+}

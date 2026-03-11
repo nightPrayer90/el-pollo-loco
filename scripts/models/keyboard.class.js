@@ -48,9 +48,8 @@ class Keyboard {
         const btnD = document.getElementById("btn-d");
         const btnSpace = document.getElementById("btn-space");
 
-        // LEFT
+        // left
         btnLeft.addEventListener("touchstart", (e) => {
-            e.preventDefault();
             Keyboard.LEFT = true;
             btnLeft.classList.add("touchPressed");
         });
@@ -59,9 +58,8 @@ class Keyboard {
             btnLeft.classList.remove("touchPressed");
         });
 
-        // RIGHT
+        // right
         btnRight.addEventListener("touchstart", (e) => {
-            e.preventDefault();
             Keyboard.RIGHT = true;
             btnRight.classList.add("touchPressed");
         });
@@ -71,9 +69,8 @@ class Keyboard {
             btnRight.classList.remove("touchPressed");
         });
 
-        // D
+        // d
         btnD.addEventListener("touchstart", (e) => {
-            e.preventDefault();
             Keyboard.D = true;
             btnD.classList.add("touchPressed");
         });
@@ -83,9 +80,8 @@ class Keyboard {
             btnD.classList.remove("touchPressed");
         });
 
-        // SPACE
+        // jump
         btnSpace.addEventListener("touchstart", (e) => {
-            e.preventDefault();
             Keyboard.SPACE = true;
             btnSpace.classList.add("touchPressed");
         });

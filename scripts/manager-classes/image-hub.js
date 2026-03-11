@@ -257,4 +257,16 @@ class ImageHub {
             "./assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"
         ]
     }
+
+    static OVERLAY = {
+        victory: [
+            "./assets/img/9_intro_outro_screens/game_victory/you-win-a.png"
+        ],
+        gameOver: [
+            "./assets/img/9_intro_outro_screens/game_over/you-lost.png"
+        ],
+        startScreen: [
+            "./assets/img/9_intro_outro_screens/start/startscreen_2.png"
+        ]
+    }
 }

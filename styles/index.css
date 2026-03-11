@@ -86,6 +86,13 @@ canvas {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .start-button-container {
+    background-color: #09212ad8;
+    border-radius: 5px;
+    border: 2px solid rgba(245, 222, 179, 0.831);
+    padding: 20px;
+    }
 }
 
 #mobile-controls {
@@ -152,6 +159,14 @@ button:hover,
     margin-right: 15px;
 }
 
+.orientation-text {
+    background-color: #09212ad8;
+    border-radius: 5px;
+    border: 2px solid rgba(245, 222, 179, 0.831);
+    padding: 8px;
+    margin: 10px;
+}
+
 footer {
     display: flex;
     align-items: center;
@@ -161,13 +176,6 @@ footer {
     height: 128px;
 }
 
-.orientation-text {
-    background-color: #09212ad8;
-    border-radius: 5px;
-    border: 2px solid rgba(245, 222, 179, 0.831);
-    padding: 8px;
-    margin: 10px;
-}
 
 /* Smartphones */
 @media only screen and (max-width: 720px) {

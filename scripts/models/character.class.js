@@ -198,6 +198,7 @@ class Character extends MovableObject {
             if (this.playAnimationSingle(this.IMAGES_DEAD)) {
                 AudioHub.playOne(AudioHub.CHAR_DEAD);
                 this.stopPlayerIntervals();
+                this.world.gameIsOver(this.isDead());
             }
         } else if (!this.playHurtAnimation) {
             this.playAnimationLoop(this.IMAGES_HURT);
