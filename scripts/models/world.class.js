@@ -11,8 +11,8 @@ class World {
     bottleUI = new StatusObject(0, this.character);
     coinUI = new StatusObject(1, this.character);
 
-    startOverlay = new StatusOverlay(2);
-    startOverlayFlag = false;
+    overlay = new StatusOverlay(2);
+    showOverlay = false;
 
     throwableObjects = [];
     thrownBottles = [];
@@ -46,8 +46,8 @@ class World {
 
     initLoadOverlay() {
         setTimeout(() => {
-            this.startOverlayFlag = true;
-            this.startOverlay.stopInterval();
+            this.showOverlay = true;
+            this.overlay.stopInterval();
         }, 700);
     }
 
@@ -97,8 +97,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.bottleUI);
         this.addToMap(this.coinUI);
-        if(!this.startOverlayFlag)
-        this.addToMap(this.startOverlay);
+        if (!this.showOverlay) this.addToMap(this.overlay);
 
         // Draw() wird immer wieder aufgerufen
         requestAnimationFrame(() => this.draw());
@@ -242,6 +241,7 @@ class World {
 
         setTimeout(() => {
             IntervalHub.stopIntervals();
+            this.showOverlay = false;
             if (isPlayerDead) {
                 this.gameOver();
             } else {
@@ -252,9 +252,17 @@ class World {
 
     gameOver() {
         console.log("show game over");
+        this.overlay.initOverlay(1);
+        setTimeout(() => {
+            showBackToMenuBtn();
+        }, 2000);
     }
 
     victroy() {
         console.log("show victroy");
+        this.overlay.initOverlay(0);
+        setTimeout(() => {
+            showBackToMenuBtn();
+        }, 2000);
     }
 }

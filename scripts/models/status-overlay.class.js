@@ -7,12 +7,11 @@ class StatusOverlay extends DrawableObject {
 
     constructor(type) {
         super();
-        this.type = type;
-        this.init();
-        this.animate_id = IntervalHub.startInterval(this.aninmate, 16);
+        this.initOverlay(type);
     }
 
-    init() {
+    initOverlay(type) {
+        this.type = type;
         switch (this.type) {
             case 0:
                 this.initVictory();
@@ -60,6 +59,7 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
+        this.animate_id = IntervalHub.startInterval(this.aninmate, 16);
     }
 
     aninmate = () => {

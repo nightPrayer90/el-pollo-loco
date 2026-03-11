@@ -36,6 +36,11 @@ function toggleFullscreenBtnSprite(){
     }
 }
 
+function showBackToMenuBtn() {
+    console.log("show back to menu btn");
+
+}
+
 /** Function for adding or removing css classes. @param(elementRef) is a reference */
 function changeClass(elementRef, className, control) {
     switch (control) {
