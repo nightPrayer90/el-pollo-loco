@@ -52,28 +52,47 @@ class Keyboard {
         btnLeft.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.LEFT = true;
+            btnLeft.classList.add("touchPressed");
         });
-        btnLeft.addEventListener("touchend", (e) => (Keyboard.LEFT = false));
+        btnLeft.addEventListener("touchend", (e) => {
+            Keyboard.LEFT = false;
+            btnLeft.classList.remove("touchPressed");
+        });
 
         // RIGHT
         btnRight.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.RIGHT = true;
+            btnRight.classList.add("touchPressed");
         });
-        btnRight.addEventListener("touchend", () => (Keyboard.RIGHT = false));
+
+        btnRight.addEventListener("touchend", () => {
+            Keyboard.RIGHT = false;
+            btnRight.classList.remove("touchPressed");
+        });
 
         // D
-        btnUp.addEventListener("touchstart", (e) => {
+        btnRight.addEventListener("touchstart", (e) => {
             e.preventDefault();
-            Keyboard.D = true;
+            Keyboard.RIGHT = true;
+            btnRight.classList.add("touchPressed");
         });
-        btnUp.addEventListener("touchend", () => (Keyboard.D = false));
+
+        btnRight.addEventListener("touchend", () => {
+            Keyboard.RIGHT = false;
+            btnRight.classList.remove("touchPressed");
+        });
 
         // SPACE
         btnSpace.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.SPACE = true;
+            btnSpace.classList.add("touchPressed");
         });
-        btnSpace.addEventListener("touchend", () => (Keyboard.SPACE = false));
+
+        btnSpace.addEventListener("touchend", () => {
+            Keyboard.SPACE = false;
+            btnSpace.classList.remove("touchPressed");
+        });
     }
 }

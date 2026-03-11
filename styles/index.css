@@ -50,7 +50,7 @@ canvas {
     height: 100%;
 }
 
-#fullscreen{
+#fullscreen {
     .hide-object {
         display: none;
     }
@@ -86,8 +86,8 @@ canvas {
 #mobile-controls {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
-    
+    justify-content: space-between;
+
     width: 100%;
 }
 
@@ -95,7 +95,11 @@ button {
     background-color: rgb(238, 161, 7);
     border: 2px solid;
     border-color: rgb(219, 100, 9);
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
 
     img {
         background: none;
@@ -105,9 +109,11 @@ button {
     }
 }
 
-button:hover {
+button:hover,
+.touchPressed {
     background-color: rgb(238, 183, 74);
     border-color: rgb(222, 128, 56);
+    transform: scale(0.95);
 }
 
 .button-UI {
@@ -127,7 +133,6 @@ button:hover {
     color: rgb(95, 50, 2);
 }
 
-
 .button-image-offset {
     top: 2px;
 }
@@ -138,7 +143,7 @@ button:hover {
 
 .audio_slider {
     width: 100px;
-    height:25px;
+    height: 25px;
 }
 
 footer {
