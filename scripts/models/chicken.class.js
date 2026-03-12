@@ -6,8 +6,8 @@ class Chicken extends MovableObject {
     speed;
     damage = 20;
 
-    IMAGES_WALKING;
-    IMAGES_DEAD;
+    images_walking;
+    images_dead;
 
     isDead = false;
 
@@ -24,9 +24,9 @@ class Chicken extends MovableObject {
         this.x = x;
         this.chickenType(chickenType);
         this.setCollisionRect();
-        this.loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImage(this.images_walking[0]);
+        this.loadImages(this.images_walking);
+        this.loadImages(this.images_dead);
         this.turnXPosition = turnXPosition;
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
         this.move_id = IntervalHub.startInterval(this.move, 32);
@@ -55,9 +55,9 @@ class Chicken extends MovableObject {
 
     animate = () => {
         if (this.isDead == false) {
-            this.playAnimationLoop(this.IMAGES_WALKING);
+            this.playAnimationLoop(this.images_walking);
         } else {
-            if (this.playAnimationSingle(this.IMAGES_DEAD)) {
+            if (this.playAnimationSingle(this.images_dead)) {
                 this.y += 10;
                 this.removeEnemyFormInverval();
             }
@@ -95,8 +95,8 @@ class Chicken extends MovableObject {
     }
 
     loadNormalChicken() {
-        this.IMAGES_WALKING = ImageHub.CHICKEN_NORMAL.walk;
-        this.IMAGES_DEAD = ImageHub.CHICKEN_NORMAL.dead;
+        this.images_walking = ImageHub.CHICKEN_NORMAL.walk;
+        this.images_dead = ImageHub.CHICKEN_NORMAL.dead;
         this.collisionOffset = {
             top: 15,
             right: 15,
@@ -110,8 +110,8 @@ class Chicken extends MovableObject {
     }
 
     loadSmallChicken() {
-        this.IMAGES_WALKING = ImageHub.CHICKEN_SMALL.walk;
-        this.IMAGES_DEAD = ImageHub.CHICKEN_SMALL.dead;
+        this.images_walking = ImageHub.CHICKEN_SMALL.walk;
+        this.images_dead = ImageHub.CHICKEN_SMALL.dead;
         this.collisionOffset = {
             top: 5,
             right: 5,

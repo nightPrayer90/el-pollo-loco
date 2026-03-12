@@ -1,7 +1,7 @@
 class ParticleSystem extends MovableObject {
     x;
     y;
-    IMAGES;
+    images_set;
     animate_id;
     width = 125;
     height = 125;
@@ -13,15 +13,15 @@ class ParticleSystem extends MovableObject {
         this.width = width;
         this.x = x - width/2;
         this.y = y - height/2;
-        this.IMAGES = images;
+        this.images_set = images;
         this.world = world;
-        this.loadImage(this.IMAGES[0]);
-        this.loadImages(this.IMAGES);
+        this.loadImage(this.images_set[0]);
+        this.loadImages(this.images_set);
         this.animate_id = IntervalHub.startInterval(this.animate, 25);
     }
 
     animate = () => {
-        if (this.playAnimationSingle(this.IMAGES)) {
+        if (this.playAnimationSingle(this.images_set)) {
             IntervalHub.stopInterval(this.animate_id);
             this.removeParticle();
         }

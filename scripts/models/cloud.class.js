@@ -6,7 +6,7 @@ class Cloud extends MovableObject {
 
     world_width;
 
-    IMAGES_CLOUD = ImageHub.CLOUDS.cloud;
+    images_cloud = ImageHub.CLOUDS.cloud;
 
     constructor(world_width, layer, generateRandomX) {
         super();
@@ -28,7 +28,7 @@ class Cloud extends MovableObject {
         let variant = Math.random() < 0.5 ? 0 : 1;
         this.x = generateRandomX == true ? Math.random() * this.world_width : Math.random() *20 + this.world_width;
 
-        this.loadImage(this.IMAGES_CLOUD[variant]);
+        this.loadImage(this.images_cloud[variant]);
         (layer == 0) ?  this.cloudLayer2() : this.cloudLayer3();
     }
 

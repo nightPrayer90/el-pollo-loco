@@ -4,8 +4,8 @@ class Collectable extends MovableObject {
     width;
     height;
 
-    IMAGES_SET = [];
-    IMAGES_VFX = ImageHub.VFX.coin;
+    images_set = [];
+    images_vfx = ImageHub.VFX.coin;
 
     animate_id;
     isCollect = false;
@@ -21,7 +21,7 @@ class Collectable extends MovableObject {
 
     animate = () => {
         if (this.isCollect == false) {
-            this.playAnimationLoop(this.IMAGES_SET);
+            this.playAnimationLoop(this.images_set);
         }
     };
 
@@ -34,9 +34,9 @@ class Collectable extends MovableObject {
                 this.initBottle();
                 break;
         }
-        this.loadImage(this.IMAGES_SET[0]);
-        this.loadImages(this.IMAGES_SET);
-        if (this.IMAGES_SET.length > 1) this.animate_id = IntervalHub.startInterval(this.animate, 250);
+        this.loadImage(this.images_set[0]);
+        this.loadImages(this.images_set);
+        if (this.images_set.length > 1) this.animate_id = IntervalHub.startInterval(this.animate, 250);
     }
 
     initCoin() {
@@ -48,7 +48,7 @@ class Collectable extends MovableObject {
             bottom: 40,
             left: 40,
         };
-        this.IMAGES_SET = ImageHub.COLLECTABLES.coin;
+        this.images_set = ImageHub.COLLECTABLES.coin;
     }
 
     initBottle() {
@@ -60,7 +60,7 @@ class Collectable extends MovableObject {
             bottom: 5,
             left: 5,
         };
-        this.IMAGES_SET = Math.random() < 0.5 ? ImageHub.COLLECTABLES.bottle_v1 : ImageHub.COLLECTABLES.bottle_v2;
+        this.images_set = Math.random() < 0.5 ? ImageHub.COLLECTABLES.bottle_v1 : ImageHub.COLLECTABLES.bottle_v2;
     }
 
     collect(world) {
@@ -79,7 +79,7 @@ class Collectable extends MovableObject {
                 break;
         }
 
-        if (this.IMAGES_SET.length > 1) this.removeCollectableFormInverval();
+        if (this.images_set.length > 1) this.removeCollectableFormInverval();
         this.removeCollectableFromCollision(world);
     }
 

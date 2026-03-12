@@ -2,11 +2,11 @@ class Endboss extends MovableObject {
     y = -50;
     height = 500;
     width = 300;
-    IMAGES_WALKING = ImageHub.ENDBOSS.walk;
+    images_walking = ImageHub.ENDBOSS.walk;
     
     constructor() {
-        super().loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_WALKING);
+        super().loadImage(this.images_walking[0]);
+        this.loadImages(this.images_walking);
 
         this.x = 2300;
 
@@ -15,6 +15,6 @@ class Endboss extends MovableObject {
 
 
     animate = () => {
-        this.playAnimationLoop(this.IMAGES_WALKING);
+        this.playAnimationLoop(this.images_walking);
     };
 }

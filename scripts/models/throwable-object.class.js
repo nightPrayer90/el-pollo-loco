@@ -3,8 +3,8 @@ class ThrowableObject extends MovableObject {
     height = 50;
     width = 50;
 
-    ROTATE_BOTTLE = ImageHub.BOTTLE.rotate;
-    BROKEN_BOTTLE = ImageHub.BOTTLE.broken;
+    images_rotate_bottle = ImageHub.BOTTLE.rotate;
+    images_broken_bottle = ImageHub.BOTTLE.broken;
 
     isHit = false;
     isSplash = false;
@@ -16,8 +16,8 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y, world) {
         super();
-        this.loadImage(this.ROTATE_BOTTLE[0]);
-        this.loadImages(this.ROTATE_BOTTLE);
+        this.loadImage(this.images_rotate_bottle[0]);
+        this.loadImages(this.images_rotate_bottle);
 
         this.x = x + 50;
         this.y = y + 100;
@@ -51,12 +51,12 @@ class ThrowableObject extends MovableObject {
 
     animate = () => {
         if (this.isHit == false) {
-            this.playAnimationLoop(this.ROTATE_BOTTLE);
+            this.playAnimationLoop(this.images_rotate_bottle);
         }
         else {
             if (this.isHitOnGround == true) {
                 AudioHub.playOne(AudioHub.THROW_HITGORUND);
-                this.loadImage(this.BROKEN_BOTTLE[Math.floor(Math.random() * this.BROKEN_BOTTLE.length)]);
+                this.loadImage(this.images_broken_bottle[Math.floor(Math.random() * this.images_broken_bottle.length)]);
                 
                 //TODO: könnte man hier auch in die Superclass verschieben!
                 IntervalHub.stopInterval(this.animate_id);

@@ -11,13 +11,13 @@ class Character extends MovableObject {
     coins = 0;
     bottles = 5;
 
-    IMAGES_WALKING = ImageHub.CHARACTER.walk;
-    IMAGES_JUMPING = ImageHub.CHARACTER.jump;
-    IMAGES_FALLING = ImageHub.CHARACTER.fall;
-    IMAGES_IDLE = ImageHub.CHARACTER.idle;
-    IMAGES_DEAD = ImageHub.CHARACTER.dead;
-    IMAGES_HURT = ImageHub.CHARACTER.hurt;
-    IMAGES_SLEEP = ImageHub.CHARACTER.sleep;
+    images_walking = ImageHub.CHARACTER.walk;
+    images_jumping = ImageHub.CHARACTER.jump;
+    images_falling = ImageHub.CHARACTER.fall;
+    images_idle = ImageHub.CHARACTER.idle;
+    images_dead = ImageHub.CHARACTER.dead;
+    images_hurt = ImageHub.CHARACTER.hurt;
+    images_sleep = ImageHub.CHARACTER.sleep;
 
     animate_id;
     move_id;
@@ -46,14 +46,14 @@ class Character extends MovableObject {
     }
 
     initImages() {
-        this.loadImage(this.IMAGES_WALKING[0]);
-        this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_JUMPING);
-        this.loadImages(this.IMAGES_FALLING);
-        this.loadImages(this.IMAGES_IDLE);
-        this.loadImages(this.IMAGES_DEAD);
-        this.loadImages(this.IMAGES_HURT);
-        this.loadImages(this.IMAGES_SLEEP);
+        this.loadImage(this.images_walking[0]);
+        this.loadImages(this.images_walking);
+        this.loadImages(this.images_jumping);
+        this.loadImages(this.images_falling);
+        this.loadImages(this.images_idle);
+        this.loadImages(this.images_dead);
+        this.loadImages(this.images_hurt);
+        this.loadImages(this.images_sleep);
     }
 
     startPlayerIntervals() {
@@ -195,22 +195,22 @@ class Character extends MovableObject {
 
     animate = () => {
         if (this.isDead()) {
-            if (this.playAnimationSingle(this.IMAGES_DEAD)) {
+            if (this.playAnimationSingle(this.images_dead)) {
                 AudioHub.playOne(AudioHub.CHAR_DEAD);
                 this.stopPlayerIntervals();
                 this.world.gameIsOver(this.isDead());
             }
         } else if (!this.playHurtAnimation) {
-            this.playAnimationLoop(this.IMAGES_HURT);
+            this.playAnimationLoop(this.images_hurt);
         } else if (this.isAboveGround()) {
-            if (this.speedY > 0) this.playAnimationSingle(this.IMAGES_JUMPING);
-            else this.playAnimationSingle(this.IMAGES_FALLING);
+            if (this.speedY > 0) this.playAnimationSingle(this.images_jumping);
+            else this.playAnimationSingle(this.images_falling);
         } else {
             if (Keyboard.RIGHT || Keyboard.LEFT) {
-                this.playAnimationLoop(this.IMAGES_WALKING);
+                this.playAnimationLoop(this.images_walking);
             } else {
-                if (this.sleepTimer >= 15) this.playAnimationLoop(this.IMAGES_SLEEP);
-                else this.playAnimationLoop(this.IMAGES_IDLE);
+                if (this.sleepTimer >= 15) this.playAnimationLoop(this.images_sleep);
+                else this.playAnimationLoop(this.images_idle);
             }
         }
     };

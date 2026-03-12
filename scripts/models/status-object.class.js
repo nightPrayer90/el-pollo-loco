@@ -1,6 +1,6 @@
 class StatusObject extends DrawableObject {
-    IMAGES_BOTTLE = ImageHub.STATUSBAR.bottle;
-    IMAGES_COIN = ImageHub.STATUSBAR.coin;
+    images_bottle = ImageHub.STATUSBAR.bottle;
+    images_coin = ImageHub.STATUSBAR.coin;
 
     x = 38;
     y = 55;
@@ -31,7 +31,7 @@ class StatusObject extends DrawableObject {
     }
 
     initBottle() {
-        this.loadImage(this.IMAGES_BOTTLE[0]);
+        this.loadImage(this.images_bottle[0]);
         this.x = 38;
         this.y = 58;
         this.width = 50;
@@ -44,7 +44,7 @@ class StatusObject extends DrawableObject {
     }
 
     initCoin() {
-        this.loadImage(this.IMAGES_COIN[0]);
+        this.loadImage(this.images_coin[0]);
         this.x = 145;
         this.y = 53;
         this.width = 46;

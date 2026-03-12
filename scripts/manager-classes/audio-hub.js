@@ -23,7 +23,7 @@ class AudioHub {
     static JUMP_HITCHICKEN = new MyAudio("./assets/sounds/chicken/chickenDead2.mp3");
 
     // Audiodaten Bgm
-    static GAME_MUSIC = new MyAudio("./assets/bgm/my-quest.mp3");
+    static GAME_MUSIC = new MyAudio("./assets/bgm/mexico-mariachi-music.mp3");
 
     static DEFAULT_VOLUME = 0.2;
     static AUDIO_VOLUME = 0.2;
@@ -64,9 +64,10 @@ class AudioHub {
     static playOne(track) {
         if (track.myAudio.readyState == 4 || track.isLoaded) {
             track.isLoaded = true;
-            track.myAudio.volume = AudioHub.AUDIO_VOLUME; // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
-            track.myAudio.currentTime = 0; // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
-            track.myAudio.play(); // Spielt das übergebene Sound-Objekt ab
+            track.myAudio.volume = AudioHub.AUDIO_VOLUME; 
+            track.myAudio.currentTime = 0; 
+            track.myAudio
+            track.myAudio.play(); 
         }
     }
 
