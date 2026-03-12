@@ -38,8 +38,9 @@ class Character extends MovableObject {
     playHurtAnimation = true;
     isPlayWalksound = false;
 
-    constructor() {
+    constructor(world) {
         super();
+        this.world = world;
         this.initImages();
         this.setCollisionRect();
         this.startPlayerIntervals();

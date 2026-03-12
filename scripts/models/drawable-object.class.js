@@ -36,7 +36,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (!(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject|| this instanceof Collectable)) return;
+        if (!(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject|| this instanceof Collectable || this instanceof Endboss)) return;
         this.setCollisionRect();
 
         ctx.beginPath();

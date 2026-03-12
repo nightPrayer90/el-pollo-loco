@@ -9,6 +9,7 @@ class Chicken extends MovableObject {
     images_walking;
     images_dead;
 
+    isBoss = false;
     isDead = false;
 
     animate_id;

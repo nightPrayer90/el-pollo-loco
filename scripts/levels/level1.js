@@ -52,6 +52,8 @@ function chickenGenerator(chickenQuantity) {
         chickens.push(new Chicken(xSpawnPos, type, turnXPosition));
     }
 
+    chickens.push(new Endboss(getWorldWitdh() - 200));
+
     return chickens;
 }
 

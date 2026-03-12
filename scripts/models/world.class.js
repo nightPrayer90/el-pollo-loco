@@ -1,5 +1,5 @@
 class World {
-    character = new Character();
+    character = new Character(this);
     level;
 
     ctx;
@@ -35,11 +35,9 @@ class World {
         this.level = level;
         this.initKeyboard();
         this.initLoadOverlay();
-        this.draw();
-        this.setWorldToCharacter();
-        this.cloudsGenerator(6);
-        this.initWorldInvervals();
         this.initInfoText();
+        this.initWorldInvervalsAndObjects();
+        this.draw();
     }
 
     initKeyboard() {
@@ -54,20 +52,24 @@ class World {
         }, 700);
     }
 
-    initInfoText(){
+    initInfoText() {
         setTimeout(() => {
             this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.");
         }, 1200);
-        
     }
 
-    initWorldInvervals() {
+    initWorldInvervalsAndObjects() {
         IntervalHub.startInterval(this.update, 16);
         this.spawn_id = IntervalHub.startInterval(this.chickenSpawner, 3000);
-    }
+        this.cloudsGenerator(6);
 
-    setWorldToCharacter() {
-        this.character.world = this;
+        for (let i = 0; i < this.level.enemies.length; i++) {
+            if (this.level.enemies[i].isBoss == true) {
+                this.level.enemies[i].world = this;
+                console.log("FOUNDTHEBOSS!");
+                return;
+            }
+        }
     }
 
     draw() {
@@ -135,7 +137,7 @@ class World {
         }
     }
 
-    addTextToMap(to){
+    addTextToMap(to) {
         to.drawText(this.ctx);
     }
 
@@ -250,9 +252,11 @@ class World {
     };
 
     gameIsOver(isPlayerDead) {
-        this.bottleUI = null;
-        this.coinUI = null;
-        this.statusBar = null;
+        if (isPlayerDead == true) {
+            this.bottleUI = null;
+            this.coinUI = null;
+            this.statusBar = null;
+        }
 
         setTimeout(() => {
             IntervalHub.stopIntervals();

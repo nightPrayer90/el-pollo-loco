@@ -86,18 +86,26 @@ class ImageHub {
 
     static STATUSBAR = {
         health: [
-            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/0.png",
-            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/20.png",
-            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/40.png",
-            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/60.png",
-            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/80.png",
-            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/blue/100.png"
+            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/0.png",
+            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/20.png",
+            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/40.png",
+            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/60.png",
+            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/80.png",
+            "./assets/img/7_statusbars/1_statusbar/2_statusbar_health/green/100.png"
         ],
         bottle: [
             "./assets/img/7_statusbars/3_icons/icon_salsa_bottle.png",
         ],
         coin: [
             "./assets/img/7_statusbars/3_icons/icon_coin.png",
+        ],
+        endboss: [
+            "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange0.png",
+            "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange20.png",
+            "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange40.png",
+            "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange60.png",
+            "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange80.png",
+            "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange100.png"
         ]
     }
 
