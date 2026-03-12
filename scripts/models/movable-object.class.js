@@ -12,7 +12,7 @@ class MovableObject extends DrawableObject {
     damage;
 
     isLanding = false;
-    drawCollisionFrame = true;
+    drawCollisionFrame = false;
 
     // collision
     cX;
@@ -29,12 +29,12 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
-        this.otherDirection = (this instanceof Chicken)  ? true :  false;
+        this.otherDirection = (this instanceof Chicken || this instanceof Endboss)  ? true :  false;
     }
 
     moveLeft() {
         this.x -= this.speed;
-        this.otherDirection = (this instanceof Chicken)  ? false :  true;
+        this.otherDirection = (this instanceof Chicken || this instanceof Endboss)  ? false :  true;
     }
 
     jump() {

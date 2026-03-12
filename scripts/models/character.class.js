@@ -193,7 +193,7 @@ class Character extends MovableObject {
     }
 
     isDead() {
-        return this.health <= 0;
+        return (this.health <= 0);
     }
 
     animate = () => {

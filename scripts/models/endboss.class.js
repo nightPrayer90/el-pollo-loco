@@ -1,25 +1,30 @@
 class Endboss extends MovableObject {
-    y = 100;
-    groundY = 100;
+    y = 240;
+    groundY = 240;
     acceleration = 1.5;
     jumpPower = 22;
+    damage = 20;
 
-    height = 350;
-    width = 280;
+    height = 200;
+    width = 150;
 
     isHurt = false;
     isBoss = true;
+    isDead = false;
+    isBlockMoving = false;
     isAttack = false;
+    canAttack = false;
     isLanding = true;
     health = 5;
+    speed = 4.5;
 
     isWaitingState = true;
     isAttackState = false;
 
     collisionOffset = {
-        top: 80,
-        right: 50,
-        bottom: 50,
+        top: 90,
+        right: 30,
+        bottom: 20,
         left: 30,
     };
 
@@ -57,11 +62,13 @@ class Endboss extends MovableObject {
         this.isWaitingState = false;
         this.isAttackState = true;
 
-        this.move_id = IntervalHub.startInterval(this.animate, 33);
+        this.move_id = IntervalHub.startInterval(this.move, 16);
+        this.isBlockMoving = false;
+        this.canAttack = true;
     }
 
     animate = () => {
-        if (this.isDead()) {
+        if (this.isDie()) {
             this.y += 15;
             if (this.playAnimationSingle(this.images_dead)) {
                 this.world.gameIsOver(false);
@@ -77,12 +84,42 @@ class Endboss extends MovableObject {
                     this.isAttack = false;
                 }
             } else {
-                this.playAnimationLoop(this.images_alert);
+                if (this.isWaitingState == true) this.playAnimationLoop(this.images_alert);
+                else this.playAnimationLoop(this.images_walking);
             }
         }
     };
 
-    move = () => {};
+    move = () => {
+        if (this.isDead == true) return;
+        if (this.isAttack == true) return;
+        if (this.isBlockMoving == true) return;
+
+        const directionOffset = 400;
+
+    if (this.x > (this.world.character.x + directionOffset)) {
+
+        if (this.moveDirection !== true) {
+            this.moveDirection = true;
+            this.doAttack();
+            this.blockMoveing();
+        }
+
+    }
+
+    if (this.x < (this.world.character.x - directionOffset)) {
+
+        if (this.moveDirection !== false) {
+            this.moveDirection = false;
+            this.doAttack();
+            this.blockMoveing();
+        }
+
+    }
+
+        if (this.moveDirection == true) this.moveLeft();
+        else this.moveRight();
+    };
 
     hit(world, hitFrom) {
         if (this.isHurt == true) return;
@@ -94,9 +131,25 @@ class Endboss extends MovableObject {
         }
     }
 
+    doAttack() {
+        if (this.canAttack == false) return;
+        this.isAttack = true;
+        this.jump();
+
+        this.setCoolDownAttack();
+    }
+
+    setCoolDownAttack() {
+        this.canAttack = false;
+        setTimeout(() => {
+            this.canAttack = true;
+        }, 3000);
+    }
+
     takeDamge() {
         this.isHurt = true;
         this.health -= 1;
+        this.speed++;
         console.log("ENDBOSS HIT " + this.health);
 
         setTimeout(() => {
@@ -104,7 +157,7 @@ class Endboss extends MovableObject {
         }, 500);
     }
 
-    isDead() {
+    isDie() {
         return this.health <= 0;
     }
 
@@ -113,9 +166,23 @@ class Endboss extends MovableObject {
         AudioHub.playOne(AudioHub.CHAR_LANDING);
         this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 30, 500, 500);
         this.world.triggerScreenShake(300);
+        this.chickenSpawnAttack(3);
+        this.isAttack = false;
+        
+        if (this.isWaitingState == true)
+            this.changeStage();
+    }
 
-        for (let i = 0; i < 3; i++) {
+    chickenSpawnAttack(spawnQuantity) {
+        for (let i = 0; i < spawnQuantity; i++) {
             this.world.level.enemies.push(new Chicken(this.world.character.x, 2, 5000));
         }
+    }
+
+    blockMoveing() {
+        this.isBlockMoving = true;
+        setTimeout(() => {
+            this.isBlockMoving = false;
+        }, 500);
     }
 }
