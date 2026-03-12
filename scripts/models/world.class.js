@@ -5,7 +5,6 @@ class World {
     ctx;
     canvas;
     keyboard;
-    spawn_id;
     camera_x = 0;
     statusBar = new StatusBar();
     bottleUI = new StatusObject(0, this.character);
@@ -25,6 +24,8 @@ class World {
 
     yShake = 0;
     yShake_id;
+    drawCanvas_Id;
+    spawn_id;
     isScreenShake = false;
 
     constructor(canvas, level) {
@@ -61,7 +62,7 @@ class World {
     }
 
     draw() {
-        this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         //-first bk -> no movement
         // bk layer
@@ -100,7 +101,7 @@ class World {
         if (!this.showOverlay) this.addToMap(this.overlay);
 
         // Draw() wird immer wieder aufgerufen
-        requestAnimationFrame(() => this.draw());
+        this.drawCanvas_Id = requestAnimationFrame(() => this.draw());
     }
 
     addObjectsToMap(objects) {
@@ -177,7 +178,7 @@ class World {
             if (this.character.isColliding(collectable) && collectable.isCollect == false) {
                 collectable.collect(this);
 
-                this.createParticleSystem(collectable.IMAGES_VFX, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
+                this.createParticleSystem(collectable.images_vfx, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
             }
         });
     }
@@ -251,18 +252,23 @@ class World {
     }
 
     gameOver() {
-        console.log("show game over");
         this.overlay.initOverlay(1);
         setTimeout(() => {
-            showBackToMenuBtn();
+            this.reloadStartWindow();
         }, 2000);
     }
 
     victroy() {
-        console.log("show victroy");
         this.overlay.initOverlay(0);
         setTimeout(() => {
-            showBackToMenuBtn();
-        }, 2000);
+            this.reloadStartWindow();
+        }, 3000);
+    }
+
+    reloadStartWindow() {
+        IntervalHub.stopIntervals();
+        showBackToMenuBtn();
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        cancelAnimationFrame(this.drawCanvas_Id);
     }
 }

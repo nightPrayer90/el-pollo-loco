@@ -12,8 +12,7 @@ function startGame() {
     IntervalHub.stopIntervals();
     const level = levelInit();
     world = new World(canvas, level);
-    AudioHub.playOne(AudioHub.GAME_MUSIC);
+    AudioHub.playOne(AudioHub.GAME_MUSIC, true);
     uiStartGame();
-    
 }
 

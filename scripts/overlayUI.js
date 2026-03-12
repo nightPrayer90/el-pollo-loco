@@ -13,6 +13,11 @@ function uiStartGame(){
     showMobileOverlay();
 }
 
+function uiMainMenu(){
+    changeClass(mainMenuRef, "hide-object", false);
+    changeClass(ingameUIRef, "hide-object", true);
+}
+
 function showMobileOverlay(){
     changeClass(mobileControlsRef, "hide-object", false);
 }
@@ -37,6 +42,8 @@ function toggleFullscreenBtnSprite(){
 }
 
 function showBackToMenuBtn() {
+    uiMainMenu();
+    AudioHub.stopOne(AudioHub.GAME_MUSIC);
     console.log("show back to menu btn");
 
 }

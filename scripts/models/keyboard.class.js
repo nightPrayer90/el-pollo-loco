@@ -50,6 +50,7 @@ class Keyboard {
 
         // left
         btnLeft.addEventListener("touchstart", (e) => {
+            e.preventDefault();
             Keyboard.LEFT = true;
             btnLeft.classList.add("touchPressed");
         });
@@ -60,6 +61,7 @@ class Keyboard {
 
         // right
         btnRight.addEventListener("touchstart", (e) => {
+            e.preventDefault();
             Keyboard.RIGHT = true;
             btnRight.classList.add("touchPressed");
         });
@@ -71,6 +73,7 @@ class Keyboard {
 
         // d
         btnD.addEventListener("touchstart", (e) => {
+            e.preventDefault();
             Keyboard.D = true;
             btnD.classList.add("touchPressed");
         });
@@ -82,6 +85,7 @@ class Keyboard {
 
         // jump
         btnSpace.addEventListener("touchstart", (e) => {
+            e.preventDefault();
             Keyboard.SPACE = true;
             btnSpace.classList.add("touchPressed");
         });

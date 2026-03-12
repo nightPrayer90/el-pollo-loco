@@ -111,7 +111,7 @@ class Character extends MovableObject {
         if (!this.isAboveGround() && (Keyboard.RIGHT || Keyboard.LEFT)) {
             if (this.isPlayWalksound == false) {
                 this.isPlayWalksound = true;
-                AudioHub.playOne(AudioHub.CHAR_WALK);
+                AudioHub.playOne(AudioHub.CHAR_WALK,true);
             }
         } else {
             this.isPlayWalksound = false;
@@ -197,6 +197,7 @@ class Character extends MovableObject {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.images_dead)) {
                 AudioHub.playOne(AudioHub.CHAR_DEAD);
+                AudioHub.stopOne(AudioHub.CHAR_WALK);
                 this.stopPlayerIntervals();
                 this.world.gameIsOver(this.isDead());
             }

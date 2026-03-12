@@ -13,11 +13,13 @@ header {
     align-items: center;
     flex-direction: column;
     background: #09212a;
+    border-bottom: 3px solid wheat;
 
     div {
         display: flex;
         height: 80px;
         padding: 20px 123px;
+        border: none;
     }
 }
 
@@ -92,7 +94,7 @@ canvas {
         border-radius: 5px;
         border: 2px solid rgba(245, 222, 179, 0.831);
         padding: 20px;
-        width: 600px;;
+        width: 80%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -178,18 +180,16 @@ button:hover,
     margin: 10px;
 }
 
-.controls{
+.controls {
+    margin-bottom: 28px;
     p {
         margin: 8px;
         border: none;
-        font-size: 24px;
-        span{
+        span {
             color: rgb(207, 254, 221);
-            font-size: 28px;
         }
-    };
+    }
 }
-
 
 footer {
     display: flex;
@@ -197,11 +197,18 @@ footer {
     justify-content: center;
 
     background: #09212a;
+    border-top: 3px solid wheat;
     height: 128px;
 }
 
 /* Smartphones */
 @media only screen and (max-width: 720px) {
+    main {
+        section {
+            padding: 0 8px;
+        }
+    }
+
     canvas {
         width: 100%;
     }

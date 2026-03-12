@@ -29,6 +29,14 @@ span {
     h1 {
         font-size: 50px;
     }
+
+    p {
+        font-size: 28px;
+    }
+
+    span {
+        font-size: 28px;
+    }
 }
 
 /* mobile */
@@ -37,5 +45,12 @@ span {
         font-size: 32px;
         margin-top: 24px;
         margin-bottom: 24px;
+    }
+     p {
+        font-size: 20px;
+    }
+
+    span {
+        font-size: 20px;
     }
 }

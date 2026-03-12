@@ -47,6 +47,7 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
+        this.animate_id = IntervalHub.startInterval(this.aninmatGrow, 16);
     }
 
     initStartGame() {
@@ -59,14 +60,21 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
-        this.animate_id = IntervalHub.startInterval(this.aninmate, 16);
+        this.animate_id = IntervalHub.startInterval(this.aninmateShrink, 16);
     }
 
-    aninmate = () => {
+    aninmateShrink = () => {
         Math.max(0, this.width -= 16);
         Math.max(0, this.height -= 16);
         this.x +=8;
         this.y +=8;
+    }
+
+    aninmatGrow = () => {
+        Math.max(0, this.width += 1);
+        Math.max(0, this.height += 1);
+        this.x -= 0.5;
+        this.y -= 0.5;
     }
 
     stopInterval() {

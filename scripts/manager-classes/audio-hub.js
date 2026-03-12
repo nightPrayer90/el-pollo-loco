@@ -61,12 +61,12 @@ class AudioHub {
     }
 
     // Spielt eine einzelne Audiodatei ab
-    static playOne(track) {
+    static playOne(track, isLoop = false) {
         if (track.myAudio.readyState == 4 || track.isLoaded) {
             track.isLoaded = true;
             track.myAudio.volume = AudioHub.AUDIO_VOLUME; 
             track.myAudio.currentTime = 0; 
-            track.myAudio
+            track.myAudio.loop = isLoop;
             track.myAudio.play(); 
         }
     }
