@@ -14,7 +14,7 @@ class Collectable extends MovableObject {
         "Nice, only 3 coins left!",
         "Pepe does a great job! You are ok too!",
         "Only one Coin left! Can you get the last one?",
-        "You're ready to roast the rooster! (The other one is fake:)"
+        "You're ready to roast the rooster! (Now Spice the chicken!)"
     ]
 
     constructor(x, y, type) {

@@ -18,6 +18,14 @@ class Endboss extends MovableObject {
     health = 5;
     speed = 4.5;
 
+    strArray = [
+        "This guy is only interested in rich Mexicans!",
+        "You're too poor for him to be interested in you.",
+        "Pepe is short on cash.",
+        "Your poverty makes me sick!",
+        "Hmm, your coins will taste good to me. Just like your flesh."
+    ]
+
     isWaitingState = true;
     isAttackState = false;
 
@@ -99,25 +107,21 @@ class Endboss extends MovableObject {
 
         const directionOffset = 400;
 
-    if (this.x > (this.world.character.x + directionOffset)) {
-
-        if (this.moveDirection !== true) {
-            this.moveDirection = true;
-            this.doAttack();
-            this.blockMoveing();
+        if (this.x > this.world.character.x + directionOffset) {
+            if (this.moveDirection !== true) {
+                this.moveDirection = true;
+                this.doAttack();
+                this.blockMoveing();
+            }
         }
 
-    }
-
-    if (this.x < (this.world.character.x - directionOffset)) {
-
-        if (this.moveDirection !== false) {
-            this.moveDirection = false;
-            this.doAttack();
-            this.blockMoveing();
+        if (this.x < this.world.character.x - directionOffset) {
+            if (this.moveDirection !== false) {
+                this.moveDirection = false;
+                this.doAttack();
+                this.blockMoveing();
+            }
         }
-
-    }
 
         if (this.moveDirection == true) this.moveLeft();
         else this.moveRight();
@@ -172,9 +176,18 @@ class Endboss extends MovableObject {
         this.world.triggerScreenShake(300);
         this.chickenSpawnAttack(3);
         this.isAttack = false;
-        
-        if (this.isWaitingState == true)
-            this.changeStage();
+
+        if (this.isWaitingState == true) {
+            if (this.world.character.coins >= 4) {
+                this.changeStage();
+                this.world.statusTextObject.updateText(this.strArray[4]);
+            }
+            else{
+                let ran = Math.floor(Math.random() * (this.strArray.length-1));
+                console.log(ran);
+                this.world.statusTextObject.updateText(this.strArray[ran]);
+            }
+        }
     }
 
     chickenSpawnAttack(spawnQuantity) {
