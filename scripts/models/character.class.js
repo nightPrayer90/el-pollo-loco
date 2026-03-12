@@ -8,6 +8,7 @@ class Character extends MovableObject {
     otherDirection = false;
     sleepTimer = 0;
     jumpPower = 18;
+    cameraOffset = 100;
 
     health = 100;
     coins = 0;
@@ -25,7 +26,7 @@ class Character extends MovableObject {
     move_id;
     applyGravity_id;
     sleepInverval_id;
-
+    cameraOffset_id;
     world;
 
     collisionOffset = {
@@ -91,8 +92,20 @@ class Character extends MovableObject {
         if (this.canThrowBottle()) this.throwBottle();
 
         this.playMoveSound();
-        this.world.camera_x = -this.x + 100;
+        this.world.camera_x = -this.x + this.cameraOffset;
     };
+
+    changeCameraOffset() {
+        this.cameraOffset_id = IntervalHub.startInterval(this.animateCameraOffset, 16)
+    }
+
+    animateCameraOffset =() => {
+        this.cameraOffset++
+
+        if (this.cameraOffset >= 340) {
+            IntervalHub.stopInterval(this.cameraOffset_id);
+        } 
+    }
 
     canMoveRight() {
         return Keyboard.RIGHT && this.x < this.world.level.level_size - 650;
@@ -200,7 +213,6 @@ class Character extends MovableObject {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.images_dead)) {
                 AudioHub.playOne(AudioHub.CHAR_DEAD);
-                AudioHub.stopOne(AudioHub.CHAR_WALK);
                 this.stopPlayerIntervals();
                 this.world.gameIsOver(this.isDead());
             }

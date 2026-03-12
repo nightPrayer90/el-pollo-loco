@@ -29,6 +29,7 @@
     <script src="./scripts/models/status-bar.class.js" defer></script>
     <script src="./scripts/models/status-overlay.class.js" defer></script>
     <script src="./scripts/models/status-text.class.js" defer></script>
+    <script src="./scripts/models/status-boss-bar.class.js" defer></script>
     <script src="./scripts/models/background-objects.class.js" defer></script>
     <script src="./scripts/models/level.class.js" defer></script>
     <script src="./scripts/levels/level1.js" defer></script>
@@ -56,7 +57,7 @@
                 <div id="overlay-main-menu">
                     <!-- start-menu -->
                     <div class="start-button-container orientation-display-hide">
-                        <button class="button-rect" onclick="startGame()"> Start Hunt! </button>
+                        <button class="button-rect" onclick="startGame(); blur()"> Start Hunt! </button>
                         <p class="start-story-text">Then battle the boss rooster to rid the world of the chicken plague.</p>
                     </div>
                     <p class="orientation-display-show orientation-text">Pepe need more space! Turn your Device to play.</p>

@@ -15,6 +15,7 @@ class Keyboard {
             }
 
             if (e.key == " ") {
+                e.preventDefault();
                 Keyboard.SPACE = true;
             }
 

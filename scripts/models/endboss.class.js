@@ -62,7 +62,9 @@ class Endboss extends MovableObject {
         this.isWaitingState = false;
         this.isAttackState = true;
 
+        this.world.showBossBar = true;
         this.move_id = IntervalHub.startInterval(this.move, 16);
+        this.world.character.changeCameraOffset();
         this.isBlockMoving = false;
         this.canAttack = true;
     }
@@ -150,7 +152,7 @@ class Endboss extends MovableObject {
         this.isHurt = true;
         this.health -= 1;
         this.speed++;
-        console.log("ENDBOSS HIT " + this.health);
+        this.world.statusBossBar.setHealth(this.health);
 
         setTimeout(() => {
             this.isHurt = false;
@@ -162,6 +164,8 @@ class Endboss extends MovableObject {
     }
 
     jumpEndFrame() {
+        if (this.isDie()) return;
+
         super.jumpEndFrame();
         AudioHub.playOne(AudioHub.CHAR_LANDING);
         this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 30, 500, 500);
@@ -174,6 +178,8 @@ class Endboss extends MovableObject {
     }
 
     chickenSpawnAttack(spawnQuantity) {
+        if (this.isDie()) return;
+
         for (let i = 0; i < spawnQuantity; i++) {
             this.world.level.enemies.push(new Chicken(this.world.character.x, 2, 5000));
         }

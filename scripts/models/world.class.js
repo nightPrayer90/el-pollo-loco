@@ -7,12 +7,14 @@ class World {
     keyboard;
     camera_x = 0;
     statusBar = new StatusBar();
+    statusBossBar = new StatusBossBar();
     bottleUI = new StatusObject(0, this.character);
     coinUI = new StatusObject(1, this.character);
     statusTextObject = new StatusTextObject();
 
     overlay = new StatusOverlay(2);
     showOverlay = false;
+    showBossBar = false;
 
     throwableObjects = [];
     thrownBottles = [];
@@ -110,7 +112,8 @@ class World {
         this.addToMap(this.bottleUI);
         this.addToMap(this.coinUI);
         this.addTextToMap(this.statusTextObject);
-        if (!this.showOverlay) this.addToMap(this.overlay);
+        if (!this.showOverlay) this.addToMap(this.overlay); // TODO -> change bool direction
+        if (this.showBossBar) this.addToMap(this.statusBossBar);
 
         // Draw() wird immer wieder aufgerufen
         this.drawCanvas_Id = requestAnimationFrame(() => this.draw());
@@ -257,6 +260,7 @@ class World {
             this.coinUI = null;
             this.statusBar = null;
         }
+        AudioHub.stopOne(AudioHub.CHAR_WALK);
 
         setTimeout(() => {
             IntervalHub.stopIntervals();
