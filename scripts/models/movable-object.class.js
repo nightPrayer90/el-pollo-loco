@@ -2,6 +2,8 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     speedY = 0;
     acceleration = 1;
+    groundY = 180;
+    jumpPower = 18;
 
     lastImages = [];
     animationFlag = false;
@@ -36,7 +38,7 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 18;
+        this.speedY = this.jumpPower;
         this.lastImages = [];
     }
 
@@ -86,7 +88,7 @@ class MovableObject extends DrawableObject {
     };
 
     isAboveGround() {
-        return this.y < 180;
+        return this.y < this.groundY;
     }
 
     jumpEndFrame(){

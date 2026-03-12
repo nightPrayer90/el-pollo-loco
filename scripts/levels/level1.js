@@ -63,7 +63,7 @@ function getCollectables() {
         new Collectable(-470,75,0),
         new Collectable((getWorldWitdh() - 1000)/2,75,0),
         new Collectable(3000,75,0),
-        new Collectable((getWorldWitdh() - 850),40,0),
+        new Collectable((getWorldWitdh() - 850),25,0),
         new Collectable((getWorldWitdh() - 650),340,0),
 
         // bottles

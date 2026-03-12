@@ -31,11 +31,13 @@ class Chicken extends MovableObject {
         this.turnXPosition = turnXPosition;
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
         this.move_id = IntervalHub.startInterval(this.move, 32);
-        this.moveDirection = (Math.random() < 0.6) ? true : false;
+        this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);
+        this.moveDirection = Math.random() < 0.6 ? true : false;
     }
 
     move = () => {
         if (this.isDead == true) return;
+        if (this.isLanding == false) return;
 
         if (this.x <= -300) this.moveDirection = false;
         if (this.x >= this.turnXPosition) this.moveDirection = true;
@@ -46,10 +48,8 @@ class Chicken extends MovableObject {
 
     // hitFrom 0-> PlayerJump 1->Bottle
     hit(world, hitFrom) {
-        if (hitFrom == 0) 
-            AudioHub.playOne(AudioHub.JUMP_HITCHICKEN);
-        else
-            AudioHub.playOne(AudioHub.THROW_HITCHICKEN);
+        if (hitFrom == 0) AudioHub.playOne(AudioHub.JUMP_HITCHICKEN);
+        else AudioHub.playOne(AudioHub.THROW_HITCHICKEN);
 
         this.removeEnemyFromCollision(world);
     }
@@ -72,7 +72,7 @@ class Chicken extends MovableObject {
             const index = world.level.enemies.indexOf(this);
             if (index != -1) {
                 world.level.enemies.splice(index, 1);
-                world.diedEnemies.push(this);
+                if (this.isLanding == true) world.diedEnemies.push(this);
             }
             this.isDead = true;
         }
@@ -82,6 +82,7 @@ class Chicken extends MovableObject {
     removeEnemyFormInverval() {
         IntervalHub.stopInterval(this.animate_id);
         IntervalHub.stopInterval(this.move_id);
+        IntervalHub.stopInterval(this.applyGravity_id);
     }
 
     chickenType(type) {
@@ -91,6 +92,9 @@ class Chicken extends MovableObject {
                 break;
             case 1:
                 this.loadSmallChicken();
+                break;
+            case 2:
+                this.loadBossSpawnChickes();
                 break;
         }
     }
@@ -107,6 +111,7 @@ class Chicken extends MovableObject {
         this.height = 100;
         this.width = 95;
         this.y = 335;
+        this.groundY = this.y;
         this.speed = 1 + Math.random() * 1;
     }
 
@@ -122,6 +127,30 @@ class Chicken extends MovableObject {
         this.height = 60;
         this.width = 55;
         this.y = 370;
+        this.groundY = this.y;
         this.speed = 3 + Math.random() * 2;
+    }
+
+    loadBossSpawnChickes() {
+        this.images_walking = ImageHub.CHICKEN_SMALL.walk;
+        this.images_dead = ImageHub.CHICKEN_SMALL.dead;
+        this.collisionOffset = {
+            top: 5,
+            right: 5,
+            bottom: 0,
+            left: 5,
+        };
+        this.height = 60;
+        this.width = 55;
+        this.y = 25;
+        this.groundY = 370;
+
+        this.x = this.x + this.getRandomRange(200, 100);
+        this.speed = 3 + Math.random() * 2;
+    }
+
+    getRandomRange(maxValue, minAbs) {
+        let sign = Math.random() < 0.5 ? -1 : 1;
+        return sign * (Math.random() * (maxValue - minAbs) + minAbs);
     }
 }

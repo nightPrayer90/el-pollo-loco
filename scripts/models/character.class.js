@@ -1,11 +1,13 @@
 class Character extends MovableObject {
     x = 120;
     y = 0;
+    groundY = 180;
     height = 250;
     width = 120;
     speed = 4;
     otherDirection = false;
     sleepTimer = 0;
+    jumpPower = 18;
 
     health = 100;
     coins = 0;

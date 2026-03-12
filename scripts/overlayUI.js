@@ -44,9 +44,7 @@ function toggleFullscreenBtnSprite(){
 function showBackToMenuBtn() {
     uiMainMenu();
     AudioHub.stopOne(AudioHub.GAME_MUSIC);
-    console.log("show back to menu btn");
-
-}
+ }
 
 /** Function for adding or removing css classes. @param(elementRef) is a reference */
 function changeClass(elementRef, className, control) {
