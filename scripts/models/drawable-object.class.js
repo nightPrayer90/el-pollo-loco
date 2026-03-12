@@ -7,8 +7,11 @@ class DrawableObject {
     y = 200;
     height = 150;
     width = 100;
- 
+
     isDrawText = false;
+    textAlign = "start";
+    textFontStyle = "30px Boogaloo";
+    textFontColor = "orange";
     showTextString = "Möhrenkult";
     textOffset = {
         x: 0,
@@ -44,8 +47,9 @@ class DrawableObject {
     }
 
     drawText(ctx) {
-        ctx.font = "30px Boogaloo";
-        ctx.fillStyle = "orange";
+        ctx.font = this.textFontStyle;
+        ctx.fillStyle = this.textFontColor;
+        ctx.textAlign = this.textAlign;
         ctx.fillText(this.showTextString,this.x + this.textOffset.x, this.y+this.textOffset.y);
     }
 }

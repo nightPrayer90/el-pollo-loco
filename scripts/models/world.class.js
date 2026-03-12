@@ -9,6 +9,7 @@ class World {
     statusBar = new StatusBar();
     bottleUI = new StatusObject(0, this.character);
     coinUI = new StatusObject(1, this.character);
+    statusTextObject = new StatusTextObject();
 
     overlay = new StatusOverlay(2);
     showOverlay = false;
@@ -38,6 +39,7 @@ class World {
         this.setWorldToCharacter();
         this.cloudsGenerator(6);
         this.initWorldInvervals();
+        this.initInfoText();
     }
 
     initKeyboard() {
@@ -50,6 +52,13 @@ class World {
             this.showOverlay = true;
             this.overlay.stopInterval();
         }, 700);
+    }
+
+    initInfoText(){
+        setTimeout(() => {
+            this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.");
+        }, 1200);
+        
     }
 
     initWorldInvervals() {
@@ -98,6 +107,7 @@ class World {
         this.addToMap(this.statusBar);
         this.addToMap(this.bottleUI);
         this.addToMap(this.coinUI);
+        this.addTextToMap(this.statusTextObject);
         if (!this.showOverlay) this.addToMap(this.overlay);
 
         // Draw() wird immer wieder aufgerufen
@@ -123,6 +133,10 @@ class World {
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
+    }
+
+    addTextToMap(to){
+        to.drawText(this.ctx);
     }
 
     flipImage(mo) {

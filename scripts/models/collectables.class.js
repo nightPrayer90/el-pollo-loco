@@ -10,6 +10,13 @@ class Collectable extends MovableObject {
     animate_id;
     isCollect = false;
 
+    strArray = [
+        "Nice, only 3 coins left!",
+        "Pepe does a great job! You are ok too!",
+        "Only one Coin left! Can you get the last one?",
+        "You're ready to roast the rooster!"
+    ]
+
     constructor(x, y, type) {
         super();
         this.type = type;
@@ -66,6 +73,7 @@ class Collectable extends MovableObject {
     collect(world) {
         switch (this.type) {
             case 0:
+                world.statusTextObject.updateText(this.strArray[world.character.coins]);
                 world.character.coins++;
                 world.level.maxEnemies = Math.max(world.level.maxEnemies - 5, 0);
                 world.coinUI.updateText(world.character.coins);
