@@ -242,6 +242,9 @@ class ImageHub {
         ],
         barrel2: [
             "./assets/img/11_obstacles/barrel-2.png"
+        ],
+        stone: [
+            "./assets/img/11_obstacles/stone.png"
         ]
     }
 

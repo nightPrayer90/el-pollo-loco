@@ -61,21 +61,22 @@ function getCollectables() {
         new Collectable(-470,75,0),
         new Collectable((getWorldWitdh() - 1000)/2,75,0),
         new Collectable(3000,75,0),
-        new Collectable((getWorldWitdh() - 1000),150,0),
+        new Collectable((getWorldWitdh() - 850),40,0),
+        new Collectable((getWorldWitdh() - 650),340,0),
 
         // bottles
-        new Collectable(-500,381,1),
-        new Collectable(-440,381,1),
-        new Collectable(-370,381,1),
-        new Collectable(-200,381,1),
-        new Collectable(-120,381,1),
+        new Collectable(-500,390,1),
+        new Collectable(-440,375,1),
+        new Collectable(-370,385,1),
+        new Collectable(-200,370,1),
+        new Collectable(-120,385,1),
 
         new Collectable(850,381,1), 
-        new Collectable(1080,382,1), 
-        new Collectable(1260,379,1), 
-        new Collectable(1500,380,1), 
-        new Collectable(1800,377,1), 
-        new Collectable(2100,382,1)
+        new Collectable(1080,385,1), 
+        new Collectable(1260,375,1), 
+        new Collectable(1500,385,1), 
+        new Collectable(1800,375,1), 
+        new Collectable(2100,385,1)
     ];
 }
 
@@ -83,8 +84,9 @@ function getObstacles() {
     return [
         new Obstacle(ImageHub.OBSTACLES.mast, -640, 180, 250, 250),
         new Obstacle(ImageHub.OBSTACLES.barrel1, -330, 330, 90, 120),
+        new Obstacle(ImageHub.OBSTACLES.barrel2, (getWorldWitdh() - 1000)/2, 330, 140, 120),
         new Obstacle(ImageHub.OBSTACLES.barrel1, (getWorldWitdh() - 980), 330, 90, 120),
-        new Obstacle(ImageHub.OBSTACLES.barrel2, (getWorldWitdh() - 1000)/2, 330, 140, 120)
+        new Obstacle(ImageHub.OBSTACLES.stone, (getWorldWitdh() - 650), 300, 130, 190) // 
     ];
 }
 //, new Endboss(
