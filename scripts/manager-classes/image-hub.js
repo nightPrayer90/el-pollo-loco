@@ -85,8 +85,7 @@ class ImageHub {
             "./assets/img/6_salsa_bottle/bottle_broken/bottle_broken2.png",
             "./assets/img/6_salsa_bottle/bottle_broken/bottle_broken3.png"
         ]
-
-    }
+    };
 
     static STATUSBAR = {
         health: [
@@ -111,7 +110,7 @@ class ImageHub {
             "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange80.png",
             "./assets/img/7_statusbars/2_statusbar_endboss/orange/orange100.png"
         ]
-    }
+    };
 
     static CHICKEN_SMALL = {
         walk: [
@@ -160,14 +159,20 @@ class ImageHub {
         set2: [
             "./assets/img/5_background/layers/3_third_layer/2.png", 
         ]
-    }
+    };
+
+    static SKY = {
+        air: [
+            "./assets/img/5_background/layers/air.png"
+        ]
+    };
 
     static CLOUDS = {
         cloud: [
             "./assets/img/5_background/layers/4_clouds/1.png",
             "./assets/img/5_background/layers/4_clouds/2.png"
         ]
-    }
+    };
 
     static ENDBOSS = {
         walk: [
@@ -243,7 +248,7 @@ class ImageHub {
             "./assets/img/10_animation/collectCoin/7.png",
             "./assets/img/10_animation/collectCoin/8.png"
         ]
-    }
+    };
 
     static OBSTACLES = {
         mast: [
@@ -258,7 +263,7 @@ class ImageHub {
         stone: [
             "./assets/img/11_obstacles/stone.png"
         ]
-    }
+    };
 
     static COLLECTABLES = {
         coin: [
@@ -271,7 +276,7 @@ class ImageHub {
         bottle_v2: [
             "./assets/img/6_salsa_bottle/2_salsa_bottle_on_ground.png"
         ]
-    }
+    };
 
     static OVERLAY = {
         victory: [
@@ -283,5 +288,5 @@ class ImageHub {
         startScreen: [
             "./assets/img/9_intro_outro_screens/start/startscreen_2.png"
         ]
-    }
+    };
 }

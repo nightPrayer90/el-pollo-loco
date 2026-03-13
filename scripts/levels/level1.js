@@ -12,7 +12,7 @@ let maxEnemies = 20;
 function levelInit() {
     const level1 = new Level(
     chickenGenerator(15), 
-    [new BackgroundObject("./assets/img/5_background/layers/air.png", 0)],
+    [new BackgroundObject(ImageHub.SKY.air, 0)],
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L1),
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L2),
     buildBackgrounds(ImageHub.BACKGROUNDSETS_L3),
