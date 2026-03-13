@@ -19,13 +19,13 @@ class Character extends MovableObject {
     coins = 0;
     bottles = 5;
 
-    images_walking = ImageHub.CHARACTER.walk;
-    images_jumping = ImageHub.CHARACTER.jump;
-    images_falling = ImageHub.CHARACTER.fall;
-    images_idle = ImageHub.CHARACTER.idle;
-    images_dead = ImageHub.CHARACTER.dead;
-    images_hurt = ImageHub.CHARACTER.hurt;
-    images_sleep = ImageHub.CHARACTER.sleep;
+    imagesWalking = ImageHub.CHARACTER.walk;
+    imagesJumping = ImageHub.CHARACTER.jump;
+    imagesFalling = ImageHub.CHARACTER.fall;
+    imagesIdle = ImageHub.CHARACTER.idle;
+    imagesDead = ImageHub.CHARACTER.dead;
+    imagesHurt = ImageHub.CHARACTER.hurt;
+    imagesSleep = ImageHub.CHARACTER.sleep;
 
     animate_id;
     move_id;
@@ -65,14 +65,14 @@ class Character extends MovableObject {
      * Loads all animation images for the character.
      */
     initImages() {
-        this.loadImage(this.images_walking[0]);
-        this.loadImages(this.images_walking);
-        this.loadImages(this.images_jumping);
-        this.loadImages(this.images_falling);
-        this.loadImages(this.images_idle);
-        this.loadImages(this.images_dead);
-        this.loadImages(this.images_hurt);
-        this.loadImages(this.images_sleep);
+        this.loadImage(this.imagesWalking[0]);
+        this.loadImages(this.imagesWalking);
+        this.loadImages(this.imagesJumping);
+        this.loadImages(this.imagesFalling);
+        this.loadImages(this.imagesIdle);
+        this.loadImages(this.imagesDead);
+        this.loadImages(this.imagesHurt);
+        this.loadImages(this.imagesSleep);
     }
 
     /**
@@ -253,21 +253,21 @@ class Character extends MovableObject {
 
     animate = () => {
         if (this.isDead()) {
-            if (this.playAnimationSingle(this.images_dead)) {
+            if (this.playAnimationSingle(this.imagesDead)) {
                 this.triggerGameOver();
             }
         } else if (!this.playHurtAnimation) {
-            this.playAnimationLoop(this.images_hurt);
+            this.playAnimationLoop(this.imagesHurt);
         } else if (this.isAboveGround()) {
-            if (this.speedY > 0) this.playAnimationSingle(this.images_jumping);
-            else this.playAnimationSingle(this.images_falling);
+            if (this.speedY > 0) this.playAnimationSingle(this.imagesJumping);
+            else this.playAnimationSingle(this.imagesFalling);
         } else {
             if (Keyboard.RIGHT || Keyboard.LEFT) {
-                this.playAnimationLoop(this.images_walking);
+                this.playAnimationLoop(this.imagesWalking);
                 this.sleepTimer = 0;
             } else {
-                if (this.sleepTimer >= 15) this.playAnimationLoop(this.images_sleep);
-                else this.playAnimationLoop(this.images_idle);
+                if (this.sleepTimer >= 15) this.playAnimationLoop(this.imagesSleep);
+                else this.playAnimationLoop(this.imagesIdle);
             }
         }
     };

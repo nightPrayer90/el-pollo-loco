@@ -5,9 +5,9 @@
 class StatusOverlay extends DrawableObject {
     
     //#region Properties
-    image_victory = ImageHub.OVERLAY.victory;
-    image_gameOver = ImageHub.OVERLAY.gameOver;
-    image_startscreen = ImageHub.OVERLAY.startScreen;
+    imageVictory = ImageHub.OVERLAY.victory;
+    imageGameOver = ImageHub.OVERLAY.gameOver;
+    imageStartscreen = ImageHub.OVERLAY.startScreen;
     type;
     animate_id;
     //#endregion
@@ -44,7 +44,7 @@ class StatusOverlay extends DrawableObject {
      * Initializes the victory overlay.
      */
     initVictory() {
-        this.loadImage(this.image_victory[0]);
+        this.loadImage(this.imageVictory[0]);
         this.x = (720 - 500) / 2;
         this.y = 5;
         this.width = 500;
@@ -60,7 +60,7 @@ class StatusOverlay extends DrawableObject {
      * Initializes the game over overlay.
      */
     initGameOver() {
-        this.loadImage(this.image_gameOver[0]);
+        this.loadImage(this.imageGameOver[0]);
         this.x = 0;
         this.y = 0;
         this.width = 720;
@@ -76,7 +76,7 @@ class StatusOverlay extends DrawableObject {
      * Initializes the start screen overlay.
      */
     initStartGame() {
-        this.loadImage(this.image_startscreen[0]);
+        this.loadImage(this.imageStartscreen[0]);
         this.x = 0;
         this.y = 0;
         this.width = 720;

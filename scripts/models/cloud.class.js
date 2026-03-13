@@ -7,7 +7,7 @@ class Cloud extends MovableObject {
     width = 500;
     height = 280;
     world_width;
-    images_cloud = ImageHub.CLOUDS.cloud;
+    imagesCloud = ImageHub.CLOUDS.cloud;
     //#endregion
 
     /**
@@ -32,7 +32,7 @@ class Cloud extends MovableObject {
         let variant = Math.random() < 0.5 ? 0 : 1;
         this.x = (generateRandomX == true) ? Math.random() * this.world_width : Math.random() * 20 + this.world_width;
 
-        this.loadImage(this.images_cloud[variant]);
+        this.loadImage(this.imagesCloud[variant]);
         layer == 0 ? this.cloudLayer2() : this.cloudLayer3();
     }
 

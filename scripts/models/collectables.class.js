@@ -10,8 +10,8 @@ class Collectable extends MovableObject {
     width;
     height;
 
-    images_set = [];
-    images_vfx = ImageHub.VFX.coin;
+    imagesSet = [];
+    imagesVfx = ImageHub.VFX.coin;
 
     animate_id;
     isCollect = false;
@@ -48,9 +48,9 @@ class Collectable extends MovableObject {
                 this.initBottle();
                 break;
         }
-        this.loadImage(this.images_set[0]);
-        this.loadImages(this.images_set);
-        if (this.images_set.length > 1) this.animate_id = IntervalHub.startInterval(this.animate, 250);
+        this.loadImage(this.imagesSet[0]);
+        this.loadImages(this.imagesSet);
+        if (this.imagesSet.length > 1) this.animate_id = IntervalHub.startInterval(this.animate, 250);
     }
 
     /**
@@ -65,7 +65,7 @@ class Collectable extends MovableObject {
             bottom: 40,
             left: 40,
         };
-        this.images_set = ImageHub.COLLECTABLES.coin;
+        this.imagesSet = ImageHub.COLLECTABLES.coin;
     }
 
     /**
@@ -80,7 +80,7 @@ class Collectable extends MovableObject {
             bottom: 5,
             left: 5,
         };
-        this.images_set = Math.random() < 0.5 ? ImageHub.COLLECTABLES.bottle_v1 : ImageHub.COLLECTABLES.bottle_v2;
+        this.imagesSet = Math.random() < 0.5 ? ImageHub.COLLECTABLES.bottle_v1 : ImageHub.COLLECTABLES.bottle_v2;
     }
 
     /**
@@ -96,7 +96,7 @@ class Collectable extends MovableObject {
                 break;
         }
 
-        if (this.images_set.length > 1) this.removeCollectableFormInverval();
+        if (this.imagesSet.length > 1) this.removeCollectableFormInverval();
         this.removeCollectableFromCollision(world);
     }
 
@@ -144,7 +144,7 @@ class Collectable extends MovableObject {
 
     animate = () => {
         if (this.isCollect == false) {
-            this.playAnimationLoop(this.images_set);
+            this.playAnimationLoop(this.imagesSet);
         }
     };
     //#endregion

@@ -10,8 +10,8 @@ class ThrowableObject extends MovableObject {
     height = 50;
     width = 50;
 
-    images_rotate_bottle = ImageHub.BOTTLE.rotate;
-    images_broken_bottle = ImageHub.BOTTLE.broken;
+    imagesRotateBottle = ImageHub.BOTTLE.rotate;
+    imagesBrokenBottle = ImageHub.BOTTLE.broken;
 
     isHit = false;
     isSplash = false;
@@ -43,8 +43,8 @@ class ThrowableObject extends MovableObject {
      * Loads bottle rotation images.
      */
     initImages(){
-        this.loadImage(this.images_rotate_bottle[0]);
-        this.loadImages(this.images_rotate_bottle);
+        this.loadImage(this.imagesRotateBottle[0]);
+        this.loadImages(this.imagesRotateBottle);
     }
 
     /**
@@ -109,12 +109,12 @@ class ThrowableObject extends MovableObject {
      */
     animate = () => {
         if (!this.isHit) {
-            this.playAnimationLoop(this.images_rotate_bottle);
+            this.playAnimationLoop(this.imagesRotateBottle);
         }
         else {
             if (this.isHitOnGround) {
                 AudioHub.playOne(AudioHub.THROW_HITGORUND);
-                this.loadImage(this.images_broken_bottle[Math.floor(Math.random() * this.images_broken_bottle.length)]);
+                this.loadImage(this.imagesBrokenBottle[Math.floor(Math.random() * this.imagesBrokenBottle.length)]);
                 IntervalHub.stopInterval(this.animate_id);
             }
         }

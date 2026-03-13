@@ -5,7 +5,7 @@
 class StatusBossBar extends DrawableObject{
 
     //#region Properties
-    images_set = ImageHub.STATUSBAR.endboss;
+    imagesSet = ImageHub.STATUSBAR.endboss;
     x = 250;
     y = 420;
     width = 250;
@@ -17,7 +17,7 @@ class StatusBossBar extends DrawableObject{
      */
     constructor() {
         super();
-        this.loadImages(this.images_set)
+        this.loadImages(this.imagesSet)
         this.setHealth(5);
     }
 
@@ -26,7 +26,7 @@ class StatusBossBar extends DrawableObject{
      * @param {number} health - Current boss health value.
      */
     setHealth(health) {
-        let path = this.images_set[health];
+        let path = this.imagesSet[health];
         this.img = this.imageCache[path];
     }
 }

@@ -37,11 +37,11 @@ class Endboss extends MovableObject {
         left: 30,
     };
 
-    images_alert = ImageHub.ENDBOSS.alert;
-    images_walking = ImageHub.ENDBOSS.walk;
-    images_attack = ImageHub.ENDBOSS.attack;
-    images_hurt = ImageHub.ENDBOSS.hurt;
-    images_dead = ImageHub.ENDBOSS.dead;
+    imagesAlert = ImageHub.ENDBOSS.alert;
+    imagesWalking = ImageHub.ENDBOSS.walk;
+    imagesAttack = ImageHub.ENDBOSS.attack;
+    imagesHurt = ImageHub.ENDBOSS.hurt;
+    imagesDead = ImageHub.ENDBOSS.dead;
 
     animate_id;
     move_id;
@@ -67,12 +67,12 @@ class Endboss extends MovableObject {
      * Loads all animation images.
      */
     initImages() {
-        this.loadImage(this.images_alert[0]);
-        this.loadImages(this.images_alert);
-        this.loadImages(this.images_walking);
-        this.loadImages(this.images_attack);
-        this.loadImages(this.images_hurt);
-        this.loadImages(this.images_dead);
+        this.loadImage(this.imagesAlert[0]);
+        this.loadImages(this.imagesAlert);
+        this.loadImages(this.imagesWalking);
+        this.loadImages(this.imagesAttack);
+        this.loadImages(this.imagesHurt);
+        this.loadImages(this.imagesDead);
     }
 
     /**
@@ -214,16 +214,16 @@ class Endboss extends MovableObject {
     animate = () => {
         if (this.isDie()) {
             this.y += 15;
-            if (this.playAnimationSingle(this.images_dead)) this.world.gameIsOver(false);
+            if (this.playAnimationSingle(this.imagesDead)) this.world.gameIsOver(false);
             return;
         }
-        if (this.isHurt) this.playAnimationLoop(this.images_hurt);
+        if (this.isHurt) this.playAnimationLoop(this.imagesHurt);
         else {
             if (this.isAttack) {
-                if (this.playAnimationSingle(this.images_attack)) this.isAttack = false;
+                if (this.playAnimationSingle(this.imagesAttack)) this.isAttack = false;
             } else {
-                if (this.isWaitingState) this.playAnimationLoop(this.images_alert);
-                else this.playAnimationLoop(this.images_walking);
+                if (this.isWaitingState) this.playAnimationLoop(this.imagesAlert);
+                else this.playAnimationLoop(this.imagesWalking);
             }
         }
     }

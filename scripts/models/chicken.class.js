@@ -11,8 +11,8 @@ class Chicken extends MovableObject {
     speed;
     damage = 20;
 
-    images_walking;
-    images_dead;
+    imagesWalking;
+    imagesDead;
 
     isBoss = false;
     isDead = false;
@@ -44,9 +44,9 @@ class Chicken extends MovableObject {
     }
 
     initLoadImages() {
-        this.loadImage(this.images_walking[0]);
-        this.loadImages(this.images_walking);
-        this.loadImages(this.images_dead);
+        this.loadImage(this.imagesWalking[0]);
+        this.loadImages(this.imagesWalking);
+        this.loadImages(this.imagesDead);
     }
 
     initStartInvervals() {
@@ -90,8 +90,8 @@ class Chicken extends MovableObject {
      * Loads the normal chicken configuration.
      */
     loadNormalChicken() {
-        this.images_walking = ImageHub.CHICKEN_NORMAL.walk;
-        this.images_dead = ImageHub.CHICKEN_NORMAL.dead;
+        this.imagesWalking = ImageHub.CHICKEN_NORMAL.walk;
+        this.imagesDead = ImageHub.CHICKEN_NORMAL.dead;
         this.collisionOffset = {
             top: 15,
             right: 15,
@@ -109,8 +109,8 @@ class Chicken extends MovableObject {
      * Loads the small chicken configuration.
      */
     loadSmallChicken() {
-        this.images_walking = ImageHub.CHICKEN_SMALL.walk;
-        this.images_dead = ImageHub.CHICKEN_SMALL.dead;
+        this.imagesWalking = ImageHub.CHICKEN_SMALL.walk;
+        this.imagesDead = ImageHub.CHICKEN_SMALL.dead;
         this.collisionOffset = {
             top: 5,
             right: 5,
@@ -128,8 +128,8 @@ class Chicken extends MovableObject {
      * Loads the chicken configuration used by boss spawns.
      */
     loadBossSpawnChickes() {
-        this.images_walking = ImageHub.CHICKEN_SMALL.walk;
-        this.images_dead = ImageHub.CHICKEN_SMALL.dead;
+        this.imagesWalking = ImageHub.CHICKEN_SMALL.walk;
+        this.imagesDead = ImageHub.CHICKEN_SMALL.dead;
         this.collisionOffset = {
             top: 5,
             right: 5,
@@ -191,9 +191,9 @@ class Chicken extends MovableObject {
 
     animate = () => {
         if (this.isDead == false) {
-            this.playAnimationLoop(this.images_walking);
+            this.playAnimationLoop(this.imagesWalking);
         } else {
-            if (this.playAnimationSingle(this.images_dead)) {
+            if (this.playAnimationSingle(this.imagesDead)) {
                 this.y += 10;
                 this.removeEnemyFormInverval();
             }

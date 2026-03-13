@@ -247,7 +247,7 @@ class World {
 
     handleCollisionPlayerCollectable(collectable) {
         collectable.collect(this);
-        this.createParticleSystem(collectable.images_vfx, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
+        this.createParticleSystem(collectable.imagesVfx, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
     }
     //#endregion
 
