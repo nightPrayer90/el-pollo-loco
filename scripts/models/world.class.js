@@ -56,7 +56,7 @@ class World {
 
     initInfoText() {
         setTimeout(() => {
-            this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.",1);
+            this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.", 1);
         }, 1200);
     }
 
@@ -97,9 +97,9 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects_L1);
         this.addObjectsToMap(this.diedEnemies);
         this.addObjectsToMap(this.thrownBottles);
-        this.addObjectsToMap(this.level.collectables);
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.collectables);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.particleSystems);
         this.addObjectsToMap(this.level.obstacles);
@@ -259,7 +259,7 @@ class World {
             this.coinUI = null;
             this.statusBar = null;
         }
-        this.character.stopMoveSound();       
+        this.character.stopMoveSound();
 
         setTimeout(() => {
             IntervalHub.stopIntervals();

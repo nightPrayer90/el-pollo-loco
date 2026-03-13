@@ -110,7 +110,7 @@ class Chicken extends MovableObject {
         };
         this.height = 100;
         this.width = 95;
-        this.y = 335;
+        this.y = 335 + Math.floor(Math.random() * 10);
         this.groundY = this.y;
         this.speed = 1 + Math.random() * 1;
     }
@@ -126,7 +126,7 @@ class Chicken extends MovableObject {
         };
         this.height = 60;
         this.width = 55;
-        this.y = 370;
+        this.y = 370 + Math.floor(Math.random() * 5);
         this.groundY = this.y;
         this.speed = 3 + Math.random() * 2;
     }
