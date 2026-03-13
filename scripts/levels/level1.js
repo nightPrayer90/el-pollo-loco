@@ -1,11 +1,14 @@
+//#region Config
 let levelBkLength = 6;
 let imageWidth = 720;
 let chickenArry = [];
 let maxEnemies = 20;
+//#endregion
 
-// Chicken 0 -> Normal Chicken   1 -> small chicken
-// Collectables -> 0 for 1 for bottle
-
+//#region Level Builder
+/**
+ * Creates and returns the level configuration.
+ */
 function levelInit() {
     const level1 = new Level(
     chickenGenerator(15), 
@@ -22,6 +25,18 @@ function levelInit() {
     return level1;
 }
 
+/**
+ * Returns the total world width.
+ */
+function getWorldWitdh() {
+    return imageWidth * levelBkLength;
+}
+//#endregion
+
+//#region Generators
+/**
+ * Builds the repeating background layers.
+ */
 function buildBackgrounds(imageSet) {
     let backgroundObjects = [];
 
@@ -35,10 +50,10 @@ function buildBackgrounds(imageSet) {
     return backgroundObjects;
 }
 
-function getWorldWitdh() {
-    return imageWidth * levelBkLength;
-}
-
+/**
+ * Generates all enemies for the level.
+ *  0 -> normal chicken   1 -> small chicken
+ */
 function chickenGenerator(chickenQuantity) {
     let xSpawnPos = 800;
     let chickens = []; 
@@ -53,26 +68,29 @@ function chickenGenerator(chickenQuantity) {
     }
 
     chickens.push(new Endboss(getWorldWitdh() - 200));
-
     return chickens;
 }
+//#endregion
 
+//#region Object Creation
+/**
+ * Creates all collectable objects in the level.
+ */
 function getCollectables() {
     return [
-        // coins
+        // coins -> 0
         new Collectable(-470,75,0),
         new Collectable((getWorldWitdh() - 1000)/2,75,0),
         new Collectable(3000,75,0),
         new Collectable((getWorldWitdh() - 850),25,0),
         new Collectable((getWorldWitdh() - 650),340,0),
 
-        // bottles
+        // bottles -> 1
         new Collectable(-500,390,1),
         new Collectable(-440,375,1),
         new Collectable(-370,385,1),
         new Collectable(-200,370,1),
         new Collectable(-120,385,1),
-
         new Collectable(850,381,1), 
         new Collectable(1080,385,1), 
         new Collectable(1260,375,1), 
@@ -82,6 +100,9 @@ function getCollectables() {
     ];
 }
 
+/**
+ * Creates all static obstacles in the level.
+ */
 function getObstacles() {
     return [
         new Obstacle(ImageHub.OBSTACLES.mast, -640, 180, 250, 250),
@@ -91,4 +112,4 @@ function getObstacles() {
         new Obstacle(ImageHub.OBSTACLES.stone, (getWorldWitdh() - 650), 300, 130, 190) // 
     ];
 }
-//, new Endboss(
+//#endregion

@@ -1,4 +1,9 @@
+/**
+ * @class
+ * Represents a chicken enemy with different types and behaviors.
+ */
 class Chicken extends MovableObject {
+    //#region Properties
     x;
     y;
     height;
@@ -19,34 +24,43 @@ class Chicken extends MovableObject {
     turnXPosition;
 
     collisionOffset = {};
+    //#endregion
 
+    /**
+     * Creates a chicken enemy.
+     * @param {number} x - Spawn position on the x axis.
+     * @param {number} chickenType - Type identifier of the chicken.
+     * @param {number} turnXPosition - Position where the chicken turns around.
+     */
     constructor(x, chickenType, turnXPosition) {
         super();
         this.x = x;
         this.chickenType(chickenType);
         this.setCollisionRect();
-        this.loadImage(this.images_walking[0]);
-        this.loadImages(this.images_walking);
-        this.loadImages(this.images_dead);
+        this.initLoadImages();
+        this.initStartInvervals();
         this.turnXPosition = turnXPosition;
-        this.animate_id = IntervalHub.startInterval(this.animate, 100);
-        this.move_id = IntervalHub.startInterval(this.move, 32);
-        this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);
         this.moveDirection = Math.random() < 0.6 ? true : false;
     }
 
-    move = () => {
-        if (this.isDead == true) return;
-        if (this.isLanding == false) return;
+    initLoadImages() {
+        this.loadImage(this.images_walking[0]);
+        this.loadImages(this.images_walking);
+        this.loadImages(this.images_dead);
+    }
 
-        if (this.x <= -300) this.moveDirection = false;
-        if (this.x >= this.turnXPosition) this.moveDirection = true;
+    initStartInvervals() {
+        this.animate_id = IntervalHub.startInterval(this.animate, 100);
+        this.move_id = IntervalHub.startInterval(this.move, 32);
+        this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);
+    }
 
-        if (this.moveDirection == true) this.moveLeft();
-        else this.moveRight();
-    };
-
-    // hitFrom 0-> PlayerJump 1->Bottle
+    //#region Methods
+    /**
+     * Handles enemy hit logic.
+     * @param {World} world
+     * @param {number} hitFrom - 0: player jump, 1: bottle
+     */
     hit(world, hitFrom) {
         if (hitFrom == 0) AudioHub.playOne(AudioHub.JUMP_HITCHICKEN);
         else AudioHub.playOne(AudioHub.THROW_HITCHICKEN);
@@ -54,37 +68,10 @@ class Chicken extends MovableObject {
         this.removeEnemyFromCollision(world);
     }
 
-    animate = () => {
-        if (this.isDead == false) {
-            this.playAnimationLoop(this.images_walking);
-        } else {
-            if (this.playAnimationSingle(this.images_dead)) {
-                this.y += 10;
-                this.removeEnemyFormInverval();
-            }
-        }
-    };
-
-    removeEnemyFromCollision(world) {
-        // INTERVAL Läuft noch aber sonst tut sich nichts mehr
-        if (this.isDead == false) {
-            // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
-            const index = world.level.enemies.indexOf(this);
-            if (index != -1) {
-                world.level.enemies.splice(index, 1);
-                if (this.isLanding == true) world.diedEnemies.push(this);
-            }
-            this.isDead = true;
-        }
-    }
-
-    // enemy wird aus dem intervalhub genommen
-    removeEnemyFormInverval() {
-        IntervalHub.stopInterval(this.animate_id);
-        IntervalHub.stopInterval(this.move_id);
-        IntervalHub.stopInterval(this.applyGravity_id);
-    }
-
+    /**
+     * Initializes the chicken based on its type.
+     * @param {number} type
+     */
     chickenType(type) {
         switch (type) {
             case 0:
@@ -99,6 +86,9 @@ class Chicken extends MovableObject {
         }
     }
 
+    /**
+     * Loads the normal chicken configuration.
+     */
     loadNormalChicken() {
         this.images_walking = ImageHub.CHICKEN_NORMAL.walk;
         this.images_dead = ImageHub.CHICKEN_NORMAL.dead;
@@ -115,6 +105,9 @@ class Chicken extends MovableObject {
         this.speed = 1 + Math.random() * 1;
     }
 
+    /**
+     * Loads the small chicken configuration.
+     */
     loadSmallChicken() {
         this.images_walking = ImageHub.CHICKEN_SMALL.walk;
         this.images_dead = ImageHub.CHICKEN_SMALL.dead;
@@ -131,6 +124,9 @@ class Chicken extends MovableObject {
         this.speed = 3 + Math.random() * 2;
     }
 
+    /**
+     * Loads the chicken configuration used by boss spawns.
+     */
     loadBossSpawnChickes() {
         this.images_walking = ImageHub.CHICKEN_SMALL.walk;
         this.images_dead = ImageHub.CHICKEN_SMALL.dead;
@@ -149,8 +145,59 @@ class Chicken extends MovableObject {
         this.speed = 3 + Math.random() * 2;
     }
 
+    /**
+     * Removes the enemy from the world collision list.
+     */
+    removeEnemyFromCollision(world) {
+        if (this.isDead == false) {
+            const index = world.level.enemies.indexOf(this);
+            if (index != -1) {
+                world.level.enemies.splice(index, 1);
+                if (this.isLanding == true) world.diedEnemies.push(this);
+            }
+            this.isDead = true;
+        }
+    }
+
+    /**
+     * Stops all intervals used by the enemy.
+     */
+    removeEnemyFormInverval() {
+        IntervalHub.stopInterval(this.animate_id);
+        IntervalHub.stopInterval(this.move_id);
+        IntervalHub.stopInterval(this.applyGravity_id);
+    }
+
+    /**
+     * Returns a random number with random sign within a range.
+     */
     getRandomRange(maxValue, minAbs) {
         let sign = Math.random() < 0.5 ? -1 : 1;
         return sign * (Math.random() * (maxValue - minAbs) + minAbs);
     }
+    //#endregion
+
+    //#region Intervals
+    move = () => {
+        if (this.isDead == true) return;
+        if (this.isLanding == false) return;
+
+        if (this.x <= -300) this.moveDirection = false;
+        if (this.x >= this.turnXPosition) this.moveDirection = true;
+
+        if (this.moveDirection == true) this.moveLeft();
+        else this.moveRight();
+    };
+
+    animate = () => {
+        if (this.isDead == false) {
+            this.playAnimationLoop(this.images_walking);
+        } else {
+            if (this.playAnimationSingle(this.images_dead)) {
+                this.y += 10;
+                this.removeEnemyFormInverval();
+            }
+        }
+    };
+    //#endregion
 }

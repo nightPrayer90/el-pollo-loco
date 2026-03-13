@@ -1,9 +1,20 @@
+/**
+ * @class
+ * Handles keyboard and touch input for the player controls.
+ */
 class Keyboard {
+
+    //#region Properties
     static LEFT = false;
     static RIGHT = false;
     static D = false;
     static SPACE = false;
+    //#endregion
 
+    //#region Methods
+    /**
+     * Registers keyboard key events.
+     */
     static addEvents() {
         window.addEventListener("keydown", (e) => {
             if (e.key == "ArrowRight") {
@@ -43,13 +54,15 @@ class Keyboard {
         });
     }
 
+    /**
+     * Registers touch controls for mobile buttons.
+     */
     static addButtonEvents() {
         const btnLeft = document.getElementById("btn-left");
         const btnRight = document.getElementById("btn-right");
         const btnD = document.getElementById("btn-d");
         const btnSpace = document.getElementById("btn-space");
 
-        // left
         btnLeft.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.LEFT = true;
@@ -60,7 +73,6 @@ class Keyboard {
             btnLeft.classList.remove("touchPressed");
         });
 
-        // right
         btnRight.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.RIGHT = true;
@@ -72,7 +84,6 @@ class Keyboard {
             btnRight.classList.remove("touchPressed");
         });
 
-        // d
         btnD.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.D = true;
@@ -84,7 +95,6 @@ class Keyboard {
             btnD.classList.remove("touchPressed");
         });
 
-        // jump
         btnSpace.addEventListener("touchstart", (e) => {
             e.preventDefault();
             Keyboard.SPACE = true;
@@ -96,4 +106,5 @@ class Keyboard {
             btnSpace.classList.remove("touchPressed");
         });
     }
+    //#endregion
 }

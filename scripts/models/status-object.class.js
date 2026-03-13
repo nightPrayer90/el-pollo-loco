@@ -1,16 +1,28 @@
+/**
+ * @class
+ * Represents a UI status object displaying coins or bottles.
+ */
 class StatusObject extends DrawableObject {
-    images_bottle = ImageHub.STATUSBAR.bottle;
-    images_coin = ImageHub.STATUSBAR.coin;
-
+    
+    //#region Properties
     x = 38;
     y = 55;
     width = 50;
     height = 40;
 
+    images_bottle = ImageHub.STATUSBAR.bottle;
+    images_coin = ImageHub.STATUSBAR.coin;
+
     isDrawText = true;
     type;
     character;
+    //#endregion
 
+    /**
+     * Creates a status UI element.
+     * @param {number} type - Status type (0 = bottle, 1 = coin).
+     * @param {Character} character - Reference to the player character.
+     */
     constructor(type, character) {
         super();
         this.type = type;
@@ -19,6 +31,10 @@ class StatusObject extends DrawableObject {
         
     }
 
+    //#region Methods
+    /**
+     * Initializes the UI element based on its type.
+     */
     init() {
         switch (this.type) {
             case 0:
@@ -30,6 +46,9 @@ class StatusObject extends DrawableObject {
         }
     }
 
+    /**
+     * Initializes the bottle UI.
+     */
     initBottle() {
         this.loadImage(this.images_bottle[0]);
         this.x = 38;
@@ -43,6 +62,9 @@ class StatusObject extends DrawableObject {
         this.updateText(this.character.bottles);
     }
 
+    /**
+     * Initializes the coin UI.
+     */
     initCoin() {
         this.loadImage(this.images_coin[0]);
         this.x = 145;
@@ -56,6 +78,9 @@ class StatusObject extends DrawableObject {
         this.updateText(this.character.coins);
     } 
 
+    /**
+     * Updates the displayed text value.
+     */
     updateText(value) {
         switch (this.type) {
             case 0:
@@ -66,4 +91,5 @@ class StatusObject extends DrawableObject {
                 break;
         }
     }
+    //#endregion
 }

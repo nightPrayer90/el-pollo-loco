@@ -1,4 +1,10 @@
+/**
+ * @class
+ * Represents a collectable object such as coins or bottles.
+ */
 class Collectable extends MovableObject {
+
+     //#region Properties
     x;
     y;
     width;
@@ -10,13 +16,15 @@ class Collectable extends MovableObject {
     animate_id;
     isCollect = false;
 
-    strArray = [
-        "Nice, only 3 coins left!",
-        "Pepe does a great job! You are ok too!",
-        "Only one Coin left! Can you get the last one?",
-        "You're ready to roast the rooster! (Now Spice the chicken!)"
-    ]
+    strArray = ["Nice, only 3 coins left!", "Pepe does a great job! You are ok too!", "Only one Coin left! Can you get the last one?", "You're ready to roast the rooster! (Now Spice the chicken!)"];
+    //#endregion
 
+    /**
+     * Creates a collectable object.
+     * @param {number} x - X position in the world.
+     * @param {number} y - Y position in the world.
+     * @param {number} type - Collectable type (0 = coin, 1 = bottle).
+     */
     constructor(x, y, type) {
         super();
         this.type = type;
@@ -26,12 +34,11 @@ class Collectable extends MovableObject {
         this.setCollisionRect();
     }
 
-    animate = () => {
-        if (this.isCollect == false) {
-            this.playAnimationLoop(this.images_set);
-        }
-    };
+    //#region Methods
 
+    /**
+     * Initializes the collectable depending on its type.
+     */
     init(type) {
         switch (type) {
             case 0:
@@ -46,6 +53,9 @@ class Collectable extends MovableObject {
         if (this.images_set.length > 1) this.animate_id = IntervalHub.startInterval(this.animate, 250);
     }
 
+    /**
+     * Initializes coin properties.
+     */
     initCoin() {
         this.width = 120;
         this.height = 120;
@@ -58,6 +68,9 @@ class Collectable extends MovableObject {
         this.images_set = ImageHub.COLLECTABLES.coin;
     }
 
+    /**
+     * Initializes bottle properties.
+     */
     initBottle() {
         this.width = 60;
         this.height = 60;
@@ -70,21 +83,16 @@ class Collectable extends MovableObject {
         this.images_set = Math.random() < 0.5 ? ImageHub.COLLECTABLES.bottle_v1 : ImageHub.COLLECTABLES.bottle_v2;
     }
 
+    /**
+     * Handles collection logic.
+     */
     collect(world) {
         switch (this.type) {
             case 0:
-                world.statusTextObject.updateText(this.strArray[world.character.coins]);
-                world.character.coins++;
-                world.level.maxEnemies = Math.max(world.level.maxEnemies - 5, 0);
-                world.coinUI.updateText(world.character.coins);
-                world.triggerScreenShake(66);
-                if(world.character.coins != 4) AudioHub.playOne(AudioHub.COLL_COIN);
-                else AudioHub.playOne(AudioHub.COLL_COIN_4);
+                this.collectCoin(world);
                 break;
             case 1:
-                world.character.bottles++;
-                world.bottleUI.updateText(world.character.bottles);
-                AudioHub.playOne(AudioHub.COLL_BOTTLE);
+                this.collectBottle(world);
                 break;
         }
 
@@ -92,11 +100,33 @@ class Collectable extends MovableObject {
         this.removeCollectableFromCollision(world);
     }
 
-    // TODO: könnte man in die superclass verschieben
+    /**
+     * Handles coin collection.
+     */
+    collectCoin(world) {
+        world.statusTextObject.updateText(this.strArray[world.character.coins]);
+        world.character.coins++;
+        world.level.maxEnemies = Math.max(world.level.maxEnemies - 5, 0);
+        world.coinUI.updateText(world.character.coins);
+        world.triggerScreenShake(66);
+        if (world.character.coins != 4) AudioHub.playOne(AudioHub.COLL_COIN);
+        else AudioHub.playOne(AudioHub.COLL_COIN_4);
+    }
+
+    /**
+     * Handles bottle collection.
+     */
+    collectBottle(world) {
+        world.character.bottles++;
+        world.bottleUI.updateText(world.character.bottles);
+        AudioHub.playOne(AudioHub.COLL_BOTTLE);
+    }
+
+    /**
+     * Removes the collectable from collision checks.
+     */
     removeCollectableFromCollision(world) {
-        // INTERVAL Läuft noch aber sonst tut sich nichts mehr
         if (this.isCollect == false) {
-            // -> wir wechseln das array, somit fällt die Flasche aus der Collisionsabfrage raus
             const index = world.level.collectables.indexOf(this);
             if (index != -1) {
                 world.level.collectables.splice(index, 1);
@@ -105,8 +135,17 @@ class Collectable extends MovableObject {
         }
     }
 
-    // TODO: Könnte man in die superclass verschieben
+    /**
+     * Stops the animation interval.
+     */
     removeCollectableFormInverval() {
         IntervalHub.stopInterval(this.animate_id);
     }
+
+    animate = () => {
+        if (this.isCollect == false) {
+            this.playAnimationLoop(this.images_set);
+        }
+    };
+    //#endregion
 }

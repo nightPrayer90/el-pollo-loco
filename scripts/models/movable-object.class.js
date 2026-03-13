@@ -1,4 +1,11 @@
+/**
+ * @class
+ * Base class for all movable game objects.
+ * Handles movement, jumping, animation playback and collision logic.
+ */
 class MovableObject extends DrawableObject {
+    
+     //#region Properties
     speed = 0.15;
     speedY = 0;
     acceleration = 1;
@@ -6,42 +13,68 @@ class MovableObject extends DrawableObject {
     jumpPower = 18;
 
     lastImages = [];
-    animationFlag = false;
 
     health;
     damage;
 
+    animationFlag = false;
     isLanding = false;
     drawCollisionFrame = false;
 
-    // collision
     cX;
     cY;
     cW;
     cH;
-
     collisionOffset = {
         top: 0,
         right: 0,
         bottom: 0,
         left: 0,
     };
+    //#endregion
 
+    //#region Methods
+    /**
+     * Moves the object to the right.
+     */
     moveRight() {
         this.x += this.speed;
         this.otherDirection = (this instanceof Chicken || this instanceof Endboss)  ? true :  false;
     }
 
+    /**
+     * Moves the object to the left.
+     */
     moveLeft() {
         this.x -= this.speed;
         this.otherDirection = (this instanceof Chicken || this instanceof Endboss)  ? false :  true;
     }
 
+    /**
+     * Starts a jump.
+     */
     jump() {
         this.speedY = this.jumpPower;
         this.lastImages = [];
     }
 
+    /**
+     * Returns whether the object is above the ground.
+     */
+    isAboveGround() {
+        return this.y < this.groundY;
+    }
+
+    /**
+     * Called when a jump lands.
+     */
+    jumpEndFrame(){
+        this.isLanding = true;
+    }
+
+    /**
+     * Plays a looping animation.
+     */
     playAnimationLoop(images) {
         if (images != this.lastImages) {
             this.currentImage = 0;
@@ -54,6 +87,9 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    /**
+     * Plays a single animation once.
+     */
     playAnimationSingle(images) {
         if (images != this.lastImages) { 
             this.currentImage = 0;
@@ -61,7 +97,7 @@ class MovableObject extends DrawableObject {
             this.lastImages = images;
         }
 
-        if (this.animationFlag == true) return;
+        if (this.animationFlag) return;
 
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -74,28 +110,12 @@ class MovableObject extends DrawableObject {
         }
         return false;
     }
+    //#endregion
 
-    applyGravity = () => {
-        if (this.isAboveGround() || this.speedY > 0) {
-            this.y -= this.speedY;
-            this.speedY -= this.acceleration;
-            this.isLanding = false;
-        }
-
-        if (!this.isAboveGround() && this.isLanding == false) {
-            this.jumpEndFrame();
-        }
-    };
-
-    isAboveGround() {
-        return this.y < this.groundY;
-    }
-
-    jumpEndFrame(){
-        this.isLanding = true;
-    }
-
-    // constructor
+    //#region Collision
+    /**
+     * Initializes the collision rectangle.
+     */
     setCollisionRect() {
         this.cX = this.x + this.collisionOffset.left;
         this.cY = this.y + this.collisionOffset.top;
@@ -103,12 +123,17 @@ class MovableObject extends DrawableObject {
         this.cH = this.height - this.collisionOffset.top - this.collisionOffset.bottom;
     }
 
-    // collision update
+    /**
+     * Updates the collision rectangle position.
+     */
     updateCollisionRect() {
         this.cX = this.x + this.collisionOffset.left;
         this.cY = this.y + this.collisionOffset.top;
     }
 
+    /**
+     * Checks collision with another movable object.
+     */
     isColliding(mo) {
         this.updateCollisionRect();
         mo.updateCollisionRect();
@@ -119,9 +144,30 @@ class MovableObject extends DrawableObject {
         this.cY < mo.cY + mo.cH;
     }
 
+    /**
+     * Checks if the collision occurred from above.
+     */
     isCollidingFromTop(mo) {
         const playerBottomPrev = this.cY + this.cH + this.speedY;
         const enemyTop = mo.cY;
         return playerBottomPrev < enemyTop;
     }
+    //#endregion
+
+    //#region Intervals
+    /**
+     * Applies gravity and vertical movement.
+     */
+    applyGravity = () => {
+        if (this.isAboveGround() || this.speedY > 0) {
+            this.y -= this.speedY;
+            this.speedY -= this.acceleration;
+            this.isLanding = false;
+        }
+
+        if (!this.isAboveGround() && !this.isLanding) {
+            this.jumpEndFrame();
+        }
+    }
+    //#endregion
 }

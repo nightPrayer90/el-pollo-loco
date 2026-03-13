@@ -55,11 +55,7 @@ a:hover {
         font-size: 40px;
     }
 
-    p {
-        font-size: 28px;
-    }
-
-    span {
+    p, span ,a {
         font-size: 28px;
     }
 }
@@ -77,11 +73,7 @@ a:hover {
         margin-top: 24px;
         margin-bottom: 24px;
     }
-    p {
-        font-size: 20px;
-    }
-
-    span {
+    p, span, a {
         font-size: 20px;
     }
 }

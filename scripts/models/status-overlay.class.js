@@ -1,15 +1,30 @@
+/**
+ * @class
+ * Represents screen overlays such as victory, game over or start screen.
+ */
 class StatusOverlay extends DrawableObject {
+    
+    //#region Properties
     image_victory = ImageHub.OVERLAY.victory;
     image_gameOver = ImageHub.OVERLAY.gameOver;
     image_startscreen = ImageHub.OVERLAY.startScreen;
     type;
     animate_id;
+    //#endregion
 
+    /**
+     * Creates an overlay instance.
+     * @param {number} type - Overlay type (0 = victory, 1 = game over, 2 = start screen).
+     */
     constructor(type) {
         super();
         this.initOverlay(type);
     }
 
+     //#region Methods
+    /**
+     * Initializes the overlay based on its type.
+     */
     initOverlay(type) {
         this.type = type;
         switch (this.type) {
@@ -25,6 +40,9 @@ class StatusOverlay extends DrawableObject {
         }
     }
 
+    /**
+     * Initializes the victory overlay.
+     */
     initVictory() {
         this.loadImage(this.image_victory[0]);
         this.x = (720 - 500) / 2;
@@ -35,9 +53,12 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
-        this.animate_id = IntervalHub.startInterval(this.aninmatGrow, 16);
+        this.animate_id = IntervalHub.startInterval(this.animateGrow, 16);
     }
 
+    /**
+     * Initializes the game over overlay.
+     */
     initGameOver() {
         this.loadImage(this.image_gameOver[0]);
         this.x = 0;
@@ -48,9 +69,12 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
-        this.animate_id = IntervalHub.startInterval(this.aninmatGrow, 16);
+        this.animate_id = IntervalHub.startInterval(this.animateGrow, 16);
     }
 
+    /**
+     * Initializes the start screen overlay.
+     */
     initStartGame() {
         this.loadImage(this.image_startscreen[0]);
         this.x = 0;
@@ -61,24 +85,36 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
-        this.animate_id = IntervalHub.startInterval(this.aninmateShrink, 16);
+        this.animate_id = IntervalHub.startInterval(this.animateShrink, 16);
     }
 
-    aninmateShrink = () => {
-        Math.max(0, (this.width -= 16));
-        Math.max(0, (this.height -= 16));
-        this.x += 8;
-        this.y += 8;
-    };
+    /**
+     * Stops the overlay animation interval.
+     */
+    stopInterval() {
+        IntervalHub.stopInterval(this.animate_id);
+    }
+     //#endregion
 
-    aninmatGrow = () => {
-        Math.max(0, (this.width += 1));
-        Math.max(0, (this.height += 1));
+     //#region Intervals
+    /**
+     * Shrinks the overlay animation.
+     */
+    animateGrow = () => {
+        this.width += 1;
+        this.height += 1;
         this.x -= 0.5;
         this.y -= 0.5;
     };
 
-    stopInterval() {
-        IntervalHub.stopInterval(this.animate_id);
-    }
+    /**
+     * Grows the overlay animation.
+     */
+    animateShrink = () => {
+        this.width -= 16;
+        this.height -= 16;
+        this.x += 8;
+        this.y += 8;
+    };
+    //#endregion
 }

@@ -1,10 +1,17 @@
+/**
+ * @class
+ * Represents the endboss enemy and controls its behavior,
+ * attack phases and combat logic.
+ */
 class Endboss extends MovableObject {
+
+    //#region Properties
     y = 240;
     groundY = 240;
     acceleration = 1.5;
     jumpPower = 22;
     damage = 20;
-
+    directionOffset = 400;
     height = 200;
     width = 150;
 
@@ -33,7 +40,6 @@ class Endboss extends MovableObject {
     images_alert = ImageHub.ENDBOSS.alert;
     images_walking = ImageHub.ENDBOSS.walk;
     images_attack = ImageHub.ENDBOSS.attack;
-    images_attack = ImageHub.ENDBOSS.attack;
     images_hurt = ImageHub.ENDBOSS.hurt;
     images_dead = ImageHub.ENDBOSS.dead;
 
@@ -41,7 +47,12 @@ class Endboss extends MovableObject {
     move_id;
     applyGravity_id;
     world;
+    //#endregion
 
+    /**
+     * Creates the endboss instance.
+     * @param {number} x - Spawn position.
+     */
     constructor(x) {
         super();
         this.x = x;
@@ -51,6 +62,10 @@ class Endboss extends MovableObject {
         this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);
     }
 
+    //#region Methods
+    /**
+     * Loads all animation images.
+     */
     initImages() {
         this.loadImage(this.images_alert[0]);
         this.loadImages(this.images_alert);
@@ -60,11 +75,14 @@ class Endboss extends MovableObject {
         this.loadImages(this.images_dead);
     }
 
+    /**
+     * Changes the boss from waiting state to attack phase.
+     */
     changeStage() {
         this.isWaitingState = false;
         this.isAttackState = true;
-        AudioHub.playOne(AudioHub.ENDBOSS_CHANGE_STATE);
 
+        AudioHub.playOne(AudioHub.ENDBOSS_CHANGE_STATE);
         this.world.showBossBar = true;
         this.move_id = IntervalHub.startInterval(this.move, 16);
         this.world.character.changeCameraOffset();
@@ -72,60 +90,15 @@ class Endboss extends MovableObject {
         this.canAttack = true;
     }
 
-    animate = () => {
-        if (this.isDie()) {
-            this.y += 15;
-            if (this.playAnimationSingle(this.images_dead)) {
-                this.world.gameIsOver(false);
-            }
-            return;
-        }
-
-        if (this.isHurt == true) {
-            this.playAnimationLoop(this.images_hurt);
-        } else {
-            if (this.isAttack == true) {
-                if (this.playAnimationSingle(this.images_attack)) {
-                    this.isAttack = false;
-                }
-            } else {
-                if (this.isWaitingState == true) this.playAnimationLoop(this.images_alert);
-                else this.playAnimationLoop(this.images_walking);
-            }
-        }
-    };
-
-    move = () => {
-        if (this.isDead == true) return;
-        if (this.isAttack == true) return;
-        if (this.isBlockMoving == true) return;
-
-        const directionOffset = 400;
-
-        if (this.x > this.world.character.x + directionOffset) {
-            if (this.moveDirection !== true) {
-                this.moveDirection = true;
-                this.doAttack();
-                this.blockMoveing();
-            }
-        }
-
-        if (this.x < this.world.character.x - directionOffset) {
-            if (this.moveDirection !== false) {
-                this.moveDirection = false;
-                this.doAttack();
-                this.blockMoveing();
-            }
-        }
-
-        if (this.moveDirection == true) this.moveLeft();
-        else this.moveRight();
-    };
-
+    /**
+     * Handles boss damage interaction.
+     * world and hitForm here are usless -> but i need both in the chicken class
+     * and boss and chicken use the same collision logic in world
+     */
     hit(world, hitFrom) {
-        if (this.isHurt == true) return;
-        if (this.isWaitingState == false) {
-            this.takeDamge();
+        if (this.isHurt) return;
+        if (!this.isWaitingState) {
+            this.takeDamage();
         } else {
             this.isAttack = true;
             this.jump();
@@ -133,63 +106,88 @@ class Endboss extends MovableObject {
         }
     }
 
+    /**
+     * Executes an attack jump.
+     */
     doAttack() {
-        if (this.canAttack == false) return;
+        if (!this.canAttack) return;
         this.isAttack = true;
         this.jump();
-
-        this.setCoolDownAttack();
+        this.blockMoveing();
+        this.setCooldownAttack();
     }
 
-    setCoolDownAttack() {
+    /**
+     * Temporarily blocks movement.
+     */
+    blockMoveing() {
+        this.isBlockMoving = true;
+        setTimeout(() => {
+            this.isBlockMoving = false;
+        }, 500);
+    }
+
+    /**
+     * Starts the attack cooldown.
+     */
+    setCooldownAttack() {
         this.canAttack = false;
         setTimeout(() => {
             this.canAttack = true;
         }, 3000);
     }
 
-    takeDamge() {
+    /**
+     * Applies damage to the boss.
+     */
+    takeDamage() {
         this.isHurt = true;
         this.health -= 1;
         this.speed++;
         this.world.statusBossBar.setHealth(this.health);
         if (this.health > 0) AudioHub.playOne(AudioHub.ENDBOSS_HIT_S2);
-        else  AudioHub.playOne(AudioHub.ENDBOSS_DIE);
+        else AudioHub.playOne(AudioHub.ENDBOSS_DIE);
         setTimeout(() => {
             this.isHurt = false;
         }, 500);
     }
 
+    /**
+     * Returns whether the boss is dead.
+     */
     isDie() {
         return this.health <= 0;
     }
 
+    /**
+     * Executes the boss jump attack.
+     */
     jump() {
         super.jump();
         AudioHub.playOne(AudioHub.ENDBOSS_JUMP_ATTACK);
     }
 
+    /**
+     * Called when the boss lands after jumping.
+     */
     jumpEndFrame() {
         if (this.isDie()) return;
+
         super.jumpEndFrame();
         AudioHub.playOne(AudioHub.ENDBOSS_LANDING);
-        this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 30, 500, 500);
-        this.world.triggerScreenShake(300);
         this.chickenSpawnAttack(3);
         this.isAttack = false;
-
-        if (this.isWaitingState == true) {
-            if (this.world.character.coins >= 4) {
-                this.changeStage();
-                this.world.statusTextObject.updateText(this.strArray[4]);
-            } else {
-                let ran = Math.floor(Math.random() * (this.strArray.length - 1));
-                console.log(ran);
-                this.world.statusTextObject.updateText(this.strArray[ran]);
-            }
+        this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 30, 500, 500);
+        this.world.triggerScreenShake(300);
+        
+        if (this.isWaitingState) {
+            this.updateHitWaitingMessage();
         }
     }
 
+    /**
+     * Spawns chickens during attack phase.
+     */
     chickenSpawnAttack(spawnQuantity) {
         if (this.isDie()) return;
 
@@ -198,10 +196,55 @@ class Endboss extends MovableObject {
         }
     }
 
-    blockMoveing() {
-        this.isBlockMoving = true;
-        setTimeout(() => {
-            this.isBlockMoving = false;
-        }, 500);
+    /**
+     * Updates the dialog message while boss waits for coins.
+     */
+    updateHitWaitingMessage() {
+        if (this.world.character.coins >= 4) {
+            this.changeStage();
+            this.world.statusTextObject.updateText(this.strArray[4]);
+        } else {
+            let ran = Math.floor(Math.random() * (this.strArray.length - 1));
+            this.world.statusTextObject.updateText(this.strArray[ran]);
+        }
     }
+    //#endregion
+
+    //#region Intervals
+    animate = () => {
+        if (this.isDie()) {
+            this.y += 15;
+            if (this.playAnimationSingle(this.images_dead)) this.world.gameIsOver(false);
+            return;
+        }
+        if (this.isHurt) this.playAnimationLoop(this.images_hurt);
+        else {
+            if (this.isAttack) {
+                if (this.playAnimationSingle(this.images_attack)) this.isAttack = false;
+            } else {
+                if (this.isWaitingState) this.playAnimationLoop(this.images_alert);
+                else this.playAnimationLoop(this.images_walking);
+            }
+        }
+    }
+
+    move = () => {
+        if (this.isDead || this.isAttack || this.isBlockMoving) return;
+
+        if (this.x > this.world.character.x + this.directionOffset) {
+            if (this.moveDirection != true) {
+                this.moveDirection = true;
+                this.doAttack();
+            }
+        }
+        if (this.x < this.world.character.x - this.directionOffset) {
+            if (this.moveDirection != false) {
+                this.moveDirection = false;
+                this.doAttack();
+            }
+        }
+        if (this.moveDirection) this.moveLeft();
+        else this.moveRight();
+    }
+     //#endregion
 }

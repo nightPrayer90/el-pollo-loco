@@ -1,5 +1,13 @@
+/**
+ * @class
+ * Central hub that stores all image paths used in the game.
+ */
 class ImageHub {
     static CHARACTER = {
+    /**
+     * Character animation frames.
+     * @static
+     */
         sleep: [
             "./assets/img/2_character_pepe/1_idle/long_idle/I-11.png",
             "./assets/img/2_character_pepe/1_idle/long_idle/I-12.png",
@@ -33,9 +41,6 @@ class ImageHub {
             "./assets/img/2_character_pepe/2_walk/W-26.png",
         ],
         jump: [
-            //"../assets/img/2_character_pepe/3_jump/J-31.png",
-            //"../assets/img/2_character_pepe/3_jump/J-32.png",
-            //"../assets/img/2_character_pepe/3_jump/J-33.png",
             "./assets/img/2_character_pepe/3_jump/J-34.png"
         ],
         fall: [
@@ -43,7 +48,6 @@ class ImageHub {
             "./assets/img/2_character_pepe/3_jump/J-36.png",
             "./assets/img/2_character_pepe/3_jump/J-37.png",
             "./assets/img/2_character_pepe/3_jump/J-38.png"
-            //"../assets/img/2_character_pepe/3_jump/J-39.png"
         ],
         hurt: [
             "./assets/img/2_character_pepe/4_hurt/H-41.png",

@@ -1,11 +1,16 @@
+/**
+ * @class
+ * Represents the playable character and handles movement, animation,
+ * combat interactions and player related gameplay logic.
+ */
 class Character extends MovableObject {
+    //#region Properties
     x = 120;
     y = 0;
     groundY = 180;
     height = 250;
     width = 120;
     speed = 4;
-    otherDirection = false;
     sleepTimer = 0;
     jumpPower = 18;
     cameraOffset = 100;
@@ -36,11 +41,17 @@ class Character extends MovableObject {
         left: 35,
     };
 
+    otherDirection = false;
     canTakeDamage = true;
     canThrow = true;
     playHurtAnimation = true;
     isPlayWalksound = false;
+    //#endregion
 
+    /**
+     * Creates the player character.
+     * @param {World} world - Reference to the game world.
+     */
     constructor(world) {
         super();
         this.world = world;
@@ -49,6 +60,10 @@ class Character extends MovableObject {
         this.startPlayerIntervals();
     }
 
+    //#region Methods
+    /**
+     * Loads all animation images for the character.
+     */
     initImages() {
         this.loadImage(this.images_walking[0]);
         this.loadImages(this.images_walking);
@@ -60,6 +75,9 @@ class Character extends MovableObject {
         this.loadImages(this.images_sleep);
     }
 
+    /**
+     * Starts all player related intervals.
+     */
     startPlayerIntervals() {
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
         this.move_id = IntervalHub.startInterval(this.move, 16);
@@ -67,44 +85,21 @@ class Character extends MovableObject {
         this.sleepInverval_id = IntervalHub.startInterval(this.sleepInterval, 1000);
     }
 
+    /**
+     * Stops the player intervals.
+     */
     stopPlayerIntervals() {
         IntervalHub.stopInterval(this.animate_id);
         IntervalHub.stopInterval(this.move_id);
         IntervalHub.stopInterval(this.sleepInverval_id);
     }
 
-    sleepInterval = () => {
-        this.sleepTimer++;
-        if (this.sleepTimer >= 15) {
-            if (this.sleepTimer % 2) AudioHub.playOne(AudioHub.CHAR_SLEEP);
-        }
-    };
-
-    move = () => {
-        if (this.isDead() == true) return;
-
-        if (this.canMoveRight()) this.moveRight();
-        else if (this.canMoveLeft()) this.moveLeft();
-
-        if (this.canJump()) this.jump();
-
-        if (this.canThrowBottle()) this.throwBottle();
-
-        this.playMoveSound();
-        this.world.camera_x = -this.x + this.cameraOffset;
-    };
-
+    /**
+     * Starts the camera offset animation.
+     */
     changeCameraOffset() {
         this.cameraOffset_id = IntervalHub.startInterval(this.animateCameraOffset, 16);
     }
-
-    animateCameraOffset = () => {
-        this.cameraOffset++;
-
-        if (this.cameraOffset >= 340) {
-            IntervalHub.stopInterval(this.cameraOffset_id);
-        }
-    };
 
     canMoveRight() {
         return Keyboard.RIGHT && this.x < this.world.level.level_size - 650;
@@ -115,16 +110,19 @@ class Character extends MovableObject {
     }
 
     canThrowBottle() {
-        return Keyboard.D && this.canThrow == true && this.bottles > 0;
+        return Keyboard.D && this.canThrow && this.bottles > 0;
     }
 
     canJump() {
         return Keyboard.SPACE;
     }
 
+    /**
+     * Plays and stops walking sound while the character moves on the ground.
+     */
     playMoveSound() {
         if (!this.isAboveGround() && (Keyboard.RIGHT || Keyboard.LEFT)) {
-            if (this.isPlayWalksound == false) {
+            if (!this.isPlayWalksound) {
                 this.isPlayWalksound = true;
                 AudioHub.playOne(AudioHub.CHAR_WALK, true);
             }
@@ -133,11 +131,17 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Stops the walking sound.
+     */
     stopMoveSound() {
         this.isPlayWalksound = false;
         AudioHub.stopOne(AudioHub.CHAR_WALK);
     }
 
+    /**
+     * Throws a bottle projectile.
+     */
     throwBottle() {
         AudioHub.playOne(AudioHub.CHAR_THROW);
         let bottle = new ThrowableObject(this.x, this.y, this.world);
@@ -158,13 +162,19 @@ class Character extends MovableObject {
         super.moveRight();
     }
 
+    /**
+     * Cooldown after throwing a bottle.
+     */
     throwCooldown() {
         this.canThrow = false;
         setTimeout(() => {
             this.canThrow = true;
-        }, 1000);
+        }, 1500);
     }
 
+    /**
+     * Makes the character jump.
+     */
     jump() {
         if (!this.isAboveGround()) {
             super.jump();
@@ -173,6 +183,9 @@ class Character extends MovableObject {
         this.sleepTimer = 0;
     }
 
+    /**
+     * Called when the jump animation finishes.
+     */
     jumpEndFrame() {
         super.jumpEndFrame();
         AudioHub.playOne(AudioHub.CHAR_LANDING);
@@ -180,20 +193,21 @@ class Character extends MovableObject {
     }
 
     hit(damage) {
-        if (this.canTakeDamage == true && !this.isDead()) {
+        if (this.canTakeDamage && !this.isDead()) {
             AudioHub.playOne(AudioHub.CHAR_HURT);
             this.collisionTimeout();
-
             this.playHurtAnimation = false;
             this.health -= damage;
             this.world.statusBar.setPercentage(this.health);
-
             this.sleepTimer = 0;
             this.speedY = 6;
             this.isHurt();
         }
     }
 
+    /**
+     * Character cant collide for a short time.
+     */
     collisionTimeout() {
         this.canTakeDamage = false;
 
@@ -202,6 +216,9 @@ class Character extends MovableObject {
         }, 1000);
     }
 
+    /**
+     * Character get damage -> animation reset.
+     */
     isHurt() {
         setTimeout(() => {
             this.playHurtAnimation = true;
@@ -212,12 +229,32 @@ class Character extends MovableObject {
         return this.health <= 0;
     }
 
+    triggerGameOver() {
+        AudioHub.playOne(AudioHub.CHAR_DEAD);
+        this.stopPlayerIntervals();
+        this.world.gameIsOver(this.isDead());
+    }
+    //#endregion
+
+    //#region Intervals
+    move = () => {
+        if (this.isDead()) return;
+
+        if (this.canMoveRight()) this.moveRight();
+        else if (this.canMoveLeft()) this.moveLeft();
+
+        if (this.canJump()) this.jump();
+
+        if (this.canThrowBottle()) this.throwBottle();
+
+        this.playMoveSound();
+        this.world.camera_x = -this.x + this.cameraOffset;
+    };
+
     animate = () => {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.images_dead)) {
-                AudioHub.playOne(AudioHub.CHAR_DEAD);
-                this.stopPlayerIntervals();
-                this.world.gameIsOver(this.isDead());
+                this.triggerGameOver();
             }
         } else if (!this.playHurtAnimation) {
             this.playAnimationLoop(this.images_hurt);
@@ -234,4 +271,20 @@ class Character extends MovableObject {
             }
         }
     };
+
+    sleepInterval = () => {
+        this.sleepTimer++;
+        if (this.sleepTimer >= 15) {
+            if (this.sleepTimer % 2) AudioHub.playOne(AudioHub.CHAR_SLEEP);
+        }
+    };
+
+    animateCameraOffset = () => {
+        this.cameraOffset++;
+
+        if (this.cameraOffset >= 340) {
+            IntervalHub.stopInterval(this.cameraOffset_id);
+        }
+    };
+     //#endregion
 }
