@@ -202,9 +202,9 @@ class ImageHub {
             "./assets/img/4_enemie_boss_chicken/3_attack/G20.png",
         ],
         hurt: [
-            "../assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
-            "../assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
-            "../assets/img/4_enemie_boss_chicken/4_hurt/G23.png"
+            "./assets/img/4_enemie_boss_chicken/4_hurt/G21.png",
+            "./assets/img/4_enemie_boss_chicken/4_hurt/G22.png",
+            "./assets/img/4_enemie_boss_chicken/4_hurt/G23.png"
         ],
         dead: [
             "./assets/img/4_enemie_boss_chicken/5_dead/G24.png",
