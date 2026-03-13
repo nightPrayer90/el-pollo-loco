@@ -16,11 +16,22 @@ class AudioHub {
     static CHAR_WALK = new MyAudio("./assets/sounds/character/characterRun.mp3");
     static CHAR_THROW = new MyAudio("./assets/sounds/character/characterThrow.mp3");
     static CHAR_SLEEP = new MyAudio("./assets/sounds/character/characterSnoring.mp3");
-    static COLL_COIN = new MyAudio("./assets/sounds/collectables/coinCollectSound.mp3");
-    static COLL_BOTTLE = new MyAudio("./assets/sounds/collectables/bottleCollectSound.mp3");
+    static COLL_COIN = new MyAudio("./assets/sounds/collectables/coin-collect-sound.mp3");
+    static COLL_COIN_4 = new MyAudio("./assets/sounds/collectables/coin-4-collect-sound.mp3") 
+    static COLL_BOTTLE = new MyAudio("./assets/sounds/collectables/bottle-collect-sound.mp3");
     static THROW_HITGORUND = new MyAudio("./assets/sounds/throwable/bottleBreak.mp3");
     static THROW_HITCHICKEN = new MyAudio("./assets/sounds/chicken/chickenDead.mp3");
     static JUMP_HITCHICKEN = new MyAudio("./assets/sounds/chicken/chickenDead2.mp3");
+    static RUN_START_SOUND = new MyAudio("./assets/sounds/game/run-start-sound.mp3");
+    static TYPE_SOUND = new MyAudio("./assets/sounds/game/type-sound.mp3");
+    static ENDBOSS_HIT_S1 = new MyAudio("./assets/sounds/endboss/boss-hit-first-stage.mp3");
+    static ENDBOSS_HIT_S2 = new MyAudio("./assets/sounds/endboss/boss-get-hit.mp3");
+    static ENDBOSS_CHANGE_STATE = new MyAudio("./assets/sounds/endboss/boss-get-hit.mp3");
+    static ENDBOSS_JUMP_ATTACK = new MyAudio("./assets/sounds/endboss/boss-jump-attack.mp3");
+    static ENDBOSS_LANDING = new MyAudio("./assets/sounds/endboss/boss-landing.mp3");
+    static ENDBOSS_DIE = new MyAudio("./assets/sounds/endboss/boss-approach.mp3");
+    static GAME_WIN = new MyAudio("./assets/sounds/game/win-sound.mp3");
+    static GAME_OVER = new MyAudio("./assets/sounds/game/game-over-sound.mp3");
 
     // Audiodaten Bgm
     static GAME_MUSIC = new MyAudio("./assets/bgm/mexico-mariachi-music.mp3");
@@ -30,7 +41,14 @@ class AudioHub {
     static ISSOUND_MUTE = false;
 
     // Array, das alle definierten Audio-Dateien enthält
-    static allSounds = [AudioHub.GAME_MUSIC, AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP, AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, AudioHub.THROW_HITGORUND, AudioHub.THROW_HITCHICKEN, AudioHub.JUMP_HITCHICKEN];
+    static allSounds = [AudioHub.GAME_MUSIC, 
+        AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP, 
+        AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, 
+        AudioHub.THROW_HITGORUND, AudioHub.THROW_HITCHICKEN, 
+        AudioHub.JUMP_HITCHICKEN, AudioHub.TYPE_SOUND,
+        AudioHub.ENDBOSS_HIT_S1, AudioHub.ENDBOSS_HIT_S2, AudioHub.ENDBOSS_CHANGE_STATE, AudioHub.ENDBOSS_JUMP_ATTACK, AudioHub.ENDBOSS_LANDING,
+        AudioHub.GAME_WIN, AudioHub.GAME_OVER
+    ];
 
     static initAudioHub() {
         AudioHub.initAudioVolume();

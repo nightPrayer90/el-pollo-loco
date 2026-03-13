@@ -56,7 +56,7 @@ class World {
 
     initInfoText() {
         setTimeout(() => {
-            this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.");
+            this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.",1);
         }, 1200);
     }
 
@@ -68,7 +68,6 @@ class World {
         for (let i = 0; i < this.level.enemies.length; i++) {
             if (this.level.enemies[i].isBoss == true) {
                 this.level.enemies[i].world = this;
-                console.log("FOUNDTHEBOSS!");
                 return;
             }
         }
@@ -260,7 +259,7 @@ class World {
             this.coinUI = null;
             this.statusBar = null;
         }
-        AudioHub.stopOne(AudioHub.CHAR_WALK);
+        this.character.stopMoveSound();       
 
         setTimeout(() => {
             IntervalHub.stopIntervals();
@@ -275,16 +274,18 @@ class World {
 
     gameOver() {
         this.overlay.initOverlay(1);
+        AudioHub.playOne(AudioHub.GAME_OVER);
         setTimeout(() => {
             this.reloadStartWindow();
-        }, 2000);
+        }, 3500);
     }
 
     victroy() {
         this.overlay.initOverlay(0);
+        AudioHub.playOne(AudioHub.GAME_WIN);
         setTimeout(() => {
             this.reloadStartWindow();
-        }, 3000);
+        }, 3500);
     }
 
     reloadStartWindow() {

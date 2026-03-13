@@ -18,13 +18,7 @@ class Endboss extends MovableObject {
     health = 5;
     speed = 4.5;
 
-    strArray = [
-        "This guy is only interested in rich Mexicans!",
-        "You're too poor for him to be interested in you.",
-        "Pepe is short on cash.",
-        "Your poverty makes me sick!",
-        "Hmm, your coins will taste good to me. Just like your flesh."
-    ]
+    strArray = ["This guy is only interested in rich Mexicans!", "You're too poor for him to be interested in you.", "Pepe is short on cash.", "Your poverty makes me sick!", "Hmm, your coins will taste good to me. Just like your flesh."];
 
     isWaitingState = true;
     isAttackState = false;
@@ -69,6 +63,7 @@ class Endboss extends MovableObject {
     changeStage() {
         this.isWaitingState = false;
         this.isAttackState = true;
+        AudioHub.playOne(AudioHub.ENDBOSS_CHANGE_STATE);
 
         this.world.showBossBar = true;
         this.move_id = IntervalHub.startInterval(this.move, 16);
@@ -134,6 +129,7 @@ class Endboss extends MovableObject {
         } else {
             this.isAttack = true;
             this.jump();
+            AudioHub.playOne(AudioHub.ENDBOSS_HIT_S1);
         }
     }
 
@@ -157,7 +153,8 @@ class Endboss extends MovableObject {
         this.health -= 1;
         this.speed++;
         this.world.statusBossBar.setHealth(this.health);
-
+        if (this.health > 0) AudioHub.playOne(AudioHub.ENDBOSS_HIT_S2);
+        else  AudioHub.playOne(AudioHub.ENDBOSS_DIE);
         setTimeout(() => {
             this.isHurt = false;
         }, 500);
@@ -167,11 +164,15 @@ class Endboss extends MovableObject {
         return this.health <= 0;
     }
 
+    jump() {
+        super.jump();
+        AudioHub.playOne(AudioHub.ENDBOSS_JUMP_ATTACK);
+    }
+
     jumpEndFrame() {
         if (this.isDie()) return;
-
         super.jumpEndFrame();
-        AudioHub.playOne(AudioHub.CHAR_LANDING);
+        AudioHub.playOne(AudioHub.ENDBOSS_LANDING);
         this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 30, 500, 500);
         this.world.triggerScreenShake(300);
         this.chickenSpawnAttack(3);
@@ -181,9 +182,8 @@ class Endboss extends MovableObject {
             if (this.world.character.coins >= 4) {
                 this.changeStage();
                 this.world.statusTextObject.updateText(this.strArray[4]);
-            }
-            else{
-                let ran = Math.floor(Math.random() * (this.strArray.length-1));
+            } else {
+                let ran = Math.floor(Math.random() * (this.strArray.length - 1));
                 console.log(ran);
                 this.world.statusTextObject.updateText(this.strArray[ran]);
             }

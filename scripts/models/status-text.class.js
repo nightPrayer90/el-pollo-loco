@@ -13,11 +13,12 @@ class StatusTextObject extends DrawableObject {
         this.showTextString="";
     }
 
-    updateText(textStr) {
+    updateText(textStr, soundType) {
         if (this.isTextShowing == true) return;
         this.isTextShowing = true;
         this.showTextString = textStr;
         this.clearText();
+        this.playSound(soundType);
     }
 
     clearText() {
@@ -25,5 +26,15 @@ class StatusTextObject extends DrawableObject {
             this.isTextShowing = false;
             this.showTextString = "";
         }, 4000);
+    }
+
+    playSound(soundType) {
+        switch (soundType) {
+            case 0:
+            break;
+            case 1:
+            AudioHub.playOne(AudioHub.TYPE_SOUND);
+            break;
+        }
     }
 }

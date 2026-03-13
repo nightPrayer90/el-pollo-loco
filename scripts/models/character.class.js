@@ -76,8 +76,7 @@ class Character extends MovableObject {
     sleepInterval = () => {
         this.sleepTimer++;
         if (this.sleepTimer >= 15) {
-            if (this.sleepTimer % 2)
-            AudioHub.playOne(AudioHub.CHAR_SLEEP);
+            if (this.sleepTimer % 2) AudioHub.playOne(AudioHub.CHAR_SLEEP);
         }
     };
 
@@ -96,16 +95,16 @@ class Character extends MovableObject {
     };
 
     changeCameraOffset() {
-        this.cameraOffset_id = IntervalHub.startInterval(this.animateCameraOffset, 16)
+        this.cameraOffset_id = IntervalHub.startInterval(this.animateCameraOffset, 16);
     }
 
-    animateCameraOffset =() => {
-        this.cameraOffset++
+    animateCameraOffset = () => {
+        this.cameraOffset++;
 
         if (this.cameraOffset >= 340) {
             IntervalHub.stopInterval(this.cameraOffset_id);
-        } 
-    }
+        }
+    };
 
     canMoveRight() {
         return Keyboard.RIGHT && this.x < this.world.level.level_size - 650;
@@ -127,12 +126,16 @@ class Character extends MovableObject {
         if (!this.isAboveGround() && (Keyboard.RIGHT || Keyboard.LEFT)) {
             if (this.isPlayWalksound == false) {
                 this.isPlayWalksound = true;
-                AudioHub.playOne(AudioHub.CHAR_WALK,true);
+                AudioHub.playOne(AudioHub.CHAR_WALK, true);
             }
         } else {
-            this.isPlayWalksound = false;
-            AudioHub.stopOne(AudioHub.CHAR_WALK);
+            this.stopMoveSound();
         }
+    }
+
+    stopMoveSound() {
+        this.isPlayWalksound = false;
+        AudioHub.stopOne(AudioHub.CHAR_WALK);
     }
 
     throwBottle() {
@@ -146,13 +149,13 @@ class Character extends MovableObject {
     }
 
     moveLeft() {
-        super.moveLeft();
         this.sleepTimer = 0;
+        super.moveLeft();
     }
 
     moveRight() {
-        super.moveRight();
         this.sleepTimer = 0;
+        super.moveRight();
     }
 
     throwCooldown() {
@@ -184,7 +187,7 @@ class Character extends MovableObject {
             this.playHurtAnimation = false;
             this.health -= damage;
             this.world.statusBar.setPercentage(this.health);
-            
+
             this.sleepTimer = 0;
             this.speedY = 6;
             this.isHurt();
@@ -206,7 +209,7 @@ class Character extends MovableObject {
     }
 
     isDead() {
-        return (this.health <= 0);
+        return this.health <= 0;
     }
 
     animate = () => {
@@ -224,6 +227,7 @@ class Character extends MovableObject {
         } else {
             if (Keyboard.RIGHT || Keyboard.LEFT) {
                 this.playAnimationLoop(this.images_walking);
+                this.sleepTimer = 0;
             } else {
                 if (this.sleepTimer >= 15) this.playAnimationLoop(this.images_sleep);
                 else this.playAnimationLoop(this.images_idle);
