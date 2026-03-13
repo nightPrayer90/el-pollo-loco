@@ -8,6 +8,17 @@ h1 {
     font-size: 64px;
 }
 
+h2 {
+    font-family: "Boogaloo";
+    margin-top: 64px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: whitesmoke;
+    font-size: 50px;
+}
+
+
 p {
     font-family: "Boogaloo";
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
@@ -21,13 +32,27 @@ span {
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     text-align: center;
     color: white;
+    font-size: 28px;
+}
+
+a {
+    font-family: "Boogaloo";
+    color: rgb(225, 255, 182);
     font-size: 32px;
+}
+
+a:hover {
+    color: rgb(254, 239, 157);
 }
 
 /* tablet */
 @media (max-width: 1280px) {
     h1 {
         font-size: 50px;
+    }
+
+    h2 {
+        font-size: 40px;
     }
 
     p {
@@ -43,6 +68,12 @@ span {
 @media (max-width: 767px) {
     h1 {
         font-size: 32px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    h1 {
+        font-size: 28px;
         margin-top: 24px;
         margin-bottom: 24px;
     }

@@ -8,7 +8,6 @@ class MyAudio {
 }
 
 class AudioHub {
-    // Audiodateien SFx
     static CHAR_HURT = new MyAudio("./assets/sounds/character/characterDamage.mp3");
     static CHAR_DEAD = new MyAudio("./assets/sounds/character/characterDead.mp3");
     static CHAR_JUMP = new MyAudio("./assets/sounds/character/characterJump.mp3");
@@ -32,15 +31,13 @@ class AudioHub {
     static ENDBOSS_DIE = new MyAudio("./assets/sounds/endboss/boss-approach.mp3");
     static GAME_WIN = new MyAudio("./assets/sounds/game/win-sound.mp3");
     static GAME_OVER = new MyAudio("./assets/sounds/game/game-over-sound.mp3");
-
-    // Audiodaten Bgm
     static GAME_MUSIC = new MyAudio("./assets/bgm/mexico-mariachi-music.mp3");
 
     static DEFAULT_VOLUME = 0.2;
     static AUDIO_VOLUME = 0.2;
     static ISSOUND_MUTE = false;
 
-    // Array, das alle definierten Audio-Dateien enthält
+
     static allSounds = [AudioHub.GAME_MUSIC, 
         AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP, 
         AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE, 
@@ -78,7 +75,7 @@ class AudioHub {
         }
     }
 
-    // Spielt eine einzelne Audiodatei ab
+
     static playOne(track, isLoop = false) {
         if (track.myAudio.readyState == 4 || track.isLoaded) {
             track.isLoaded = true;
@@ -89,21 +86,16 @@ class AudioHub {
         }
     }
 
-    // Stoppt das Abspielen aller Audiodateien
     static stopAll() {
         AudioHub.allSounds.forEach((sound) => {
-            sound.myAudio.pause(); // Pausiert jedes Audio in der Liste
+            sound.myAudio.pause();
         });
     }
 
-    // Stoppt das Abspielen einer einzelnen Audiodatei
     static stopOne(track) {
-        track.myAudio.pause(); // Pausiert das übergebene Audio
+        track.myAudio.pause();
     }
 
-    // ##########################################################################################################################
-    // ################################################  Sound Slider - BONUS !  ################################################
-    // Setzt die Lautstärke für alle Audiodateien
     static objSetVolume() {
         let volumeValue = document.getElementById("volume").value; // Holt den aktuellen Lautstärkewert aus dem Inputfeld
         AudioHub.AUDIO_VOLUME = Number(volumeValue);

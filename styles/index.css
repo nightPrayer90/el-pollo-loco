@@ -14,13 +14,6 @@ header {
     flex-direction: column;
     background: #09212a;
     border-bottom: 3px solid wheat;
-
-    div {
-        display: flex;
-        height: 80px;
-        padding: 20px 123px;
-        border: none;
-    }
 }
 
 main {
@@ -94,7 +87,7 @@ canvas {
         border-radius: 5px;
         border: 2px solid rgba(245, 222, 179, 0.831);
         padding: 20px;
-        width: 80%;
+        width: 60%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -199,6 +192,14 @@ footer {
     background: #09212a;
     border-top: 3px solid wheat;
     height: 128px;
+
+    .footer-content{
+        display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+        border: none;
+    }
 }
 
 /* Smartphones */
@@ -229,9 +230,6 @@ footer {
         height: 100vh;
     }
 }
-
-/* is mobile -> TODO: Nico fragen */
-/* https://stackoverflow.com/questions/12469875/how-to-code-css-media-queries-targeting-all-mobile-devices-and-tablets/42835826#42835826 */
 @media (hover) {
     #fullscreen {
         .show-only-on-Mobile {
