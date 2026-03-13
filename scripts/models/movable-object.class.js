@@ -37,17 +37,17 @@ class MovableObject extends DrawableObject {
     /**
      * Moves the object to the right.
      */
-    moveRight() {
+    moveRight(isEnemy = true) {
         this.x += this.speed;
-        this.otherDirection = (this instanceof Chicken || this instanceof Endboss)  ? true :  false;
+        this.otherDirection = isEnemy;
     }
 
     /**
      * Moves the object to the left.
      */
-    moveLeft() {
+    moveLeft(isInvert = false) {
         this.x -= this.speed;
-        this.otherDirection = (this instanceof Chicken || this instanceof Endboss)  ? false :  true;
+        this.otherDirection = isInvert;
     }
 
     /**

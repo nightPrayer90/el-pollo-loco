@@ -59,9 +59,7 @@ class DrawableObject {
      * Draws the collision rectangle for debugging.
      */
     drawFrame(ctx) {
-        if (!(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject|| this instanceof Collectable || this instanceof Endboss)) return;
         this.setCollisionRect();
-
         ctx.beginPath();
         ctx.lineWidth = "2";
         ctx.strokeStyle = "blue";

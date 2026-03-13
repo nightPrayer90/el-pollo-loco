@@ -154,12 +154,12 @@ class Character extends MovableObject {
 
     moveLeft() {
         this.sleepTimer = 0;
-        super.moveLeft();
+        super.moveLeft(true);
     }
 
     moveRight() {
         this.sleepTimer = 0;
-        super.moveRight();
+        super.moveRight(false);
     }
 
     /**
