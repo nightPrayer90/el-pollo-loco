@@ -85,7 +85,9 @@ class StatusOverlay extends DrawableObject {
             x: 0,
             y: 0,
         };
-        this.animate_id = IntervalHub.startInterval(this.animateShrink, 16);
+        setTimeout(() => {
+            this.animate_id = IntervalHub.startInterval(this.animateShrink, 16);
+        }, 500);
     }
 
     /**

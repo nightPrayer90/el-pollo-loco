@@ -64,7 +64,7 @@ function chickenGenerator(chickenQuantity) {
         let type =  (Math.random() < 0.35) ? 1 : 0;
         xSpawnPos += (Math.random()*stepWide);
         xSpawnPos = Math.min(xSpawnPos, getWorldWitdh());
-        chickens.push(new Chicken(xSpawnPos, type, turnXPosition));
+        chickens.push(new Chicken(xSpawnPos, type, turnXPosition, false));
     }
 
     chickens.push(new Endboss(getWorldWitdh() - 200));

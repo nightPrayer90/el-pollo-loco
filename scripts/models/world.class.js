@@ -10,13 +10,13 @@ class World {
     canvas;
     keyboard;
 
+    overlay = new StatusOverlay(2);
+    statusTextObject = new StatusTextObject();
     character = new Character(this);
     statusBar = new StatusBar();
     statusBossBar = new StatusBossBar();
     bottleUI = new StatusObject(0, this.character);
     coinUI = new StatusObject(1, this.character);
-    statusTextObject = new StatusTextObject();
-    overlay = new StatusOverlay(2);
 
     throwableObjects = [];
     thrownBottles = [];
@@ -64,7 +64,8 @@ class World {
         setTimeout(() => {
             this.showOverlay = true;
             this.overlay.stopInterval();
-        }, 700);
+            this.initPlayerAndEnemyIntervals();
+        }, 1200);
     }
 
     initInfoText() {
@@ -87,6 +88,16 @@ class World {
                 return;
             }
         }
+    }
+
+    initPlayerAndEnemyIntervals () {
+        for (let i = 0; i < this.level.enemies.length; i++) {
+            console.log("START");
+            if (!this.level.enemies[i].isBoss) {
+                this.level.enemies[i].initStartInvervals(true);
+            } 
+        }
+        this.character.startPlayerIntervals();
     }
     //#endregion
 
@@ -373,7 +384,7 @@ class World {
         let xSpawnPos = (this.level.level_size - 1000) / 2;
         let turnXPosition = this.level.level_size - 1000;
         let type = Math.random() < 0.35 ? 1 : 0;
-        this.level.enemies.push(new Chicken(xSpawnPos, type, turnXPosition));
+        this.level.enemies.push(new Chicken(xSpawnPos, type, turnXPosition, true));
     };
     //#endregion
 }

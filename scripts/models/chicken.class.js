@@ -32,13 +32,13 @@ class Chicken extends MovableObject {
      * @param {number} chickenType - Type identifier of the chicken.
      * @param {number} turnXPosition - Position where the chicken turns around.
      */
-    constructor(x, chickenType, turnXPosition) {
+    constructor(x, chickenType, turnXPosition, startInvervals) {
         super();
         this.x = x;
         this.chickenType(chickenType);
         this.setCollisionRect();
         this.initLoadImages();
-        this.initStartInvervals();
+        this.initStartInvervals(startInvervals);
         this.turnXPosition = turnXPosition;
         this.moveDirection = Math.random() < 0.6 ? true : false;
     }
@@ -49,7 +49,8 @@ class Chicken extends MovableObject {
         this.loadImages(this.imagesDead);
     }
 
-    initStartInvervals() {
+    initStartInvervals(startInvervals) {
+        if (!startInvervals) return;
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
         this.move_id = IntervalHub.startInterval(this.move, 32);
         this.applyGravity_id = IntervalHub.startInterval(this.applyGravity, 16);

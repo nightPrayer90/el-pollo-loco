@@ -192,7 +192,7 @@ class Endboss extends MovableObject {
         if (this.isDie()) return;
 
         for (let i = 0; i < spawnQuantity; i++) {
-            this.world.level.enemies.push(new Chicken(this.world.character.x, 2, 5000));
+            this.world.level.enemies.push(new Chicken(this.world.character.x, 2, 5000, true));
         }
     }
 

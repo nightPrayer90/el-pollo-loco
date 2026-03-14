@@ -57,7 +57,7 @@ class Character extends MovableObject {
         this.world = world;
         this.initImages();
         this.setCollisionRect();
-        this.startPlayerIntervals();
+        //this.startPlayerIntervals();
     }
 
     //#region Methods
