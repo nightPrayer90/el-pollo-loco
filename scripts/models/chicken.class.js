@@ -2,7 +2,7 @@
  * @class
  * Represents a chicken enemy with different types and behaviors.
  */
-class Chicken extends MovableObject {
+export class Chicken extends MovableObject {
     //#region Properties
     x;
     y;

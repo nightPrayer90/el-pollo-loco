@@ -3,7 +3,7 @@
  * Represents the endboss enemy and controls its behavior,
  * attack phases and combat logic.
  */
-class Endboss extends MovableObject {
+export class Endboss extends MovableObject {
 
     //#region Properties
     y = 240;

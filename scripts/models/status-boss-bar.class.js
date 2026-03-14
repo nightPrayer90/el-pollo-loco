@@ -2,7 +2,7 @@
  * @class
  * Represents the endboss health status bar.
  */
-class StatusBossBar extends DrawableObject{
+export class StatusBossBar extends DrawableObject{
 
     //#region Properties
     imagesSet = ImageHub.STATUSBAR.endboss;

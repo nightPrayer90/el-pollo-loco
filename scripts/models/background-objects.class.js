@@ -3,7 +3,7 @@
  * Represents a background element placed in the game world.
  * Used to build repeating level backgrounds.
  */
-class BackgroundObject extends DrawableObject {
+export class BackgroundObject extends DrawableObject {
     x;
     y;
     width = 720;

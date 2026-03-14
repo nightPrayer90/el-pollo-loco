@@ -3,7 +3,7 @@
  * Represents the playable character and handles movement, animation,
  * combat interactions and player related gameplay logic.
  */
-class Character extends MovableObject {
+export class Character extends MovableObject {
     //#region Properties
     x = 120;
     y = 0;

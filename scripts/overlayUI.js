@@ -45,6 +45,8 @@ function toggleMuteBtnSprite() {
 
 }
 
+
+
 /**
  * Updates the fullscreen button icon depending on the current fullscreen state.
  */

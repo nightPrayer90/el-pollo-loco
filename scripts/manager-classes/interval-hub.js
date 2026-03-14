@@ -2,7 +2,7 @@
  * @class
  * Central manager for handling all running intervals.
  */
-class IntervalHub {
+export class IntervalHub {
     static ALLINTERVALS = [];
 
     /**

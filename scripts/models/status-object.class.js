@@ -2,7 +2,7 @@
  * @class
  * Represents a UI status object displaying coins or bottles.
  */
-class StatusObject extends DrawableObject {
+export class StatusObject extends DrawableObject {
     
     //#region Properties
     x = 38;

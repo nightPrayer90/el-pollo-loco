@@ -11,36 +11,11 @@
     <link rel="stylesheet" href="./styles/standard.css">
     <link rel="stylesheet" href="./styles/index.css">
 
-    <script src="./scripts/models/keyboard.class.js" defer></script>
-    <script src="./scripts/manager-classes/image-hub.js" defer></script>
-    <script src="./scripts/manager-classes/interval-hub.js" defer></script>
-    <script src="./scripts/manager-classes/audio-hub.js" defer></script>
-    <script src="./scripts/models/drawable-object.class.js" defer></script>
-    <script src="./scripts/models/movable-object.class.js" defer></script>
-    <script src="./scripts/models/throwable-object.class.js" defer></script>
-    <script src="./scripts/models/character.class.js" defer></script>
-    <script src="./scripts/models/particle-system.class.js" defer></script>
-    <script src="./scripts/models/obstacle.class.js" defer></script>
-    <script src="./scripts/models/chicken.class.js" defer></script>
-    <script src="./scripts/models/endboss.class.js" defer></script>
-    <script src="./scripts/models/cloud.class.js" defer></script>
-    <script src="./scripts/models/collectables.class.js" defer></script>
-    <script src="./scripts/models/status-object.class.js" defer></script>
-    <script src="./scripts/models/status-bar.class.js" defer></script>
-    <script src="./scripts/models/status-overlay.class.js" defer></script>
-    <script src="./scripts/models/status-text.class.js" defer></script>
-    <script src="./scripts/models/status-boss-bar.class.js" defer></script>
-    <script src="./scripts/models/background-objects.class.js" defer></script>
-    <script src="./scripts/models/level.class.js" defer></script>
-    <script src="./scripts/levels/level1.js" defer></script>
+    <script type="module" src="./scripts/game.js" defer></script>
 
-    <script src="./scripts/models/world.class.js" defer></script>
-    <script src="./scripts/fullscreen.js" defer></script>
-    <script src="./scripts/overlayUI.js" defer></script>
-    <script src="./scripts/game.js" defer></script>
 </head>
 
-<body onload="init()">
+<body>
     <header>
         <div>
 
@@ -57,7 +32,8 @@
                 <div id="overlay-main-menu">
                     <!-- start-menu -->
                     <div class="start-button-container orientation-display-hide">
-                        <button class="button-rect" onclick="startGame(); blur()"> Start Hunt! </button>
+                        <!-- //onclick="startGame(); blur()"> -->
+                        <button class="button-rect" id="startBtn"> Start Hunt! </button>
                         <p class="start-story-text">Help Pepe fight the Boss Rooster to rid the world of the chicken plague.</p>
                     </div>
                     <p class="orientation-display-show orientation-text">Pepe need more space! Turn your Device to play.
@@ -67,14 +43,13 @@
                 <div id="overlay-UI" class="hide-object">
                     <!-- button-bar-top -->
                     <div>
-                        <input class="audio_slider" type="range" oninput="AudioHub.objSetVolume()" id='volume' min=0
-                            max=1 step=0.01 value='0.2'>
+                        <input class="audio_slider" type="range" id='volumeSlider' min=0 max=1 step=0.01 value='0.2'>
 
 
-                        <button class="button-UI" onclick="AudioHub.toggleSound(); toggleMuteBtnSprite(); blur()"> <img
+                        <button class="button-UI" id="muteBtn"> <img
                                 id="mute-btn-image" class="button-image-offset"
                                 src="./assets/img/13_icons/mute-icon.png" alt=""></button>
-                        <button class="button-UI" onclick="toggleFullscreen(); blur()"> <img id="fullscreen-btn-image"
+                        <button class="button-UI" id="fullscreenBtn"> <img id="fullscreen-btn-image"
                                 class="button-image-offset" src="assets/img/13_icons/fullscreen-open.png"
                                 alt=""></button>
                     </div>

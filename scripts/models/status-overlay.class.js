@@ -2,7 +2,7 @@
  * @class
  * Represents screen overlays such as victory, game over or start screen.
  */
-class StatusOverlay extends DrawableObject {
+export class StatusOverlay extends DrawableObject {
     
     //#region Properties
     imageVictory = ImageHub.OVERLAY.victory;

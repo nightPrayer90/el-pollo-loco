@@ -2,7 +2,7 @@
  * @class
  * Represents a collectable object such as coins or bottles.
  */
-class Collectable extends MovableObject {
+export class Collectable extends MovableObject {
 
      //#region Properties
     x;

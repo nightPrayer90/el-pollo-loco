@@ -3,7 +3,7 @@
  * Represents a throwable bottle object used by the player.
  * Handles flight physics, collision and splash effects.
  */
-class ThrowableObject extends MovableObject {
+export class ThrowableObject extends MovableObject {
     
     //#region Properties
     speed = 10;

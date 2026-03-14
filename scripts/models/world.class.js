@@ -1,15 +1,18 @@
+import { Character } from "./character.class.js";
+
 /**
  * @class
  * Represents the game world.
  * Handles rendering, object management, collisions and game state.
  */
-class World {
+export class World {
     //#region Properties
     level;
     ctx;
     canvas;
     keyboard;
 
+    o= +S
     overlay = new StatusOverlay(2);
     statusTextObject = new StatusTextObject();
     character = new Character(this);

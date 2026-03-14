@@ -1,6 +1,7 @@
 let world;
 const canvas = document.getElementById("canvas");
 
+
 /**
  * Initializes core systems of the game.
  * Sets up audio handling and fullscreen event listeners.
@@ -8,7 +9,7 @@ const canvas = document.getElementById("canvas");
 function init() {
     AudioHub.initAudioHub();
     initFullscreenListner();
-    
+    b= AudioHub
 }
 
 /**

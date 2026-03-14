@@ -2,7 +2,7 @@
  * @class
  * Represents a UI text object used to display temporary messages on screen.
  */
-class StatusTextObject extends DrawableObject {
+export class StatusTextObject extends DrawableObject {
 
     //#region Properties
     x = 720/2;

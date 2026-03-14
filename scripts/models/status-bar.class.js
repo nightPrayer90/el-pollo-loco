@@ -2,7 +2,7 @@
  * @class
  * Represents the player health status bar.
  */
-class StatusBar extends DrawableObject{
+export class StatusBar extends DrawableObject{
 
     //#region Properties
     imagesSet = ImageHub.STATUSBAR.health;

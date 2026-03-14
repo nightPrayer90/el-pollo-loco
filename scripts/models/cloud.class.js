@@ -2,7 +2,7 @@
  * @class
  * Represents a cloud object used for the parallax background.
  */
-class Cloud extends MovableObject {
+export class Cloud extends MovableObject {
     //#region Properties
     width = 500;
     height = 280;

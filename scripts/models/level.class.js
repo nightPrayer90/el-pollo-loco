@@ -3,7 +3,7 @@
  * Represents the level configuration including enemies,
  * backgrounds, obstacles and collectable objects.
  */
-class Level {
+export class Level {
 
     //#region Properties
     enemies = [];

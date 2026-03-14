@@ -3,7 +3,7 @@
  * Base class for all drawable objects in the game.
  * Handles image loading, drawing and optional debug rendering.
  */
-class DrawableObject {
+export class DrawableObject {
     
     //#region Properties
     img;

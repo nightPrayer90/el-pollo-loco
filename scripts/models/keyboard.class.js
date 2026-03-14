@@ -2,7 +2,7 @@
  * @class
  * Handles keyboard and touch input for the player controls.
  */
-class Keyboard {
+export class Keyboard {
 
     //#region Properties
     static LEFT = false;

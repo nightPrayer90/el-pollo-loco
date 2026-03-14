@@ -3,7 +3,7 @@
  * Base class for all movable game objects.
  * Handles movement, jumping, animation playback and collision logic.
  */
-class MovableObject extends DrawableObject {
+export class MovableObject extends DrawableObject {
     
      //#region Properties
     speed = 0.15;

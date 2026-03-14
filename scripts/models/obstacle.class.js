@@ -3,7 +3,7 @@
  * @class
  * Represents a static obstacle object placed in the level.
  */
-class Obstacle extends DrawableObject {
+export class Obstacle extends DrawableObject {
     
     //#region Properties
     x;

@@ -2,7 +2,7 @@
  * @class
  * Central hub that stores all image paths used in the game.
  */
-class ImageHub {
+export class ImageHub {
     static CHARACTER = {
     /**
      * Character animation frames.

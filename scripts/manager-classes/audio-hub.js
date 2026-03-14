@@ -2,7 +2,7 @@
  * @class
  * Wrapper class for a single audio object.
  */
-class MyAudio {
+export class MyAudio {
 
     //#region Properties
 

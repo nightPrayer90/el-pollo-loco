@@ -2,7 +2,7 @@
  * @class
  * Represents a particle animation system used for visual effects.
  */
-class ParticleSystem extends MovableObject {
+export class ParticleSystem extends MovableObject {
     
     //#region Properties
     x;
