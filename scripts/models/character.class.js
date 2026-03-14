@@ -92,6 +92,7 @@ class Character extends MovableObject {
         IntervalHub.stopInterval(this.animate_id);
         IntervalHub.stopInterval(this.move_id);
         IntervalHub.stopInterval(this.sleepInverval_id);
+        this.stopMoveSound();
     }
 
     /**
@@ -228,7 +229,7 @@ class Character extends MovableObject {
     isDead() {
         return this.health <= 0;
     }
-
+    
     triggerGameOver() {
         AudioHub.playOne(AudioHub.CHAR_DEAD);
         this.stopPlayerIntervals();

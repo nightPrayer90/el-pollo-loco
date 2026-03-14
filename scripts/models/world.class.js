@@ -329,10 +329,10 @@ class World {
             this.coinUI = null;
             this.statusBar = null;
         }
-        this.character.stopMoveSound();
-
+    
         setTimeout(() => {
             IntervalHub.stopIntervals();
+            this.character.stopPlayerIntervals();
             this.showOverlay = false;
             if (isPlayerDead) {
                 this.gameOver();
