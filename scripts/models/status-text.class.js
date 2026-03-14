@@ -1,3 +1,6 @@
+import { AudioHub } from "../manager-classes/audio-hub.js";
+import { DrawableObject } from "./drawable-object.class.js";
+
 /**
  * @class
  * Represents a UI text object used to display temporary messages on screen.
@@ -10,7 +13,6 @@ export class StatusTextObject extends DrawableObject {
 
     isDrawText = true;
     isTextShowing = false;
-
     textAlign = "center";
     textFontStyle = "28px Boogaloo";
     textFontColor = "white";

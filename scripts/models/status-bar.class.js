@@ -1,3 +1,6 @@
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { DrawableObject } from "./drawable-object.class.js";
+
 /**
  * @class
  * Represents the player health status bar.

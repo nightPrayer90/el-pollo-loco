@@ -1,3 +1,9 @@
+import { AudioHub } from "../manager-classes/audio-hub.js";
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { Chicken } from "./chicken.class.js";
+import { MovableObject } from "./movable-object.class.js";
+
 /**
  * @class
  * Represents the endboss enemy and controls its behavior,

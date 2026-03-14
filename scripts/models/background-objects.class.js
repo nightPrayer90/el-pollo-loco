@@ -1,3 +1,5 @@
+import { DrawableObject } from "./drawable-object.class.js";
+
 /**
  * @class
  * Represents a background element placed in the game world.

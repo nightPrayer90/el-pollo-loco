@@ -1,4 +1,17 @@
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { AudioHub } from "../manager-classes/audio-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
 import { Character } from "./character.class.js";
+import { Chicken } from "./chicken.class.js";
+import { Cloud } from "./cloud.class.js";
+import { ParticleSystem } from "./particle-system.class.js";
+import { StatusBar } from "./status-bar.class.js";
+import { StatusBossBar } from "./status-boss-bar.class.js";
+import { StatusObject } from "./status-object.class.js";
+import { StatusOverlay } from "./status-overlay.class.js";
+import { StatusTextObject } from "./status-text.class.js";
+import { Keyboard } from "./keyboard.class.js";
+import { showBackToMenuBtn } from "../overlayUI.js";
 
 /**
  * @class
@@ -12,7 +25,6 @@ export class World {
     canvas;
     keyboard;
 
-    o= +S
     overlay = new StatusOverlay(2);
     statusTextObject = new StatusTextObject();
     character = new Character(this);
@@ -95,7 +107,6 @@ export class World {
 
     initPlayerAndEnemyIntervals () {
         for (let i = 0; i < this.level.enemies.length; i++) {
-            console.log("START");
             if (!this.level.enemies[i].isBoss) {
                 this.level.enemies[i].initStartInvervals(true);
             } 

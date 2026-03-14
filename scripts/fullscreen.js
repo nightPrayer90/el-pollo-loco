@@ -1,5 +1,6 @@
 let isFullscreenMode = false;
 const fullscreenRef = document.getElementById("fullscreen");
+const fullscreenBtnImageRef = document.getElementById("fullscreen-btn-image");
 
 /**
  * Initializes the fullscreen change listener.
@@ -7,7 +8,7 @@ const fullscreenRef = document.getElementById("fullscreen");
  * fullscreen using ESC or browser controls.
  *  https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event
  */
-function initFullscreenListner() {
+export function initFullscreenListner() {
     document.addEventListener("fullscreenchange", () => {
         if (document.fullscreenElement) {
             isFullscreenMode = true;
@@ -22,7 +23,7 @@ function initFullscreenListner() {
 /**
  * Toggles fullscreen mode on or off.
  */
-function toggleFullscreen() {
+export function toggleFullscreen() {
     isFullscreenMode = !isFullscreenMode;
     if (isFullscreenMode) {
         enterFullscreen();
@@ -52,5 +53,15 @@ function exitFullscreen() {
         document.exitFullscreen();
     } else if (document.webkitRequestFullscreen) {
         document.webkitRequestFullscreen();
+    }
+}
+/**
+ * Updates the fullscreen button icon depending on the current fullscreen state.
+ */
+function toggleFullscreenBtnSprite() {
+    if (!isFullscreenMode) {
+        fullscreenBtnImageRef.src = "./assets/img/13_icons/fullscreen-open.png";
+    } else {
+        fullscreenBtnImageRef.src = "./assets/img/13_icons/fullscreen-close.png";
     }
 }

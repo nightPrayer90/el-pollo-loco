@@ -1,3 +1,4 @@
+import { DrawableObject } from "./drawable-object.class.js";
 
 /**
  * @class
@@ -11,7 +12,7 @@ export class Obstacle extends DrawableObject {
     width;
     height;
     //#endregion
-    
+
     /**
      * Creates a new obstacle object.
      * @param {string} imagePath - Path to the obstacle image.

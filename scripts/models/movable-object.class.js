@@ -1,3 +1,5 @@
+import { DrawableObject } from "./drawable-object.class.js";
+
 /**
  * @class
  * Base class for all movable game objects.
@@ -13,7 +15,6 @@ export class MovableObject extends DrawableObject {
     jumpPower = 18;
 
     lastImages = [];
-
     health;
     damage;
 

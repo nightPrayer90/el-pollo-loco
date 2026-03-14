@@ -1,3 +1,6 @@
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { MovableObject } from "./movable-object.class.js";
+
 /**
  * @class
  * Represents a particle animation system used for visual effects.

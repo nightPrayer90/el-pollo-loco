@@ -1,3 +1,7 @@
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { MovableObject } from "./movable-object.class.js";
+
 /**
  * @class
  * Represents a cloud object used for the parallax background.

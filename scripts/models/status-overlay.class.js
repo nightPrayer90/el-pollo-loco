@@ -1,3 +1,7 @@
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { DrawableObject } from "./drawable-object.class.js";
+
 /**
  * @class
  * Represents screen overlays such as victory, game over or start screen.

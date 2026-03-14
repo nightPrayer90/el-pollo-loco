@@ -1,7 +1,14 @@
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { BackgroundObject } from "../models/background-objects.class.js";
+import { Chicken } from "../models/chicken.class.js";
+import { Collectable } from "../models/collectables.class.js";
+import { Endboss } from "../models/endboss.class.js";
+import { Level } from "../models/level.class.js";
+import { Obstacle } from "../models/obstacle.class.js";
+
 //#region Config
 let levelBkLength = 6;
 let imageWidth = 720;
-let chickenArry = [];
 let maxEnemies = 20;
 //#endregion
 
@@ -9,7 +16,7 @@ let maxEnemies = 20;
 /**
  * Creates and returns the level configuration.
  */
-function levelInit() {
+export function levelInit() {
     const level1 = new Level(
     chickenGenerator(15), 
     [new BackgroundObject(ImageHub.SKY.air, 0)],

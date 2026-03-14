@@ -1,3 +1,8 @@
+import { AudioHub } from "../manager-classes/audio-hub.js";
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { MovableObject } from "./movable-object.class.js";
+
 /**
  * @class
  * Represents a chicken enemy with different types and behaviors.
@@ -16,7 +21,7 @@ export class Chicken extends MovableObject {
 
     isBoss = false;
     isDead = false;
-
+b
     animate_id;
     move_id;
 

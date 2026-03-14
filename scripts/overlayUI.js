@@ -1,71 +1,60 @@
+import { AudioHub } from "./manager-classes/audio-hub.js";
+
 const mainMenuRef = document.getElementById("overlay-main-menu");
 const ingameUIRef = document.getElementById("overlay-UI");
 const mobileControlsRef = document.getElementById("mobile-controls");
 const muteBtnImageRef = document.getElementById("mute-btn-image");
-const fullscreenBtnImageRef = document.getElementById("fullscreen-btn-image");
-
 
 /**
  * Switches the UI from main menu to in-game state.
  * Hides the main menu and enables the in-game UI.
  */
-function uiStartGame(){
+export function uiStartGame() {
     changeClass(mainMenuRef, "hide-object", true);
     changeClass(ingameUIRef, "hide-object", false);
 
-    toggleMuteBtnSprite()
+    toggleMuteBtnSprite();
     showMobileOverlay();
 }
 
 /**
  * Shows the main menu and hides the in-game UI.
  */
-function uiMainMenu(){
+export function uiMainMenu() {
     changeClass(mainMenuRef, "hide-object", false);
     changeClass(ingameUIRef, "hide-object", true);
 }
 
 /**
+ * Shows the main menu after the game ends and stops the game music.
+ */
+export function showBackToMenuBtn() {
+    uiMainMenu();
+    AudioHub.stopOne(AudioHub.GAME_MUSIC);
+}
+
+/**
  * Displays mobile control buttons.
  */
-function showMobileOverlay(){
+function showMobileOverlay() {
     changeClass(mobileControlsRef, "hide-object", false);
+}
+
+export function toggleMuteBtn() {
+    AudioHub.toggleSound(); 
+    toggleMuteBtnSprite();
 }
 
 /**
  * Updates the mute button sprite depending on the audio state.
  */
 function toggleMuteBtnSprite() {
-    if(AudioHub.ISSOUND_MUTE) {
+    if (AudioHub.ISSOUND_MUTE) {
         muteBtnImageRef.src = "./assets/img/13_icons/mute-icon.png";
-    }
-    else {
+    } else {
         muteBtnImageRef.src = "./assets/img/13_icons/unmute-icon.png";
     }
-
 }
-
-
-
-/**
- * Updates the fullscreen button icon depending on the current fullscreen state.
- */
-function toggleFullscreenBtnSprite(){
-    if (!isFullscreenMode) {
-        fullscreenBtnImageRef.src ="./assets/img/13_icons/fullscreen-open.png"
-    }
-    else{
-        fullscreenBtnImageRef.src ="./assets/img/13_icons/fullscreen-close.png"
-    }
-}
-
-/**
- * Shows the main menu after the game ends and stops the game music.
- */
-function showBackToMenuBtn() {
-    uiMainMenu();
-    AudioHub.stopOne(AudioHub.GAME_MUSIC);
- }
 
 /**
  * Adds or removes a CSS class from an element.

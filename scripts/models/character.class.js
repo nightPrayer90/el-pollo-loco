@@ -1,9 +1,17 @@
+import { AudioHub } from "../manager-classes/audio-hub.js";
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { Keyboard } from "./keyboard.class.js";
+import { MovableObject } from "./movable-object.class.js";
+import { ThrowableObject } from "./throwable-object.class.js";
+
 /**
  * @class
  * Represents the playable character and handles movement, animation,
  * combat interactions and player related gameplay logic.
  */
 export class Character extends MovableObject {
+    
     //#region Properties
     x = 120;
     y = 0;
@@ -57,7 +65,6 @@ export class Character extends MovableObject {
         this.world = world;
         this.initImages();
         this.setCollisionRect();
-        //this.startPlayerIntervals();
     }
 
     //#region Methods

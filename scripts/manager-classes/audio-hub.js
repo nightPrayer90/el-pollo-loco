@@ -2,7 +2,7 @@
  * @class
  * Wrapper class for a single audio object.
  */
-export class MyAudio {
+class MyAudio {
 
     //#region Properties
 
@@ -25,7 +25,7 @@ export class MyAudio {
  * @class
  * Central audio manager that stores and controls all game sounds.
  */
-class AudioHub {
+export class AudioHub {
 
     //#region Properties
     static CHAR_HURT = new MyAudio("./assets/sounds/character/characterDamage.mp3");
@@ -63,7 +63,7 @@ class AudioHub {
     static AUDIO_VOLUME = 0.2;
     static ISSOUND_MUTE = false;
 
-    static allSounds = [
+    static ALL_SOUNDS = [
         AudioHub.GAME_MUSIC,
         AudioHub.CHAR_HURT, AudioHub.CHAR_DEAD, AudioHub.CHAR_JUMP, AudioHub.CHAR_WALK, AudioHub.CHAR_THROW, AudioHub.CHAR_SLEEP,
         AudioHub.COLL_COIN, AudioHub.COLL_BOTTLE,
@@ -72,6 +72,8 @@ class AudioHub {
         AudioHub.ENDBOSS_HIT_S1, AudioHub.ENDBOSS_HIT_S2, AudioHub.ENDBOSS_CHANGE_STATE, AudioHub.ENDBOSS_JUMP_ATTACK, AudioHub.ENDBOSS_LANDING,
         AudioHub.GAME_WIN, AudioHub.GAME_OVER
     ];
+
+    static SLIDER_REF =  document.getElementById("volumeSlider"); 
 
     //#endregion
 
@@ -137,7 +139,7 @@ class AudioHub {
      * Stops all currently playing sounds.
      */
     static stopAll() {
-        AudioHub.allSounds.forEach((sound) => {
+        AudioHub.ALL_SOUNDS.forEach((sound) => {
             sound.myAudio.pause();
         });
     }
@@ -154,13 +156,13 @@ class AudioHub {
      * Updates the volume using the UI slider value and saves it.
      */
     static objSetVolume() {
-        let volumeValue = document.getElementById("volume").value;
+        let volumeValue = AudioHub.SLIDER_REF.value;
 
         AudioHub.AUDIO_VOLUME = Number(volumeValue);
         AudioHub.saveMuteStatus(false);
         localStorage.setItem("[EPL] volume", AudioHub.AUDIO_VOLUME);
 
-        AudioHub.allSounds.forEach((sound) => {
+        AudioHub.ALL_SOUNDS.forEach((sound) => {
             sound.myAudio.volume = AudioHub.AUDIO_VOLUME;
         });
     }
@@ -169,7 +171,7 @@ class AudioHub {
      * Updates the volume slider UI element.
      */
     static setAudioSlider() {
-        document.getElementById("volume").value = AudioHub.AUDIO_VOLUME;
+        AudioHub.SLIDER_REF.value = AudioHub.AUDIO_VOLUME;
     }
 
     /**
@@ -191,7 +193,7 @@ class AudioHub {
     static mute() {
         AudioHub.AUDIO_VOLUME = 0;
 
-        AudioHub.allSounds.forEach((sound) => {
+        AudioHub.ALL_SOUNDS.forEach((sound) => {
             sound.myAudio.volume = AudioHub.AUDIO_VOLUME;
         });
     }
@@ -201,7 +203,7 @@ class AudioHub {
      */
     static unmute() {
         AudioHub.AUDIO_VOLUME = localStorage.getItem("[EPL] volume");
-        AudioHub.allSounds.forEach((sound) => {
+        AudioHub.ALL_SOUNDS.forEach((sound) => {
             sound.myAudio.volume = AudioHub.AUDIO_VOLUME;
         });
     }

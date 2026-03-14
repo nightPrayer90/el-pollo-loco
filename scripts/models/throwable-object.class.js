@@ -1,3 +1,9 @@
+import { AudioHub } from "../manager-classes/audio-hub.js";
+import { ImageHub } from "../manager-classes/image-hub.js";
+import { IntervalHub } from "../manager-classes/interval-hub.js";
+import { Keyboard } from "./keyboard.class.js";
+import { MovableObject } from "./movable-object.class.js";
+
 /**
  * @class
  * Represents a throwable bottle object used by the player.
@@ -54,7 +60,6 @@ export class ThrowableObject extends MovableObject {
         let jumpHeight = (180 - this.world.character.y) / 25;
         this.speedY = 10 + jumpHeight;
         if (Keyboard.RIGHT) this.speed += 3;
-
         if (this.world.character.otherDirection) this.speed *= -1;
 
         this.animate_id = IntervalHub.startInterval(this.animate, 60);
