@@ -96,7 +96,9 @@ class Endboss extends MovableObject {
      * and boss and chicken use the same collision logic in world
      */
     hit(world, hitFrom) {
+        if (this.isDie()) return;
         if (this.isHurt) return;
+
         if (!this.isWaitingState) {
             this.takeDamage();
         } else {
@@ -145,8 +147,12 @@ class Endboss extends MovableObject {
         this.health -= 1;
         this.speed++;
         this.world.statusBossBar.setHealth(this.health);
-        if (this.health > 0) AudioHub.playOne(AudioHub.ENDBOSS_HIT_S2);
-        else AudioHub.playOne(AudioHub.ENDBOSS_DIE);
+        if (this.health <= 0) {
+            AudioHub.playOne(AudioHub.ENDBOSS_DIE);
+            return;
+        }
+
+        AudioHub.playOne(AudioHub.ENDBOSS_HIT_S2);
         setTimeout(() => {
             this.isHurt = false;
         }, 500);
