@@ -1,12 +1,14 @@
 import { AudioHub } from "./manager-classes/audio-hub.js";
 
 let isFullscreenMode = false;
+const fullscreeBtnRef = document.getElementById("fullscreenBtn");
 const fullscreenRef = document.getElementById("fullscreen");
 const fullscreenBtnImageRef = document.getElementById("fullscreen-btn-image");
 const mainMenuRef = document.getElementById("overlay-main-menu");
 const ingameUIRef = document.getElementById("overlay-UI");
 const mobileControlsRef = document.getElementById("mobile-controls");
 const muteBtnImageRef = document.getElementById("mute-btn-image");
+const exitBtnRef = document.getElementById("closefullscreenBtn");
 // https://dev.to/niorad/detecting-hover-and-touch-in-css-and-js-4e42
 const isMobile = !window.matchMedia("(hover: hover)").matches;
 
@@ -23,8 +25,7 @@ export function uiStartGame() {
     toggleMuteBtnSprite();
     showMobileOverlay();
     
-    if (isMobile == true) {
-        isFullscreenMode = true;
+    if (isMobile) {
         enterFullscreen();
     }
 }
@@ -32,14 +33,14 @@ export function uiStartGame() {
 /**
  * Shows the main menu and hides the in-game UI.
  */
-export function uiMainMenu() {
+function uiMainMenu() {
     changeClass(mainMenuRef, "hide-object", false);
     changeClass(ingameUIRef, "hide-object", true);
 
-    if (isMobile == true) {
-        isFullscreenMode = false;
-        exitFullscreen();
-    }
+    if (isFullscreenMode) 
+        changeClass(exitBtnRef, "hide-object", false);
+    else 
+        changeClass(exitBtnRef, "hide-object", true);
 }
 
 /**
@@ -102,15 +103,16 @@ function changeClass(elementRef, className, control) {
  *  https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event
  */
 export function initFullscreenListner() {
-    document.getElementById("fullscreenBtn").addEventListener("click", toggleFullscreen);
+    fullscreeBtnRef.addEventListener("click", toggleFullscreen);
+    exitBtnRef.addEventListener("click", exitFullscreen);
 
     document.addEventListener("fullscreenchange", () => {
         if (document.fullscreenElement) {
             isFullscreenMode = true;
-            toggleFullscreenBtnSprite(isFullscreenMode);
+            toggleFullscreenBtnSprite();
         } else {
             isFullscreenMode = false;
-            toggleFullscreenBtnSprite(isFullscreenMode);
+            toggleFullscreenBtnSprite();
         }
     });
 }
@@ -131,6 +133,7 @@ function toggleFullscreen() {
  * Requests fullscreen mode for the game container.
  */
 function enterFullscreen() {
+    isFullscreenMode = true;
     if (fullscreenRef.requestFullscreen) {
         fullscreenRef.requestFullscreen();
     } else if (fullscreenRef.msRequestFullscreen) {
@@ -144,9 +147,10 @@ function enterFullscreen() {
  * Exits fullscreen mode.
  */
 function exitFullscreen() {
-    if (document.exitFullscreen) {
+    isFullscreenMode = false;
+    if (document.fullscreenElement && document.exitFullscreen) {
         document.exitFullscreen();
-    } else if (document.webkitRequestFullscreen) {
+    } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
 }
