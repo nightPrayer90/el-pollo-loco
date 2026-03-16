@@ -223,7 +223,8 @@ footer {
         height: 100vh;
     }
 }
-@media (hover) {
+
+@media (pointer: fine)  {
     #fullscreen {
         .show-only-on-Mobile {
             display: none;

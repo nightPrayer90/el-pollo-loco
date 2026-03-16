@@ -10,8 +10,6 @@ const mobileControlsRef = document.getElementById("mobile-controls");
 const muteBtnImageRef = document.getElementById("mute-btn-image");
 const exitBtnRef = document.getElementById("closefullscreenBtn");
 // https://dev.to/niorad/detecting-hover-and-touch-in-css-and-js-4e42
-const isMobile = !window.matchMedia("(hover: hover)").matches;
-
 
 //#region UI
 /**
@@ -25,7 +23,7 @@ export function uiStartGame() {
     toggleMuteBtnSprite();
     showMobileOverlay();
     
-    if (isMobile) {
+    if (window.matchMedia("(pointer: coarse)").matches) {
         enterFullscreen();
     }
 }
