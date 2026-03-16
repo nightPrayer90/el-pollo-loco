@@ -227,7 +227,7 @@ footer {
 }
 
 /* moblie view */
-@media ((pointer: coarse) and (orientation: landscape)), (max-height: 710px) {
+@media ((pointer: coarse) and (orientation: landscape)), (max-height: 860px) {
     .hide-on-mobile {
         display: none;
     }
