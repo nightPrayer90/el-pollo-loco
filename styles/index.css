@@ -8,7 +8,6 @@ body {
     background-repeat: no-repeat;
 }
 
-
 main {
     display: flex;
     align-items: center;
@@ -187,11 +186,11 @@ footer {
     border-top: 3px solid wheat;
     height: 128px;
 
-    .footer-content{
+    .footer-content {
         display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
         border: none;
     }
 }
@@ -217,7 +216,6 @@ footer {
         }
     }
 }
-
 
 /* Smartphones */
 @media only screen and (max-height: 480px) {

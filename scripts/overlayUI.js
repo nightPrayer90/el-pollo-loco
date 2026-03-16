@@ -112,6 +112,7 @@ export function initFullscreenListner() {
             toggleFullscreenBtnSprite();
         } else {
             isFullscreenMode = false;
+            changeClass(exitBtnRef, "hide-object", true);
             toggleFullscreenBtnSprite();
         }
     });
