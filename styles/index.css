@@ -203,7 +203,7 @@ footer {
 }
 
 /* Smartphones */
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 600px) {
     main {
         section {
             padding: 0 8px;
@@ -223,6 +223,7 @@ footer {
         }
     }
 }
+
 
 /* Smartphones */
 @media only screen and (max-height: 480px) {

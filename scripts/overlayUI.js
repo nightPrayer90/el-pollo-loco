@@ -1,10 +1,17 @@
 import { AudioHub } from "./manager-classes/audio-hub.js";
 
+let isFullscreenMode = false;
+const fullscreenRef = document.getElementById("fullscreen");
+const fullscreenBtnImageRef = document.getElementById("fullscreen-btn-image");
 const mainMenuRef = document.getElementById("overlay-main-menu");
 const ingameUIRef = document.getElementById("overlay-UI");
 const mobileControlsRef = document.getElementById("mobile-controls");
 const muteBtnImageRef = document.getElementById("mute-btn-image");
+// https://dev.to/niorad/detecting-hover-and-touch-in-css-and-js-4e42
+const isMobile = !window.matchMedia("(hover: hover)").matches;
 
+
+//#region UI
 /**
  * Switches the UI from main menu to in-game state.
  * Hides the main menu and enables the in-game UI.
@@ -15,6 +22,11 @@ export function uiStartGame() {
 
     toggleMuteBtnSprite();
     showMobileOverlay();
+    
+    if (isMobile == true) {
+        isFullscreenMode = true;
+        enterFullscreen();
+    }
 }
 
 /**
@@ -23,6 +35,11 @@ export function uiStartGame() {
 export function uiMainMenu() {
     changeClass(mainMenuRef, "hide-object", false);
     changeClass(ingameUIRef, "hide-object", true);
+
+    if (isMobile == true) {
+        isFullscreenMode = false;
+        exitFullscreen();
+    }
 }
 
 /**
@@ -72,3 +89,75 @@ function changeClass(elementRef, className, control) {
             break;
     }
 }
+//#endregion
+
+//#region  Fullscreen
+/**
+ * Initializes the fullscreen change listener.
+ * This keeps the internal fullscreen state in sync when the user exits
+ * fullscreen using ESC or browser controls.
+ *  https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event
+ */
+export function initFullscreenListner() {
+    console.log("INIT FULLSCREEN?");
+    document.getElementById("fullscreenBtn").addEventListener("click", toggleFullscreen);
+
+    document.addEventListener("fullscreenchange", () => {
+        if (document.fullscreenElement) {
+            isFullscreenMode = true;
+            toggleFullscreenBtnSprite(isFullscreenMode);
+        } else {
+            isFullscreenMode = false;
+            toggleFullscreenBtnSprite(isFullscreenMode);
+        }
+    });
+}
+
+/**
+ * Toggles fullscreen mode on or off.
+ */
+function toggleFullscreen() {
+    console.log("click fullscreen?");
+    isFullscreenMode = !isFullscreenMode;
+    if (isFullscreenMode) {
+        enterFullscreen();
+    } else {
+        exitFullscreen();
+    }
+}
+
+/**
+ * Requests fullscreen mode for the game container.
+ */
+function enterFullscreen() {
+    if (fullscreenRef.requestFullscreen) {
+        fullscreenRef.requestFullscreen();
+    } else if (fullscreenRef.msRequestFullscreen) {
+        fullscreenRef.requestFullscreen();
+    } else if (fullscreenRef.webkitRequestFullscreen) {
+        fullscreenRef.webkitRequestFullscreen();
+    }
+}
+
+/**
+ * Exits fullscreen mode.
+ */
+function exitFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitRequestFullscreen) {
+        document.webkitRequestFullscreen();
+    }
+}
+
+/**
+ * Updates the fullscreen button icon depending on the current fullscreen state.
+ */
+function toggleFullscreenBtnSprite() {
+    if (!isFullscreenMode) {
+        fullscreenBtnImageRef.src = "./assets/img/13_icons/fullscreen-open.png";
+    } else {
+        fullscreenBtnImageRef.src = "./assets/img/13_icons/fullscreen-close.png";
+    }
+}
+//#endregion

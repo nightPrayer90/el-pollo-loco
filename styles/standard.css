@@ -22,3 +22,13 @@
 button {
     cursor: pointer;
 }
+
+.hide-on-mobile {
+    display: block; 
+}
+
+@media (hover: none) and (orientation: landscape) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
