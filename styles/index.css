@@ -24,7 +24,6 @@ canvas {
     display: block;
     border-radius: 5px 5px 5px 5px;
     border: wheat 2px solid;
-    margin-bottom: 64px;
 
     background-image: url("../assets/img/9_intro_outro_screens/start/startscreen_2.png");
     background-size: 100% 100%;
@@ -78,7 +77,7 @@ canvas {
         background-color: #09212ad8;
         border-radius: 5px;
         border: 2px solid rgba(245, 222, 179, 0.831);
-        padding: 20px;
+        padding: 16px;
         width: 60%;
         display: flex;
         flex-direction: column;
@@ -87,7 +86,7 @@ canvas {
     }
 
     .start-story-text {
-        margin-top: 12px;
+        margin-top: 8px;
         border: none;
         background: none;
     }
@@ -97,6 +96,7 @@ canvas {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 64px;
 
     width: 100%;
 }
@@ -184,7 +184,6 @@ footer {
 
     background: #09212a;
     border-top: 3px solid wheat;
-    height: 128px;
 
     .footer-content {
         display: flex;
@@ -192,11 +191,12 @@ footer {
         justify-content: center;
         flex-direction: column;
         border: none;
+        margin: 12px;
     }
 }
 
 /* Smartphones */
-@media only screen and (max-width: 600px) {
+@media ((pointer: coarse) and (orientation: portrait)), (max-width: 500px) {
     main {
         section {
             padding: 0 8px;
@@ -217,17 +217,65 @@ footer {
     }
 }
 
-/* Smartphones */
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-}
-
-@media (pointer: fine)  {
+/* desktop view*/
+@media (pointer: fine) {
     #fullscreen {
         .show-only-on-Mobile {
             display: none;
         }
+    }
+}
+
+/* moblie view */
+@media ((pointer: coarse) and (orientation: landscape)), (max-height: 710px) {
+    .hide-on-mobile {
+        display: none;
+    }
+    .show-btn-on-mobile {
+        display: inline-block;
+    }
+}
+
+/* Smartphones */
+@media (max-height: 480px) {
+    canvas {
+        height: 100dvh;
+    }
+}
+
+/* tablet */
+@media (max-width: 1280px) {
+    h1 {
+        font-size: 50px;
+    }
+    p,
+    span,
+    a {
+        font-size: 28px;
+    }
+
+    button-rect {
+        font-size: 20px;
+    }
+}
+
+/* mobile */
+@media (max-width: 760px) {
+    h1 {
+        font-size: 32px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+    p,
+    span,
+    a {
+        font-size: 18px;
+    }
+
+    .button-rect {
+        height: 32px;
+        width: 120px;
+        margin-bottom: 6px;
+        font-size: 20px;
     }
 }

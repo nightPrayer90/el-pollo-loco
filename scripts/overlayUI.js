@@ -9,6 +9,8 @@ const ingameUIRef = document.getElementById("overlay-UI");
 const mobileControlsRef = document.getElementById("mobile-controls");
 const muteBtnImageRef = document.getElementById("mute-btn-image");
 const exitBtnRef = document.getElementById("closefullscreenBtn");
+const impressumBtn = document.getElementById("impressumBtn");
+
 // https://dev.to/niorad/detecting-hover-and-touch-in-css-and-js-4e42
 
 //#region UI
@@ -22,10 +24,6 @@ export function uiStartGame() {
 
     toggleMuteBtnSprite();
     showMobileOverlay();
-    
-    if (window.matchMedia("(pointer: coarse)").matches) {
-        enterFullscreen();
-    }
 }
 
 /**
@@ -91,6 +89,10 @@ function changeClass(elementRef, className, control) {
             break;
     }
 }
+
+function openImpressum() {
+    window.location.href = "impressum.html";
+}
 //#endregion
 
 //#region  Fullscreen
@@ -103,6 +105,7 @@ function changeClass(elementRef, className, control) {
 export function initFullscreenListner() {
     fullscreeBtnRef.addEventListener("click", toggleFullscreen);
     exitBtnRef.addEventListener("click", pressExitBtn);
+    impressumBtn.addEventListener("click", openImpressum);
 
     document.addEventListener("fullscreenchange", () => {
         if (document.fullscreenElement) {
