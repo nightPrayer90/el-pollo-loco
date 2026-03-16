@@ -117,6 +117,9 @@ export function initFullscreenListner() {
     });
 }
 
+/**
+ * Close Fullscreen and Hide Exit btn after click.
+ */
 function pressExitBtn() {
     isFullscreenMode = false;
     changeClass(exitBtnRef, "hide-object", true);
