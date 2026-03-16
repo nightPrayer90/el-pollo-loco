@@ -8,13 +8,6 @@ body {
     background-repeat: no-repeat;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background: #09212a;
-    border-bottom: 3px solid wheat;
-}
 
 main {
     display: flex;

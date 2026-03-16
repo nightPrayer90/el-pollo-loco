@@ -262,6 +262,7 @@ export class Character extends MovableObject {
     animate = () => {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.imagesDead)) {
+                this.otherDirection = false;
                 this.triggerGameOver();
             }
         } else if (!this.playHurtAnimation) {

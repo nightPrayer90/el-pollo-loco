@@ -99,7 +99,6 @@ function changeClass(elementRef, className, control) {
  *  https://developer.mozilla.org/en-US/docs/Web/API/Document/fullscreenchange_event
  */
 export function initFullscreenListner() {
-    console.log("INIT FULLSCREEN?");
     document.getElementById("fullscreenBtn").addEventListener("click", toggleFullscreen);
 
     document.addEventListener("fullscreenchange", () => {
@@ -117,7 +116,6 @@ export function initFullscreenListner() {
  * Toggles fullscreen mode on or off.
  */
 function toggleFullscreen() {
-    console.log("click fullscreen?");
     isFullscreenMode = !isFullscreenMode;
     if (isFullscreenMode) {
         enterFullscreen();
