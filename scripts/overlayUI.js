@@ -148,7 +148,7 @@ function exitFullscreen() {
         document.exitFullscreen();
     } else if (document.webkitRequestFullscreen) {
         document.webkitExitFullscreen();
-    }0
+    }
 }
 
 /**
