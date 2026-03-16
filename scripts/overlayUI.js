@@ -104,7 +104,7 @@ function changeClass(elementRef, className, control) {
  */
 export function initFullscreenListner() {
     fullscreeBtnRef.addEventListener("click", toggleFullscreen);
-    exitBtnRef.addEventListener("click", exitFullscreen);
+    exitBtnRef.addEventListener("click", pressExitBtn);
 
     document.addEventListener("fullscreenchange", () => {
         if (document.fullscreenElement) {
@@ -115,6 +115,12 @@ export function initFullscreenListner() {
             toggleFullscreenBtnSprite();
         }
     });
+}
+
+function pressExitBtn() {
+    isFullscreenMode = false;
+    changeClass(exitBtnRef, "hide-object", true);
+    exitFullscreen();
 }
 
 /**
@@ -133,7 +139,6 @@ function toggleFullscreen() {
  * Requests fullscreen mode for the game container.
  */
 function enterFullscreen() {
-    isFullscreenMode = true;
     if (fullscreenRef.requestFullscreen) {
         fullscreenRef.requestFullscreen();
     } else if (fullscreenRef.msRequestFullscreen) {
@@ -147,7 +152,6 @@ function enterFullscreen() {
  * Exits fullscreen mode.
  */
 function exitFullscreen() {
-    isFullscreenMode = false;
     if (document.fullscreenElement && document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
