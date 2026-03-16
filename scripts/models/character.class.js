@@ -11,7 +11,6 @@ import { ThrowableObject } from "./throwable-object.class.js";
  * combat interactions and player related gameplay logic.
  */
 export class Character extends MovableObject {
-    
     //#region Properties
     x = 120;
     y = 0;
@@ -109,18 +108,30 @@ export class Character extends MovableObject {
         this.cameraOffset_id = IntervalHub.startInterval(this.animateCameraOffset, 16);
     }
 
+    /**
+     * Checks if the character can move right.
+     */
     canMoveRight() {
         return Keyboard.RIGHT && this.x < this.world.level.level_size - 650;
     }
 
+    /**
+     * Checks if the character can move left.
+     */
     canMoveLeft() {
         return Keyboard.LEFT && this.x > -500;
     }
 
+    /**
+     * Checks if the character can throw a bottle.
+     */
     canThrowBottle() {
         return Keyboard.D && this.canThrow && this.bottles > 0;
     }
 
+    /**
+     * Checks if the character can jump.
+     */
     canJump() {
         return Keyboard.SPACE;
     }
@@ -160,11 +171,17 @@ export class Character extends MovableObject {
         this.sleepTimer = 0;
     }
 
+    /**
+     * Moves the character left.
+     */
     moveLeft() {
         this.sleepTimer = 0;
         super.moveLeft(true);
     }
 
+    /**
+     * Moves the character right.
+     */
     moveRight() {
         this.sleepTimer = 0;
         super.moveRight(false);
@@ -200,6 +217,10 @@ export class Character extends MovableObject {
         this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 10, 126, 126);
     }
 
+    /**
+     * Handles player damage.
+     * @param {number} damage - Damage amount.
+     */
     hit(damage) {
         if (this.canTakeDamage && !this.isDead()) {
             AudioHub.playOne(AudioHub.CHAR_HURT);
@@ -233,10 +254,16 @@ export class Character extends MovableObject {
         }, 1000);
     }
 
+    /**
+     * Checks if the character is dead.
+     */
     isDead() {
         return this.health <= 0;
     }
-    
+
+    /**
+     * Triggers the game over sequence.
+     */
     triggerGameOver() {
         AudioHub.playOne(AudioHub.CHAR_DEAD);
         this.stopPlayerIntervals();
@@ -245,6 +272,9 @@ export class Character extends MovableObject {
     //#endregion
 
     //#region Intervals
+    /**
+     * Handles player movement and input.
+     */
     move = () => {
         if (this.isDead()) return;
 
@@ -259,6 +289,9 @@ export class Character extends MovableObject {
         this.world.camera_x = -this.x + this.cameraOffset;
     };
 
+    /**
+     * Updates the character animation state.
+     */
     animate = () => {
         if (this.isDead()) {
             if (this.playAnimationSingle(this.imagesDead)) {
@@ -281,6 +314,9 @@ export class Character extends MovableObject {
         }
     };
 
+    /**
+     * Increases the idle timer and plays sleep sounds.
+     */
     sleepInterval = () => {
         this.sleepTimer++;
         if (this.sleepTimer >= 15) {
@@ -288,6 +324,9 @@ export class Character extends MovableObject {
         }
     };
 
+    /**
+     * Animates the camera offset transition.
+     */
     animateCameraOffset = () => {
         this.cameraOffset++;
 
@@ -295,5 +334,5 @@ export class Character extends MovableObject {
             IntervalHub.stopInterval(this.cameraOffset_id);
         }
     };
-     //#endregion
+    //#endregion
 }

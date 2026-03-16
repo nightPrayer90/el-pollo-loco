@@ -8,8 +8,7 @@ import { MovableObject } from "./movable-object.class.js";
  * Represents a collectable object such as coins or bottles.
  */
 export class Collectable extends MovableObject {
-
-     //#region Properties
+    //#region Properties
     x;
     y;
     width;
@@ -147,6 +146,9 @@ export class Collectable extends MovableObject {
         IntervalHub.stopInterval(this.animate_id);
     }
 
+    /**
+     * Plays the animation while the object is not collected.
+     */
     animate = () => {
         if (this.isCollect == false) {
             this.playAnimationLoop(this.imagesSet);

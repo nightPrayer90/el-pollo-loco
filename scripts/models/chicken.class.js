@@ -17,11 +17,12 @@ export class Chicken extends MovableObject {
     damage = 20;
 
     imagesWalking;
+    imagesVFXHit = ImageHub.VFX.hit;
     imagesDead;
 
     isBoss = false;
     isDead = false;
-b
+    b;
     animate_id;
     move_id;
 
@@ -48,12 +49,19 @@ b
         this.moveDirection = Math.random() < 0.6 ? true : false;
     }
 
+    /**
+     * Loads all required enemy images.
+     */
     initLoadImages() {
         this.loadImage(this.imagesWalking[0]);
         this.loadImages(this.imagesWalking);
         this.loadImages(this.imagesDead);
     }
 
+    /**
+     * Starts the enemy animation, movement and gravity intervals.
+     * @param {boolean} startInvervals - Whether intervals should start.
+     */
     initStartInvervals(startInvervals) {
         if (!startInvervals) return;
         this.animate_id = IntervalHub.startInterval(this.animate, 100);
@@ -184,6 +192,9 @@ b
     //#endregion
 
     //#region Intervals
+    /**
+     * Moves the enemy between its turn points while grounded.
+     */
     move = () => {
         if (this.isDead == true) return;
         if (this.isLanding == false) return;
@@ -195,6 +206,9 @@ b
         else this.moveRight();
     };
 
+    /**
+     * Updates the enemy animation depending on its life state.
+     */
     animate = () => {
         if (this.isDead == false) {
             this.playAnimationLoop(this.imagesWalking);

@@ -34,7 +34,7 @@ export class Cloud extends MovableObject {
      */
     initCloud(layer, generateRandomX) {
         let variant = Math.random() < 0.5 ? 0 : 1;
-        this.x = (generateRandomX == true) ? Math.random() * this.world_width : Math.random() * 20 + this.world_width;
+        this.x = generateRandomX == true ? Math.random() * this.world_width : Math.random() * 20 + this.world_width;
 
         this.loadImage(this.imagesCloud[variant]);
         layer == 0 ? this.cloudLayer2() : this.cloudLayer3();
@@ -68,6 +68,9 @@ export class Cloud extends MovableObject {
         this.y = Math.random() * 100 + 100;
     }
 
+    /**
+     * Moves the cloud left and pools when off-screen.
+     */
     fly = () => {
         this.moveLeft();
 

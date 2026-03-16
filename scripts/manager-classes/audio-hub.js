@@ -77,9 +77,7 @@ export class AudioHub {
 
     //#endregion
 
-
     //#region Methods
-
     /**
      * Initializes the audio system and loads saved settings.
      */
@@ -216,6 +214,5 @@ export class AudioHub {
         localStorage.setItem("[EPL] mute", isMute);
         AudioHub.ISSOUND_MUTE = isMute;
     }
-
     //#endregion
 }

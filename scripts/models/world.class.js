@@ -12,6 +12,7 @@ import { StatusOverlay } from "./status-overlay.class.js";
 import { StatusTextObject } from "./status-text.class.js";
 import { Keyboard } from "./keyboard.class.js";
 import { showBackToMenuBtn } from "../overlayUI.js";
+import { CollisionHub } from "../manager-classes/collision-hub.js";
 
 /**
  * @class
@@ -70,11 +71,17 @@ export class World {
     }
 
     //#region Init
+    /**
+     * Initializes keyboard input and button events.
+     */
     initKeyboard() {
         Keyboard.addEvents();
         Keyboard.addButtonEvents();
     }
 
+    /**
+     * Activates the game after the loading overlay.
+     */
     initLoadOverlay() {
         setTimeout(() => {
             this.showOverlay = true;
@@ -83,6 +90,9 @@ export class World {
         }, 1200);
     }
 
+    /**
+     * Displays the initial mission text.
+     */
     initInfoText() {
         setTimeout(() => {
             this.statusTextObject.updateText("Find and collect all the coins to stop the chicken invasion.", 1);
@@ -105,11 +115,14 @@ export class World {
         }
     }
 
-    initPlayerAndEnemyIntervals () {
+    /**
+     * Starts intervals for all enemies and the player.
+     */
+    initPlayerAndEnemyIntervals() {
         for (let i = 0; i < this.level.enemies.length; i++) {
             if (!this.level.enemies[i].isBoss) {
                 this.level.enemies[i].initStartInvervals(true);
-            } 
+            }
         }
         this.character.startPlayerIntervals();
     }
@@ -122,43 +135,49 @@ export class World {
      */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         // --- static background layer no movement ---
         this.drawBackgroundLayer();
-
         // --- far ---
         this.ctx.translate(this.camera_x * 0.25, this.yShake);
         this.drawBackgroundLayerFar();
-
         // --- mid ---
         this.ctx.translate(this.camera_x * 0.25, -this.yShake);
         this.drawBackgroundLayerNear();
-
         // --- player layer ---
         this.ctx.translate(this.camera_x * 0.5, this.yShake);
         this.drawPlayerLayerObjects();
-
         // --- space for ui ---
         this.ctx.translate(-this.camera_x, -this.yShake);
         this.drawInGameUIObjects();
-
         this.drawCanvas_Id = requestAnimationFrame(() => this.draw());
     }
 
+    /**
+     * Draws the far background layer.
+     */
     drawBackgroundLayer() {
         this.addObjectsToMap(this.level.staticBackground);
     }
 
+    /**
+     * Draws the far background layer.
+     */
     drawBackgroundLayerFar() {
         this.addObjectsToMap(this.level.backgroundObjects_L3);
         this.addObjectsToMap(this.clouds_L2);
     }
 
+    /**
+     * Draws the near background layer.
+     */
     drawBackgroundLayerNear() {
         this.addObjectsToMap(this.level.backgroundObjects_L2);
         this.addObjectsToMap(this.clouds_L3);
     }
 
+    /**
+     * Draws all player layer objects.
+     */
     drawPlayerLayerObjects() {
         this.addObjectsToMap(this.level.backgroundObjects_L1);
         this.addObjectsToMap(this.diedEnemies);
@@ -171,6 +190,9 @@ export class World {
         this.addObjectsToMap(this.level.obstacles);
     }
 
+    /**
+     * Draws all in-game UI elements.
+     */
     drawInGameUIObjects() {
         this.addToMap(this.statusBar);
         this.addToMap(this.bottleUI);
@@ -180,28 +202,41 @@ export class World {
         if (this.showBossBar) this.addToMap(this.statusBossBar);
     }
 
+    /**
+     * Draws a list of objects.
+     * @param {Array} objects - Objects to draw.
+     */
     addObjectsToMap(objects) {
         objects.forEach((object) => {
             this.addToMap(object);
         });
     }
 
+    /**
+     * Draws a single map object.
+     * @param {Object} mo - Map object.
+     */
     addToMap(mo) {
         if (mo == null) return;
-
         if (mo.otherDirection) this.flipImage(mo);
         mo.draw(this.ctx);
-
         if (mo.drawCollisionFrame) mo.drawFrame(this.ctx);
         if (mo.isDrawText) mo.drawText(this.ctx);
-
         if (mo.otherDirection) this.flipImageBack(mo);
     }
 
+    /**
+     * Draws a text object.
+     * @param {Object} to - Text object.
+     */
     addTextToMap(to) {
         to.drawText(this.ctx);
     }
 
+    /**
+     * Flips an object horizontally before drawing.
+     * @param {Object} mo - Map object.
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -209,77 +244,19 @@ export class World {
         mo.x = mo.x * -1;
     }
 
+    /**
+     * Restores the canvas after flipping.
+     * @param {Object} mo - Map object.
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
     //#endregion
 
-    //#region Collision
-    checkCollisions() {
-        this.level.enemies.forEach((enemy) => {
-            // character -> enemy
-            if (this.character.isColliding(enemy)) {
-                this.handleCollisionPlayerEnemy(enemy);
-            }
-
-            // bottle -> enemy
-            if (this.throwableObjects.length > 0) {
-                this.throwableObjects.forEach((bottle) => {
-                    this.handleCollionEnemyBottle(bottle, enemy);
-                });
-            }
-        });
-
-        // character -> collectable
-        this.level.collectables.forEach((collectable) => {
-            if (this.character.isColliding(collectable) && collectable.isCollect == false) {
-                this.handleCollisionPlayerCollectable(collectable);
-            }
-        });
-    }
-
-    handleCollisionPlayerEnemy(enemy) {
-        if (this.character.isCollidingFromTop(enemy) && this.character.speedY < 0) {
-            this.handleCollisionFromTop(enemy);
-            return;
-        } else {
-            this.handleCollisionCharacterGetHit(enemy);
-        }
-    }
-
-    handleCollisionFromTop(enemy) {
-        enemy.hit(this, 0);
-        this.character.speedY = 8;
-        this.character.collisionTimeout();
-        this.createParticleSystem(ImageHub.VFX.hit, enemy.cX + enemy.cW / 2, enemy.cY + enemy.cH / 2, 126, 126);
-    }
-
-    handleCollisionCharacterGetHit(enemy) {
-        if (!enemy.isDead) {
-            this.character.hit(enemy.damage);
-            this.triggerScreenShake(250);
-        }
-    }
-
-    handleCollionEnemyBottle(bottle, enemy) {
-        if (bottle.isColliding(enemy)) {
-            bottle.splash();
-            enemy.hit(this, 1);
-            this.triggerScreenShake(150);
-        }
-    }
-
-    handleCollisionPlayerCollectable(collectable) {
-        collectable.collect(this);
-        this.createParticleSystem(collectable.imagesVfx, collectable.cX + collectable.cW / 2, collectable.cY + collectable.cH / 2, 200, 200);
-    }
-    //#endregion
-
     //#region Methods
     /**
-     * Generates a number of clouds and assigns them randomly
-     * to the far or near cloud layer.
+     * Generates a number of clouds and assigns them randomly - to the far or near cloud layer.
      * @param {number} cloundQuantity - Number of clouds to generate.
      */
     cloudsGenerator(cloundQuantity) {
@@ -296,7 +273,6 @@ export class World {
 
     /**
      * Creates a particle system and adds it to the world.
-     * Used for effects like hits, splashes or coin collection.
      * @param {string[]} images - Animation image set.
      * @param {number} x - Spawn position X.
      * @param {number} y - Spawn position Y.
@@ -326,7 +302,7 @@ export class World {
     }
     //#endregion
 
-    //#region Game End Controls
+    //#region Game State Controls
     reloadStartWindow() {
         IntervalHub.stopIntervals();
         showBackToMenuBtn();
@@ -334,39 +310,32 @@ export class World {
         cancelAnimationFrame(this.drawCanvas_Id);
     }
 
+    /**
+     * Triggers the game over state and stops all active intervals.
+     * @param {boolean} isPlayerDead - Determines if the player lost or won.
+     */
     gameIsOver(isPlayerDead) {
         if (this.isGameOver) return;
         this.isGameOver = true;
 
-        if (isPlayerDead) {
-            this.bottleUI = null;
-            this.coinUI = null;
-            this.statusBar = null;
-        }
-    
         setTimeout(() => {
             IntervalHub.stopIntervals();
             this.character.stopPlayerIntervals();
             this.showOverlay = false;
             if (isPlayerDead) {
-                this.gameOver();
+                this.showEndScreen(1);
             } else {
-                this.victroy();
+                this.showEndScreen(0);
             }
         }, 1000);
     }
 
-    gameOver() {
-        this.overlay.initOverlay(1);
-        AudioHub.playOne(AudioHub.GAME_OVER);
-        setTimeout(() => {
-            this.reloadStartWindow();
-        }, 3500);
-    }
-
-    victroy() {
-        this.overlay.initOverlay(0);
-        AudioHub.playOne(AudioHub.GAME_WIN);
+    /**
+     * Shows the end overlay and returns to the start screen.
+     * @param {number} type - 0 = victory, 1 = defeat.
+     */
+    showEndScreen(type) {
+        this.overlay.initOverlay(type);
         setTimeout(() => {
             this.reloadStartWindow();
         }, 3500);
@@ -374,19 +343,24 @@ export class World {
     //#endregion
 
     //#region Intervals
+    /**
+     * Updates the game state by checking collisions between all relevant entities.
+     */
     update = () => {
-        this.checkCollisions();
+        CollisionHub.checkCollisions(this.level.enemies, this.level.collectables, this.throwableObjects, this.character, this);
     };
 
+    /**
+     * Toggles the vertical screen shake direction.
+     */ k;
     sceenShake = () => {
         if (this.yShake > 0) this.yShake = -2;
         else this.yShake = -this.yShake;
     };
 
     /**
-     * Generates a number of clouds and assigns them randomly
-     * to the far or near cloud layer.
-     * @param {number} cloundQuantity - Number of clouds to generate.
+     * Spawns chicken enemies if the max enemy limit is not reached.
+     * Stops the spawn interval if maxEnemies is 0 or less.
      */
     chickenSpawner = () => {
         if (this.level.maxEnemies <= 0) {

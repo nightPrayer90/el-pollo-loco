@@ -10,7 +10,6 @@ import { MovableObject } from "./movable-object.class.js";
  * attack phases and combat logic.
  */
 export class Endboss extends MovableObject {
-
     //#region Properties
     y = 240;
     groundY = 240;
@@ -48,6 +47,7 @@ export class Endboss extends MovableObject {
     imagesAttack = ImageHub.ENDBOSS.attack;
     imagesHurt = ImageHub.ENDBOSS.hurt;
     imagesDead = ImageHub.ENDBOSS.dead;
+    imagesVFXHit = ImageHub.VFX.hit;
 
     animate_id;
     move_id;
@@ -191,7 +191,7 @@ export class Endboss extends MovableObject {
         this.isAttack = false;
         this.world.createParticleSystem(ImageHub.VFX.jump, this.x + this.width / 2, this.y + this.height - 30, 500, 500);
         this.world.triggerScreenShake(300);
-        
+
         if (this.isWaitingState) {
             this.updateHitWaitingMessage();
         }
@@ -223,6 +223,9 @@ export class Endboss extends MovableObject {
     //#endregion
 
     //#region Intervals
+    /**
+     * Updates the enemy animation based on its current state.
+     */
     animate = () => {
         if (this.isDie()) {
             this.y += 15;
@@ -238,8 +241,11 @@ export class Endboss extends MovableObject {
                 else this.playAnimationLoop(this.imagesWalking);
             }
         }
-    }
+    };
 
+    /**
+     * Moves the enemy toward the player and triggers an attack when direction changes.
+     */
     move = () => {
         if (this.isDead || this.isAttack || this.isBlockMoving) return;
 
@@ -257,6 +263,6 @@ export class Endboss extends MovableObject {
         }
         if (this.moveDirection) this.moveLeft();
         else this.moveRight();
-    }
-     //#endregion
+    };
+    //#endregion
 }

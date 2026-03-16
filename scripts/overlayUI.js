@@ -57,6 +57,9 @@ function showMobileOverlay() {
     changeClass(mobileControlsRef, "hide-object", false);
 }
 
+/**
+ * Toggles the audio mute state.
+ */
 export function toggleMuteBtn() {
     AudioHub.toggleSound(); 
     toggleMuteBtnSprite();
@@ -113,7 +116,7 @@ export function initFullscreenListner() {
 }
 
 /**
- * Toggles fullscreen mode on or off.
+ * Toggles fullscreen mode.
  */
 function toggleFullscreen() {
     isFullscreenMode = !isFullscreenMode;
@@ -144,8 +147,8 @@ function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitRequestFullscreen) {
-        document.webkitRequestFullscreen();
-    }
+        document.webkitExitFullscreen();
+    }0
 }
 
 /**

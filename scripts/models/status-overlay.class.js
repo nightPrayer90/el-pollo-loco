@@ -1,3 +1,4 @@
+import { AudioHub } from "../manager-classes/audio-hub.js";
 import { ImageHub } from "../manager-classes/image-hub.js";
 import { IntervalHub } from "../manager-classes/interval-hub.js";
 import { DrawableObject } from "./drawable-object.class.js";
@@ -34,9 +35,11 @@ export class StatusOverlay extends DrawableObject {
         switch (this.type) {
             case 0:
                 this.initVictory();
+                AudioHub.playOne(AudioHub.GAME_WIN);
                 break;
             case 1:
                 this.initGameOver();
+                AudioHub.playOne(AudioHub.GAME_OVER);
                 break;
             case 2:
                 this.initStartGame();
